@@ -1,0 +1,11 @@
+C:\Users\paxpr\source\repos\Software Engineering Project\bin\Debug\Software Engineering Project.exe.config
+C:\Users\paxpr\source\repos\Software Engineering Project\bin\Debug\Software Engineering Project.exe
+C:\Users\paxpr\source\repos\Software Engineering Project\bin\Debug\Software Engineering Project.pdb
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.csproj.AssemblyReference.cache
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.csproj.SuggestedBindingRedirects.cache
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software_Engineering_Project.FormMain.resources
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software_Engineering_Project.Properties.Resources.resources
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.csproj.GenerateResource.cache
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.csproj.CoreCompileInputs.cache
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.exe
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.pdb
