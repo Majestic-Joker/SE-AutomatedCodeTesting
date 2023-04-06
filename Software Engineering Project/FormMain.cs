@@ -15,6 +15,7 @@ namespace Software_Engineering_Project
 {
     public partial class FormMain : Form
     {
+        #region member variables
         // create open file so we can pull files from our desktop to run
         readonly OpenFileDialog openFileDialog1 = new OpenFileDialog
         {
@@ -34,6 +35,11 @@ namespace Software_Engineering_Project
             ShowReadOnly = true,
         };
 
+        // forms
+        FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
+
+        #endregion
+
         public FormMain()
         {
             InitializeComponent();
@@ -42,17 +48,17 @@ namespace Software_Engineering_Project
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
             panelSideMenuPanel.BackColor = Color.WhiteSmoke;
-            buttonFile.ForeColor = Color.Black;
+            buttonAssignments.ForeColor = Color.Black;
             buttonEdit.ForeColor = Color.Black;
             buttonHelp.ForeColor = Color.Black;
-            buttonProgramGrader.ForeColor = Color.Black;
+            //buttonProgramGrader.ForeColor = Color.Black;
             panelSubMenuFile.BackColor = Color.Tan;
             panelSubMenuEdit.BackColor = Color.Tan;
             panelSubMenuHelp.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
-            buttonOpenFile.ForeColor = Color.Black;
+            buttonOpenAssignment.ForeColor = Color.Black;
             PanelExit.BackColor = Color.Tan;
             PanelMainControls.BackColor = Color.Gray;
             #endregion
@@ -64,7 +70,7 @@ namespace Software_Engineering_Project
             buttonView.Enabled = false;
 
             #region Events
-            buttonFile.MouseHover += ButtonFile_MouseHover;
+            buttonAssignments.MouseHover += ButtonFile_MouseHover;
             buttonEdit.MouseHover += ButtonEdit_MouseHover;
             buttonHelp.MouseHover += ButtonHelp_MouseHover;
             ButtonExit.MouseHover += ButtonExit_MouseHover;
@@ -113,7 +119,7 @@ namespace Software_Engineering_Project
 
         private void ButtonFile_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(buttonFile, "Open Files here");
+            toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
         }
         #endregion
 
@@ -225,17 +231,17 @@ namespace Software_Engineering_Project
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
             panelSideMenuPanel.BackColor = Color.WhiteSmoke;
-            buttonFile.ForeColor = Color.Black;
+            buttonAssignments.ForeColor = Color.Black;
             buttonEdit.ForeColor = Color.Black;
             buttonHelp.ForeColor = Color.Black;
-            buttonProgramGrader.ForeColor = Color.Black;
+            //buttonProgramGrader.ForeColor = Color.Black;
             panelSubMenuFile.BackColor = Color.Tan;
             panelSubMenuEdit.BackColor = Color.Tan;
             panelSubMenuHelp.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
-            buttonOpenFile.ForeColor = Color.Black;
+            buttonOpenAssignment.ForeColor = Color.Black;
             PanelExit.BackColor = Color.Tan;
             PanelMainControls.BackColor = Color.Gray;
 
@@ -252,17 +258,17 @@ namespace Software_Engineering_Project
             panelMain.BackColor = Color.SlateGray;
             labelTitlecard.BackColor = Color.DarkSlateGray;
             panelSideMenuPanel.BackColor = Color.Black;
-            buttonFile.ForeColor = Color.White;
+            buttonAssignments.ForeColor = Color.White;
             buttonEdit.ForeColor = Color.White;
             buttonHelp.ForeColor = Color.White;
-            buttonProgramGrader.ForeColor = Color.White;
+            //buttonProgramGrader.ForeColor = Color.White;
             panelSubMenuFile.BackColor = Color.DarkSlateGray;
             panelSubMenuEdit.BackColor = Color.DarkSlateGray;
             panelSubMenuHelp.BackColor = Color.DarkSlateGray;
             buttonLightTheme.ForeColor = Color.White;
             buttonDarkTheme.ForeColor = Color.White;
             buttonAbout.ForeColor = Color.White;
-            buttonOpenFile.ForeColor = Color.White;
+            buttonOpenAssignment.ForeColor = Color.White;
             PanelExit.BackColor = Color.DarkSlateGray;
             PanelMainControls.BackColor = Color.Black;
             HideSubMenu();
@@ -302,12 +308,18 @@ namespace Software_Engineering_Project
             ShowSubMenu(panelSubMenuEdit);
         }
 
-        private void ButtonProgramGrader_Click(object sender, EventArgs e)
+        private void buttonCreateAssignment_Click(object sender, EventArgs e)
         {
-            //ShowSubMenu();
+            OpenFormCreateAssignment();
         }
 
-        private void ButtonHelp_Click(object sender, EventArgs e)
+        private void OpenFormCreateAssignment()
+        {
+            formCreateAssignment.Visible = true;
+            formCreateAssignment.BringToFront();
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelSubMenuHelp);
         }
@@ -321,5 +333,7 @@ namespace Software_Engineering_Project
         }
 
         #endregion
+
+        
     }
 }
