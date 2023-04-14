@@ -36,7 +36,7 @@ namespace Software_Engineering_Project
         };
 
         // forms
-        FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
+        readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
 
         #endregion
 
@@ -55,6 +55,7 @@ namespace Software_Engineering_Project
             panelSubMenuFile.BackColor = Color.Tan;
             panelSubMenuEdit.BackColor = Color.Tan;
             panelSubMenuHelp.BackColor = Color.Tan;
+            SubmissionDockpanel.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
@@ -71,6 +72,7 @@ namespace Software_Engineering_Project
 
             #region Events
             buttonAssignments.MouseHover += ButtonFile_MouseHover;
+            buttonSubmission.MouseHover += ButtonSubmission_MouseHover;
             buttonEdit.MouseHover += ButtonEdit_MouseHover;
             buttonHelp.MouseHover += ButtonHelp_MouseHover;
             ButtonExit.MouseHover += ButtonExit_MouseHover;
@@ -121,6 +123,11 @@ namespace Software_Engineering_Project
         {
             toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
         }
+
+        private void ButtonSubmission_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(buttonSubmission, "Open or Create Submissions here");
+        }
         #endregion
 
         #region Sub Menu Stuff
@@ -133,6 +140,7 @@ namespace Software_Engineering_Project
             panelSubMenuFile.Visible = false;
             panelSubMenuEdit.Visible = false;
             panelSubMenuHelp.Visible = false;
+            SubmissionDockpanel.Visible = false;
         }
 
         /// <summary>
@@ -151,6 +159,10 @@ namespace Software_Engineering_Project
             if (panelSubMenuHelp.Visible == true)
             {
                 panelSubMenuHelp.Visible = false;
+            }
+            if(SubmissionDockpanel.Visible == true)
+            {
+                SubmissionDockpanel.Visible = false;
             }
         }
 
@@ -238,6 +250,7 @@ namespace Software_Engineering_Project
             panelSubMenuFile.BackColor = Color.Tan;
             panelSubMenuEdit.BackColor = Color.Tan;
             panelSubMenuHelp.BackColor = Color.Tan;
+            SubmissionDockpanel.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
@@ -288,6 +301,39 @@ namespace Software_Engineering_Project
                 " Lastly we can view the Stats.","About",MessageBoxButtons.OK,MessageBoxIcon.Information);
             HideSubMenu();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonCreateAssignment_Click(object sender, EventArgs e)
+        {
+            OpenFormCreateAssignment();
+            HideSubMenu();
+        }
+
+        private void OpenFormCreateAssignment()
+        {
+            formCreateAssignment.Visible = true;
+            formCreateAssignment.BringToFront();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOpenSubmission_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonCreateSubmission_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
 
         #region Menu Buttons
@@ -308,32 +354,30 @@ namespace Software_Engineering_Project
             ShowSubMenu(panelSubMenuEdit);
         }
 
-        private void buttonCreateAssignment_Click(object sender, EventArgs e)
-        {
-            OpenFormCreateAssignment();
-        }
-
-        private void OpenFormCreateAssignment()
-        {
-            formCreateAssignment.Visible = true;
-            formCreateAssignment.BringToFront();
-        }
-
-        private void buttonHelp_Click(object sender, EventArgs e)
+        private void ButtonHelp_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelSubMenuHelp);
+        }
+
+        private void Buttonsubmission_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(SubmissionDockpanel);
         }
 
         #endregion
 
         #region Exit Button
+
+        /// <summary>
+        /// exit application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
         #endregion
-
-        
     }
 }
