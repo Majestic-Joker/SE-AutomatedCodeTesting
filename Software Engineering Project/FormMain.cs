@@ -303,7 +303,7 @@ namespace Software_Engineering_Project
         }
 
         /// <summary>
-        /// 
+        /// opens create assignment form. create assignment gives the user the ability to make assignments 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -313,6 +313,9 @@ namespace Software_Engineering_Project
             HideSubMenu();
         }
 
+        /// <summary>
+        /// opens create assignment form and brings it to front
+        /// </summary>
         private void OpenFormCreateAssignment()
         {
             formCreateAssignment.Visible = true;

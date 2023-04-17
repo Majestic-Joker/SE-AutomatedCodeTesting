@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,7 @@ namespace Software_Engineering_Project
 {
     public partial class FormCreateAssignment : Form
     {
+
         // create save file so we can pull files from our desktop to run
         readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog
         {
@@ -40,21 +42,23 @@ namespace Software_Engineering_Project
         // Class for Results
         class Result
         {
-            public int resultID { get; set; }
-            public bool compiled { get; set; }
-            public bool runComplete { get; set; }
-            public bool outputMatchesExpected { get; set; }
-            public string exeFilepath { get; set; }
-            public string exeOutput { get; set; }
+            public int ResultID { get; set; }
+            public bool Compiled { get; set; }
+            public bool RunComplete { get; set; }
+            public bool OutputMatchesExpected { get; set; }
+            public string ExeFilepath { get; set; }
+            public string ExeOutput { get; set; }
         }
 
         // Class for Assignments
         class Assignment
         {
-            public string assignmentName { get; set; }
-            public string requiredInput { get; set; }
-            public string expectedOutput { get; set; }
+            public string AssignmentName { get; set; }
+            public string RequiredInput { get; set; }
+            public string ExpectedOutput { get; set; }
             public List<Submission> Submissions { get; set; }
+            public object InputFilepath { get; internal set; }
+            public object OutputFilepath { get; internal set; }
 
             public Assignment()
             {
@@ -65,42 +69,54 @@ namespace Software_Engineering_Project
         // Class for Submissions
         class Submission
         {
-            public string studentName { get; set; }
-            public int submissionID { get; set; }
+            public string StudentName { get; set; }
+            public int SubmissionID { get; set; }
             public string Content { get; set; }
-            public string filePath { get; set; }
+            public string FilePath { get; set; }
             public Result result;
 
 
             public Submission(string name, string content)
             {
-                studentName = name;
+                StudentName = name;
                 Content = content;
             }
         }
 
-        //class Program
-        //{
-        //    static void Main(string[] args)
-        //    {
-        //        // create a new assignment
-        //        Assignment assignment = new Assignment();
-
-        //        // add some submissions to the assignment
-        //        assignment.Submissions.Add(new Submission("Paxton", "This is my submission"));
-        //        assignment.Submissions.Add(new Submission("Aodhan", "This is another submission"));
-        //    }
-        //}
-
         private void ButtonSaveAssignment_Click(object sender, EventArgs e)
         {
-            // Add Filename into ListBox
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            string assignmentName = "Assignment";
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
+            object inputFilepath = 1;
+            object outputFilepath = 1;
+            string assignmentFilepath = "s";
+            object AssignmentFilepath = 1;
+
+            //Assignment newAssignment = new Assignment
+            //{
+            //    AssignmentName = textBoxAssignmentName.Text,
+            //    InputFilepath = inputFilepath,
+            //    OutputFilepath = outputFilepath,
+            //    AssignmentFilepath,
+            //    assignmentFilepath
+            //};
+            folderPath = Path.Combine(folderPath, assignmentName);
+            Directory.CreateDirectory(folderPath);
+            // string json = JsonSerializer.Serialize(newAssignment);
+            string temp = Path.Combine(assignmentFilepath, "assignmentName.json");
+            // File.WriteAllText(assignmentFilepath, json);
+        }
+
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            DialogResult closeResult = MessageBox.Show("Are You Sure you Want to Exit This Window?",
+                "Make sure to Save Assignment",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if(closeResult == DialogResult.Yes)
             {
-                foreach (string filename in saveFileDialog1.FileNames)
-                {
-                    
-                }
+                Hide();
             }
         }
     }
