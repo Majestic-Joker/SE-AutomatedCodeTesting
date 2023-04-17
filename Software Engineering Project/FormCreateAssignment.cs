@@ -85,12 +85,12 @@ namespace Software_Engineering_Project
 
         private void ButtonSaveAssignment_Click(object sender, EventArgs e)
         {
-            string assignmentName = "Assignment";
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
-            object inputFilepath = 1;
-            object outputFilepath = 1;
-            string assignmentFilepath = "s";
-            object AssignmentFilepath = 1;
+            //string assignmentName = "Assignment";
+            //string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
+            //object inputFilepath = 1;
+            //object outputFilepath = 1;
+            //string assignmentFilepath = "s";
+            //object AssignmentFilepath = ".txt";
 
             //Assignment newAssignment = new Assignment
             //{
@@ -100,11 +100,29 @@ namespace Software_Engineering_Project
             //    AssignmentFilepath,
             //    assignmentFilepath
             //};
-            folderPath = Path.Combine(folderPath, assignmentName);
+            //folderPath = Path.Combine(folderPath, assignmentName);
+            //Directory.CreateDirectory(folderPath);
+            //string json = JsonSerializer.Serialize(newAssignment);
+            //string temp = Path.Combine(assignmentFilepath, "assignmentName.json");
+            //File.WriteAllText(assignmentFilepath, json);
+
+            string assignmentName = textBoxAssignmentName.Text;
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader", assignmentName);
+            object inputFilepath = 1;
+            object outputFilepath = 1;
+
+            Assignment newAssignment = new Assignment
+            {
+                AssignmentName = assignmentName,
+                InputFilepath = inputFilepath,
+                OutputFilepath = outputFilepath,
+                //AssignmentFilepath = ".txt",
+            };
+
             Directory.CreateDirectory(folderPath);
-            // string json = JsonSerializer.Serialize(newAssignment);
-            string temp = Path.Combine(assignmentFilepath, "assignmentName.json");
-            // File.WriteAllText(assignmentFilepath, json);
+            string json = JsonSerializer.Serialize(newAssignment);
+            string jsonPath = Path.Combine(folderPath, $"{assignmentName}.json");
+            File.WriteAllText(jsonPath, json);
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
