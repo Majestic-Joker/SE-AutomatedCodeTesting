@@ -8,32 +8,16 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Software_Engineering_Project.FormCreateAssignment;
 
 namespace Software_Engineering_Project
 {
     public partial class FormMain : Form
     {
         #region member variables
-        // create open file so we can pull files from our desktop to run
-        readonly OpenFileDialog openFileDialog1 = new OpenFileDialog
-        {
-            Multiselect = true,
-            InitialDirectory = @"D:\",
-            Title = "Browse Text Files",
-
-            CheckFileExists = true,
-            CheckPathExists = true,
-
-            DefaultExt = "txt",
-            Filter = "txt files (*.txt)|*.txt",
-            FilterIndex = 2,
-            RestoreDirectory = true,
-
-            ReadOnlyChecked = true,
-            ShowReadOnly = true,
-        };
 
         // forms
         readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
@@ -221,16 +205,37 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonOpenFile_Click(object sender, EventArgs e)
         {
-            // Add Filename into ListBox
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            Assignment assignment = LoadAssignment();
+
+            if (assignment != null)
             {
-                foreach (string filename in openFileDialog1.FileNames)
-                {
-                    listBoxProjectOpener.Items.Add(Path.GetFileName(openFileDialog1.FileName));
-                }
+                listBoxProjectOpener.Items.Add(assignment);
             }
             // Hides the Open File button after use
             HideSubMenu();
+        }
+
+        /// <summary>
+        /// uses open file dialog to get json file
+        /// </summary>
+        /// <returns></returns>
+        public Assignment LoadAssignment()
+        {
+            Assignment assignment = null;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filepath = openFileDialog.FileName;
+
+                var filestream = openFileDialog.OpenFile();
+                var reader = new StreamReader(filestream);
+
+                string json = reader.ReadToEnd();
+                assignment = JsonSerializer.Deserialize<Assignment>(json);
+            }
+            return assignment;
         }
 
         /// <summary>

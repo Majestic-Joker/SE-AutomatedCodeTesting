@@ -134,6 +134,7 @@
             this.buttonClose.TabIndex = 8;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // ButtonAddSubmissions
             // 
@@ -141,7 +142,7 @@
             this.ButtonAddSubmissions.Name = "ButtonAddSubmissions";
             this.ButtonAddSubmissions.Size = new System.Drawing.Size(178, 89);
             this.ButtonAddSubmissions.TabIndex = 4;
-            this.ButtonAddSubmissions.Text = "Save Assignment";
+            this.ButtonAddSubmissions.Text = "Save Submissions";
             this.ButtonAddSubmissions.UseVisualStyleBackColor = true;
             // 
             // textBoxSubmissionName
