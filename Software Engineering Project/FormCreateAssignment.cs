@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -19,44 +20,12 @@ namespace Software_Engineering_Project
         public FormCreateAssignment()
         {
             InitializeComponent();
-        }
 
-        #region Classes
-
-        // Class for Results
-        class Result
-        {
-            public int ResultID { get; set; }
-            public bool Compiled { get; set; }
-            public bool RunComplete { get; set; }
-            public bool OutputMatchesExpected { get; set; }
-            public string ExeFilepath { get; set; }
-            public string ExeOutput { get; set; }
+            FormClosing += FormCreateAssignment_FormClosing;
         }
-
-        // Class for Assignments
-        public class Assignment
-        {
-            public string AssignmentName { get; set; }
-            public string RequiredInput { get; set; }
-            public string ExpectedOutput { get; set; }
-            public List<Submission> Submissions { get; set; }
-            public object InputFilepath { get; internal set; }
-            public object OutputFilepath { get; internal set; }
-        }
-
-        // Class for Submissions
-        public class Submission
-        {
-            public string StudentName { get; set; }
-            public int SubmissionID { get; set; }
-            public string Content { get; set; }
-            public string FilePath { get; set; }
-            //public Result result;
-        }
-        #endregion
 
         #region assignment functions
+
         /// <summary>
         /// Creates Assignments folder and json file
         /// </summary>
@@ -95,10 +64,10 @@ namespace Software_Engineering_Project
             // save filepath
             assignmentFilepath = folderPath;
         }
+
         #endregion
 
         #region button events
-
         /// <summary>
         /// creates assignment
         /// </summary>
@@ -116,19 +85,18 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            // Display a MessageBox with Yes and No buttons
-            DialogResult closeResult = MessageBox.Show("Are You Sure you Want to Exit This Window?",
-                "Make sure to Save Assignment",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            // Check which button the user clicked
-            if (closeResult == DialogResult.Yes)
-            {
-                Hide();
-            }
+            Visible = false;
+            PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
+            pi.SetValue(this, CloseReason.None, null);
         }
 
+        private void FormCreateAssignment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Visible = false;
+            e.Cancel = true;//cancel close if user requested
+            PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
+            pi.SetValue(this, CloseReason.None, null);
+        }
         #endregion
     }
 }

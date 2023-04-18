@@ -11,7 +11,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Software_Engineering_Project.FormCreateAssignment;
 
 namespace Software_Engineering_Project
 {
@@ -21,6 +20,7 @@ namespace Software_Engineering_Project
 
         // forms
         readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
+        readonly FormAddSubmissions formAddSubmissions = new FormAddSubmissions();
 
         #endregion
 
@@ -339,7 +339,8 @@ namespace Software_Engineering_Project
 
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-
+            formAddSubmissions.Visible = true;
+            formAddSubmissions.BringToFront();
         }
 
         #endregion
