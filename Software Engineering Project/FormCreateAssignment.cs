@@ -17,11 +17,13 @@ namespace Software_Engineering_Project
     {
         string assignmentFilepath = "";
 
+        public Assignment? assignment { get; set; }
+
         public FormCreateAssignment()
         {
             InitializeComponent();
 
-            FormClosing += FormCreateAssignment_FormClosing;
+            //FormClosing += FormCreateAssignment_FormClosing;
         }
 
         #region assignment functions
@@ -31,22 +33,23 @@ namespace Software_Engineering_Project
         /// </summary>
         public void CreateAssignment()
         {
-            string assignmentName = "Assignment";
+            string assignmentName = textBoxAssignmentName.Text;
 
             // creates a folder called CppGrader
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
 
-            object inputFilepath = "Input.txt";
-            object outputFilepath = "Output.txt";
+            string inputFilepath = "Input.txt";
+            string outputFilepath = "Output.txt";
 
             // assignment
             Assignment newAssignment = new Assignment
             {
-                AssignmentName = textBoxAssignmentName.Text,
+                AssignmentName = assignmentName,
                 RequiredInput = textBoxRequiredInput.Text,
                 ExpectedOutput = textBoxExpectedOutput.Text,
                 InputFilepath = inputFilepath,
                 OutputFilepath = outputFilepath,
+                Submissions = new List<Submission>()
             };
             // serialize
             string json = JsonSerializer.Serialize(newAssignment);
@@ -62,7 +65,10 @@ namespace Software_Engineering_Project
             File.WriteAllText(temp, json);
 
             // save filepath
-            assignmentFilepath = folderPath;
+            newAssignment.AssignmentDirectory = folderPath;
+            //assignmentFilepath = folderPath;
+            assignment = newAssignment;
+
         }
 
         #endregion
@@ -76,6 +82,13 @@ namespace Software_Engineering_Project
         private void ButtonSaveAssignment_Click(object sender, EventArgs e)
         {
             CreateAssignment();
+
+
+            listBoxAssignments.Items.Add(assignmentFilepath);
+
+            DialogResult = DialogResult.OK;
+
+            Close();
         }
 
         /// <summary>
@@ -90,13 +103,13 @@ namespace Software_Engineering_Project
             pi.SetValue(this, CloseReason.None, null);
         }
 
-        private void FormCreateAssignment_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Visible = false;
-            e.Cancel = true;//cancel close if user requested
-            PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
-            pi.SetValue(this, CloseReason.None, null);
-        }
+        //private void FormCreateAssignment_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    Visible = false;
+        //    e.Cancel = true;//cancel close if user requested
+        //    PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
+        //    pi.SetValue(this, CloseReason.None, null);
+        //}
         #endregion
     }
 }

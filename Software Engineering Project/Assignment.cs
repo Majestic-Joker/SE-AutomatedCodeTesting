@@ -12,8 +12,29 @@ namespace Software_Engineering_Project
         public string AssignmentName { get; set; }
         public string RequiredInput { get; set; }
         public string ExpectedOutput { get; set; }
+        public string AssignmentDirectory { get; set; }
         public List<Submission> Submissions { get; set; }
-        public object InputFilepath { get; internal set; }
-        public object OutputFilepath { get; internal set; }
+        public string InputFilepath { get; set; }
+        public string OutputFilepath { get; set; }
+
+        //public Assignment()
+        //{
+
+        //}
+
+        //public Assignment(Assignment other)
+        //{
+        //    AssignmentName = other.AssignmentName;
+        //    RequiredInput = other.RequiredInput;
+        //    ExpectedOutput = other.ExpectedOutput;
+        //    AssignmentDirectory = other.AssignmentDirectory;
+        //    InputFilepath = other.InputFilepath;
+        //    OutputFilepath = other.OutputFilepath;
+
+        //    foreach(var submission in other.Submissions)
+        //    {
+        //        Submissions.Add(submission);
+        //    }
+        //}
     }
 }

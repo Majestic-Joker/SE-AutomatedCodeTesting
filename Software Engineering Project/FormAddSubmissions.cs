@@ -9,16 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json;
 using System.Reflection;
+using System.Drawing.Text;
+using System.IO;
 
 namespace Software_Engineering_Project
 {
     public partial class FormAddSubmissions : Form
     {
-        public FormAddSubmissions()
+        public Submission submission { get; set; }
+        private string filePath;
+        private string assignmentDirectory;
+
+        public FormAddSubmissions(string directory)
         {
             InitializeComponent();
 
-            FormClosing += FormAddSubmissions_FormClosing;
+            assignmentDirectory = directory;
+
+            //FormClosing += FormAddSubmissions_FormClosing;
         }
 
         #region Exit buttons
@@ -38,5 +46,39 @@ namespace Software_Engineering_Project
             pi.SetValue(this, CloseReason.None, null);
         }
         #endregion
+
+        /// <summary>
+        /// Save Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonAddSubmissions_Click(object sender, EventArgs e)
+        {
+            Submission temp = new Submission();
+            temp.StudentName = textBoxSubmissionName.Text;
+            temp.FilePath = filePath;
+            submission = temp;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void buttonOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+
+                FileInfo info = new FileInfo(dialog.FileName);
+
+                var fileStream = dialog.OpenFile();
+                var reader = new StreamReader(fileStream);
+                string code = reader.ReadToEnd();
+                string temp = Path.Combine(assignmentDirectory, "submissions");
+                Directory.CreateDirectory(temp);
+                temp = Path.Combine(temp, info.Name);
+                File.WriteAllText(temp, code);
+                filePath = temp;
+            }
+        }
     }
 }

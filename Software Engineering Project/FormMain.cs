@@ -19,8 +19,10 @@ namespace Software_Engineering_Project
         #region member variables
 
         // forms
-        readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
-        readonly FormAddSubmissions formAddSubmissions = new FormAddSubmissions();
+        //readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
+
+        public Assignment? currentAssignment = null;
+        //readonly FormAddSubmissions formAddSubmissions = new FormAddSubmissions();
 
         #endregion
 
@@ -132,8 +134,8 @@ namespace Software_Engineering_Project
         /// </summary>
         private void HideSubMenu()
         {
-            if(panelSubMenuFile.Visible == true) 
-            { 
+            if (panelSubMenuFile.Visible == true)
+            {
                 panelSubMenuFile.Visible = false;
             }
             if (panelSubMenuEdit.Visible == true)
@@ -144,7 +146,7 @@ namespace Software_Engineering_Project
             {
                 panelSubMenuHelp.Visible = false;
             }
-            if(SubmissionDockpanel.Visible == true)
+            if (SubmissionDockpanel.Visible == true)
             {
                 SubmissionDockpanel.Visible = false;
             }
@@ -156,7 +158,7 @@ namespace Software_Engineering_Project
         /// <param name="subMenu"></param>
         private void ShowSubMenu(Panel subMenu)
         {
-            if(subMenu.Visible == false)
+            if (subMenu.Visible == false)
             {
                 HideSubMenu();
                 subMenu.Visible = true;
@@ -209,7 +211,7 @@ namespace Software_Engineering_Project
 
             if (assignment != null)
             {
-                listBoxProjectOpener.Items.Add(assignment);
+                //listBoxProjectOpener.Items.Add(assignment.AssignmentName);
             }
             // Hides the Open File button after use
             HideSubMenu();
@@ -275,8 +277,13 @@ namespace Software_Engineering_Project
         {
             panelMain.BackColor = Color.SlateGray;
             labelTitlecard.BackColor = Color.DarkSlateGray;
+            SubmissionDockpanel.BackColor = Color.DarkSlateGray;
+            buttonSubmission.ForeColor = Color.White;
             panelSideMenuPanel.BackColor = Color.Black;
             buttonAssignments.ForeColor = Color.White;
+            buttonCreateAssignment.ForeColor = Color.White;
+            buttonCreateSubmission.ForeColor = Color.White;
+            buttonOpenSubmission.ForeColor = Color.White;
             buttonEdit.ForeColor = Color.White;
             buttonHelp.ForeColor = Color.White;
             //buttonProgramGrader.ForeColor = Color.White;
@@ -303,7 +310,7 @@ namespace Software_Engineering_Project
                 "then Open File. After that it'll take you" +
                 " to where you can get a cpp file. Click on OK and it will show up on the listbox." +
                 " We then can click run to get the stats and grade of the program." +
-                " Lastly we can view the Stats.","About",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                " Lastly we can view the Stats.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
             HideSubMenu();
         }
 
@@ -323,8 +330,16 @@ namespace Software_Engineering_Project
         /// </summary>
         private void OpenFormCreateAssignment()
         {
-            formCreateAssignment.Visible = true;
-            formCreateAssignment.BringToFront();
+            var form = new FormCreateAssignment();
+            //label1.Text = "testing";
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                currentAssignment = form.assignment;
+                //rrentAssignment.AssignmentDirectory = form.assignment.AssignmentDirectory;
+                label1.Text = "True";
+            }
+            form.Dispose();
         }
 
         /// <summary>
@@ -339,9 +354,25 @@ namespace Software_Engineering_Project
 
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-            formAddSubmissions.Visible = true;
-            formAddSubmissions.BringToFront();
+            //formAddSubmissions.Visible = true;
+            //formAddSubmissions.BringToFront();
+            if(currentAssignment != null)
+            {
+                label1.Text = "not null";
+            }
+            var form = new FormAddSubmissions(currentAssignment.AssignmentDirectory);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                currentAssignment.Submissions.Add(form.submission);
+                listBoxProjectOpener.Items.Add(form.submission);
+                listBoxProjectOpener.Refresh();
+
+            }
         }
+
+        // add a save current assignment method
+        /* save json */
 
         #endregion
 
