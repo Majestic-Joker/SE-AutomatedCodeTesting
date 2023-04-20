@@ -359,7 +359,7 @@ namespace Software_Engineering_Project
             {
                 label1.Text = "not null";
             }
-            var form = new FormAddSubmissions(currentAssignment.AssignmentDirectory);
+            var form = new FormAddSubmission(currentAssignment.AssignmentDirectory);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
