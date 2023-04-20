@@ -5,12 +5,18 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Logging;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Software_Engineering_Project
 {
     public class CppService
     {
         private BuildResult buildResult;
+        private string directory;
+        private float matchPercent;
+        private bool doesMatch = false;
+        private string exeOut;
+
         private readonly CppCompilation compilation;
         private readonly string exePath = null;
 
@@ -19,10 +25,36 @@ namespace Software_Engineering_Project
         public string ExePath => exePath;
         public bool IsBuilt => buildResult.OverallResult == BuildResultCode.Success;
 
-        public CppService(string filepath, string codePath) {
-            compilation = CppParser.ParseFile(codePath);
-            string projectPath = CreateProject(filepath, codePath);
-            exePath = BuildExe(projectPath);
+        public CppService(Assignment assignment, Submission submission) {
+            directory = CreateDirectory(assignment.AssignmentDirectory);
+
+            compilation = CppParser.ParseFile(submission.FilePath);
+            string projectPath = CreateProject(directory, submission.FilePath, submission.StudentName);
+            exePath = BuildExe(projectPath, submission.StudentName);
+
+            if(IsBuilt){
+                TryRunExe(assignment);
+                UpdateResult(submission);
+            }
+        }
+
+        private void UpdateResult(Submission submission){
+            submission.Result = new Result{
+                Compiled = true,
+                RunComplete = true,
+                OutputMatchesExpected = true,
+                MatchPercentage = matchPercent.ToString("n2"),
+                ExeFilepath = ExePath,
+                ExeOutput = exeOut,
+                BuildResult = buildResult,
+                CppCompilation = compilation
+            };
+        }
+
+        private string CreateDirectory(string parentDirectory){
+            string temp = Path.Combine(parentDirectory, "Projects");
+            Directory.CreateDirectory(temp);
+            return temp;
         }
 
         private string CreateProject(string filepath, string codePath, string projectName = "Test")
@@ -73,6 +105,51 @@ namespace Software_Engineering_Project
             }
 
             return exePath;
+        }
+
+        private void TryRunExe(Assignment assignment){
+            ExeRunner runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath};
+            runner.RunExe();
+            exeOut = runner.ExeOutput;
+
+            if(runner.RunCompleted){
+                string expectedOutput = new StreamReader(assignment.OutputFilepath).ReadToEnd();
+
+                string[] exeLines = GetLines(runner.ExeOutput);
+                string[] assignmentLines = GetLines(expectedOutput);
+
+                matchPercent = GetMatchPercentage(exeLines, assignmentLines);
+                
+                if (matchPercent > 90f)
+                    doesMatch = true;
+            }
+        }
+
+        private float GetMatchPercentage(string[] exe, string[] assignment){
+            float count = 0f;
+
+                for(int i = 0; i < assignment.Length; i++){
+                    for(int j = 0; j < exe.Length; i++){
+                        bool full = exe[j].Equals(assignment[i]);
+                        bool half = exe[j].Equals(assignment[i],  StringComparison.OrdinalIgnoreCase);
+                        
+                        if (full)
+                            count += 0.5f;
+
+                        if (half)
+                            count += 0.5f;
+
+                        if (full || half)
+                            break;
+                    }
+                }
+
+            return (count / (float)assignment.Length) * 100;
+        }
+
+        private string[] GetLines(string text){
+            string[] locResult = Regex.Split(text, "[\r?\n]+");
+            return locResult;
         }
     }
 }
