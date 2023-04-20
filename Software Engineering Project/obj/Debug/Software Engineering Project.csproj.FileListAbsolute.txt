@@ -9,3 +9,4 @@ C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engi
 C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.csproj.CoreCompileInputs.cache
 C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.exe
 C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software Engineering Project.pdb
+C:\Users\paxpr\source\repos\Software Engineering Project\obj\Debug\Software_Engineering_Project.FormCreateAssignment.resources

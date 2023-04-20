@@ -8,6 +8,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,24 +16,15 @@ namespace Software_Engineering_Project
 {
     public partial class FormMain : Form
     {
-        // create open file so we can pull files from our desktop to run
-        readonly OpenFileDialog openFileDialog1 = new OpenFileDialog
-        {
-            Multiselect = true,
-            InitialDirectory = @"D:\",
-            Title = "Browse Text Files",
+        #region member variables
 
-            CheckFileExists = true,
-            CheckPathExists = true,
+        // forms
+        //readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
 
-            DefaultExt = "txt",
-            Filter = "txt files (*.txt)|*.txt",
-            FilterIndex = 2,
-            RestoreDirectory = true,
+        public Assignment? currentAssignment = null;
+        //readonly FormAddSubmissions formAddSubmissions = new FormAddSubmissions();
 
-            ReadOnlyChecked = true,
-            ShowReadOnly = true,
-        };
+        #endregion
 
         public FormMain()
         {
@@ -42,17 +34,18 @@ namespace Software_Engineering_Project
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
             panelSideMenuPanel.BackColor = Color.WhiteSmoke;
-            buttonFile.ForeColor = Color.Black;
+            buttonAssignments.ForeColor = Color.Black;
             buttonEdit.ForeColor = Color.Black;
             buttonHelp.ForeColor = Color.Black;
-            buttonProgramGrader.ForeColor = Color.Black;
+            //buttonProgramGrader.ForeColor = Color.Black;
             panelSubMenuFile.BackColor = Color.Tan;
             panelSubMenuEdit.BackColor = Color.Tan;
             panelSubMenuHelp.BackColor = Color.Tan;
+            SubmissionDockpanel.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
-            buttonOpenFile.ForeColor = Color.Black;
+            buttonOpenAssignment.ForeColor = Color.Black;
             PanelExit.BackColor = Color.Tan;
             PanelMainControls.BackColor = Color.Gray;
             #endregion
@@ -64,7 +57,8 @@ namespace Software_Engineering_Project
             buttonView.Enabled = false;
 
             #region Events
-            buttonFile.MouseHover += ButtonFile_MouseHover;
+            buttonAssignments.MouseHover += ButtonFile_MouseHover;
+            buttonSubmission.MouseHover += ButtonSubmission_MouseHover;
             buttonEdit.MouseHover += ButtonEdit_MouseHover;
             buttonHelp.MouseHover += ButtonHelp_MouseHover;
             ButtonExit.MouseHover += ButtonExit_MouseHover;
@@ -113,7 +107,12 @@ namespace Software_Engineering_Project
 
         private void ButtonFile_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(buttonFile, "Open Files here");
+            toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
+        }
+
+        private void ButtonSubmission_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(buttonSubmission, "Open or Create Submissions here");
         }
         #endregion
 
@@ -127,6 +126,7 @@ namespace Software_Engineering_Project
             panelSubMenuFile.Visible = false;
             panelSubMenuEdit.Visible = false;
             panelSubMenuHelp.Visible = false;
+            SubmissionDockpanel.Visible = false;
         }
 
         /// <summary>
@@ -134,8 +134,8 @@ namespace Software_Engineering_Project
         /// </summary>
         private void HideSubMenu()
         {
-            if(panelSubMenuFile.Visible == true) 
-            { 
+            if (panelSubMenuFile.Visible == true)
+            {
                 panelSubMenuFile.Visible = false;
             }
             if (panelSubMenuEdit.Visible == true)
@@ -146,6 +146,10 @@ namespace Software_Engineering_Project
             {
                 panelSubMenuHelp.Visible = false;
             }
+            if (SubmissionDockpanel.Visible == true)
+            {
+                SubmissionDockpanel.Visible = false;
+            }
         }
 
         /// <summary>
@@ -154,7 +158,7 @@ namespace Software_Engineering_Project
         /// <param name="subMenu"></param>
         private void ShowSubMenu(Panel subMenu)
         {
-            if(subMenu.Visible == false)
+            if (subMenu.Visible == false)
             {
                 HideSubMenu();
                 subMenu.Visible = true;
@@ -203,16 +207,37 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonOpenFile_Click(object sender, EventArgs e)
         {
-            // Add Filename into ListBox
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            Assignment assignment = LoadAssignment();
+
+            if (assignment != null)
             {
-                foreach (string filename in openFileDialog1.FileNames)
-                {
-                    listBoxProjectOpener.Items.Add(Path.GetFileName(openFileDialog1.FileName));
-                }
+                currentAssignment = assignment;
             }
             // Hides the Open File button after use
             HideSubMenu();
+        }
+
+        /// <summary>
+        /// uses open file dialog to get json file
+        /// </summary>
+        /// <returns></returns>
+        public Assignment LoadAssignment()
+        {
+            Assignment assignment = null;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filepath = openFileDialog.FileName;
+
+                var filestream = openFileDialog.OpenFile();
+                var reader = new StreamReader(filestream);
+
+                string json = reader.ReadToEnd();
+                assignment = JsonSerializer.Deserialize<Assignment>(json);
+            }
+            return assignment;
         }
 
         /// <summary>
@@ -225,17 +250,18 @@ namespace Software_Engineering_Project
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
             panelSideMenuPanel.BackColor = Color.WhiteSmoke;
-            buttonFile.ForeColor = Color.Black;
+            buttonAssignments.ForeColor = Color.Black;
             buttonEdit.ForeColor = Color.Black;
             buttonHelp.ForeColor = Color.Black;
-            buttonProgramGrader.ForeColor = Color.Black;
+            //buttonProgramGrader.ForeColor = Color.Black;
             panelSubMenuFile.BackColor = Color.Tan;
             panelSubMenuEdit.BackColor = Color.Tan;
             panelSubMenuHelp.BackColor = Color.Tan;
+            SubmissionDockpanel.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
-            buttonOpenFile.ForeColor = Color.Black;
+            buttonOpenAssignment.ForeColor = Color.Black;
             PanelExit.BackColor = Color.Tan;
             PanelMainControls.BackColor = Color.Gray;
 
@@ -251,18 +277,23 @@ namespace Software_Engineering_Project
         {
             panelMain.BackColor = Color.SlateGray;
             labelTitlecard.BackColor = Color.DarkSlateGray;
+            SubmissionDockpanel.BackColor = Color.DarkSlateGray;
+            buttonSubmission.ForeColor = Color.White;
             panelSideMenuPanel.BackColor = Color.Black;
-            buttonFile.ForeColor = Color.White;
+            buttonAssignments.ForeColor = Color.White;
+            buttonCreateAssignment.ForeColor = Color.White;
+            buttonCreateSubmission.ForeColor = Color.White;
+            buttonOpenSubmission.ForeColor = Color.White;
             buttonEdit.ForeColor = Color.White;
             buttonHelp.ForeColor = Color.White;
-            buttonProgramGrader.ForeColor = Color.White;
+            //buttonProgramGrader.ForeColor = Color.White;
             panelSubMenuFile.BackColor = Color.DarkSlateGray;
             panelSubMenuEdit.BackColor = Color.DarkSlateGray;
             panelSubMenuHelp.BackColor = Color.DarkSlateGray;
             buttonLightTheme.ForeColor = Color.White;
             buttonDarkTheme.ForeColor = Color.White;
             buttonAbout.ForeColor = Color.White;
-            buttonOpenFile.ForeColor = Color.White;
+            buttonOpenAssignment.ForeColor = Color.White;
             PanelExit.BackColor = Color.DarkSlateGray;
             PanelMainControls.BackColor = Color.Black;
             HideSubMenu();
@@ -279,9 +310,88 @@ namespace Software_Engineering_Project
                 "then Open File. After that it'll take you" +
                 " to where you can get a cpp file. Click on OK and it will show up on the listbox." +
                 " We then can click run to get the stats and grade of the program." +
-                " Lastly we can view the Stats.","About",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                " Lastly we can view the Stats.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
             HideSubMenu();
         }
+
+        /// <summary>
+        /// opens create assignment form. create assignment gives the user the ability to make assignments 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonCreateAssignment_Click(object sender, EventArgs e)
+        {
+            OpenFormCreateAssignment();
+            HideSubMenu();
+        }
+
+        /// <summary>
+        /// opens create assignment form and brings it to front
+        /// </summary>
+        private void OpenFormCreateAssignment()
+        {
+            var form = new FormCreateAssignment();
+            //label1.Text = "testing";
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                currentAssignment = form.assignment;
+                saveCurrentAssignment();
+            }
+            form.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOpenSubmission_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonCreateSubmission_Click(object sender, EventArgs e)
+        {
+            //formAddSubmissions.Visible = true;
+            //formAddSubmissions.BringToFront();
+            if(currentAssignment != null)
+            {
+                label1.Text = "not null";
+            }
+            var form = new FormAddSubmissions(currentAssignment.AssignmentDirectory);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                currentAssignment.Submissions.Add(form.submission);
+                listBoxProjectOpener.Items.Add(form.submission);
+                listBoxProjectOpener.Refresh();
+                saveCurrentAssignment();
+            }
+        }
+
+        // add a save current assignment method
+        /* save json */
+        private void saveCurrentAssignment()
+        {
+
+            // creates a folder called CppGrader
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
+
+            // serialize
+            string json = JsonSerializer.Serialize(currentAssignment);
+
+            // folderpath created
+            folderPath = Path.Combine(folderPath, currentAssignment.AssignmentName);
+            Directory.CreateDirectory(folderPath);
+
+
+            string temp = Path.Combine(folderPath, $"{currentAssignment.AssignmentName}.json");
+
+            // written user info to json
+            File.WriteAllText(temp, json);
+        }
+
         #endregion
 
         #region Menu Buttons
@@ -302,21 +412,31 @@ namespace Software_Engineering_Project
             ShowSubMenu(panelSubMenuEdit);
         }
 
-        private void ButtonProgramGrader_Click(object sender, EventArgs e)
-        {
-            //ShowSubMenu();
-        }
-
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelSubMenuHelp);
         }
 
+        private void Buttonsubmission_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(SubmissionDockpanel);
+        }
+
         #endregion
 
         #region Exit Button
+
+        /// <summary>
+        /// exit application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e)
         {
+            if(currentAssignment != null)
+            {
+                saveCurrentAssignment();
+            }
             Application.Exit();
         }
 
