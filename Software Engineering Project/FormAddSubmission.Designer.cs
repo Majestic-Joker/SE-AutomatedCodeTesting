@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.panelSubmissionsForm = new System.Windows.Forms.Panel();
+            this.labelCodePreview = new System.Windows.Forms.Label();
             this.labelFile = new System.Windows.Forms.Label();
             this.buttonOpenFile = new System.Windows.Forms.Button();
-            this.labelCodePreview = new System.Windows.Forms.Label();
             this.labelSubmissionsName = new System.Windows.Forms.Label();
             this.textBoxCodePreview = new System.Windows.Forms.TextBox();
             this.PanelSubmissionsControls = new System.Windows.Forms.Panel();
@@ -62,6 +62,18 @@
             this.panelSubmissionsForm.Size = new System.Drawing.Size(469, 540);
             this.panelSubmissionsForm.TabIndex = 12;
             // 
+            // labelCodePreview
+            // 
+            this.labelCodePreview.BackColor = System.Drawing.Color.Transparent;
+            this.labelCodePreview.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCodePreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelCodePreview.Location = new System.Drawing.Point(11, 129);
+            this.labelCodePreview.Name = "labelCodePreview";
+            this.labelCodePreview.Size = new System.Drawing.Size(107, 21);
+            this.labelCodePreview.TabIndex = 8;
+            this.labelCodePreview.Text = "CodePreview:";
+            this.labelCodePreview.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
             // labelFile
             // 
             this.labelFile.AutoEllipsis = true;
@@ -83,18 +95,6 @@
             this.buttonOpenFile.UseVisualStyleBackColor = true;
             this.buttonOpenFile.Click += new System.EventHandler(this.ButtonOpenFile_Click);
             // 
-            // labelCodePreview
-            // 
-            this.labelCodePreview.BackColor = System.Drawing.Color.Transparent;
-            this.labelCodePreview.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCodePreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelCodePreview.Location = new System.Drawing.Point(11, 129);
-            this.labelCodePreview.Name = "labelCodePreview";
-            this.labelCodePreview.Size = new System.Drawing.Size(107, 21);
-            this.labelCodePreview.TabIndex = 8;
-            this.labelCodePreview.Text = "CodePreview:";
-            this.labelCodePreview.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
             // labelSubmissionsName
             // 
             this.labelSubmissionsName.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -113,6 +113,7 @@
             this.textBoxCodePreview.Location = new System.Drawing.Point(11, 153);
             this.textBoxCodePreview.Multiline = true;
             this.textBoxCodePreview.Name = "textBoxCodePreview";
+            this.textBoxCodePreview.ReadOnly = true;
             this.textBoxCodePreview.Size = new System.Drawing.Size(445, 273);
             this.textBoxCodePreview.TabIndex = 13;
             this.textBoxCodePreview.Text = "{Code from the opened file is printed here. Lorem ipsum, la dee da dee da}";
@@ -172,6 +173,7 @@
             this.textBoxSubmissionName.Size = new System.Drawing.Size(267, 26);
             this.textBoxSubmissionName.TabIndex = 0;
             this.textBoxSubmissionName.Text = "{CodeSubmissionName}";
+            this.textBoxSubmissionName.TextChanged += new System.EventHandler(this.textBoxSubmissionName_TextChanged);
             // 
             // FormAddSubmission
             // 
