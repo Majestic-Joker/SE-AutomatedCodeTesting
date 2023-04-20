@@ -331,9 +331,7 @@ namespace Software_Engineering_Project
         private void OpenFormCreateAssignment()
         {
             var form = new FormCreateAssignment();
-            //label1.Text = "testing";
-            var result = form.ShowDialog();
-            if (result == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 currentAssignment = form.assignment;
                 saveCurrentAssignment();
@@ -353,12 +351,6 @@ namespace Software_Engineering_Project
 
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-            //formAddSubmissions.Visible = true;
-            //formAddSubmissions.BringToFront();
-            if(currentAssignment != null)
-            {
-                label1.Text = "not null";
-            }
             var form = new FormAddSubmission(currentAssignment.AssignmentDirectory);
 
             if (form.ShowDialog() == DialogResult.OK)
@@ -368,6 +360,7 @@ namespace Software_Engineering_Project
                 listBoxProjectOpener.Refresh();
                 saveCurrentAssignment();
             }
+            form.Dispose();
         }
 
         // add a save current assignment method
