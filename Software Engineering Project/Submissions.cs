@@ -13,6 +13,6 @@ namespace Software_Engineering_Project
         public int SubmissionID { get; set; }
         public string Content { get; set; }
         public string FilePath { get; set; }
-        public Result result;
+        public Result Result { get; set; }
     }
 }
