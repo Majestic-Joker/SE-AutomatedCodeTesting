@@ -10,7 +10,7 @@ namespace Software_Engineering_Project
 {
     public class CppService
     {
-        private readonly BuildResult buildResult;
+        private BuildResult buildResult;
         private readonly CppCompilation compilation;
         private readonly string exePath = null;
 
@@ -58,13 +58,11 @@ namespace Software_Engineering_Project
                 Loggers = new[] { new ConsoleLogger() }
             };
             var buildRequestData = new BuildRequestData(project.CreateProjectInstance(), new[] { "Build" });
-            var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
+            buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
 
             // Check if the build succeeded
             if (buildResult.OverallResult == BuildResultCode.Success)
             {
-                Console.WriteLine("Build succeeded!");
-
                 var outputPath = project.GetPropertyValue("OutputPath");
                 var outputDir = Path.Combine(project.DirectoryPath, outputPath);
                 var exePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
