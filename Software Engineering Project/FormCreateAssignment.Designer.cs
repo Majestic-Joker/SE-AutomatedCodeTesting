@@ -42,7 +42,9 @@
             textBoxDescription = new System.Windows.Forms.TextBox();
             PanelMainControls = new System.Windows.Forms.Panel();
             PanelExit = new System.Windows.Forms.Panel();
+            button1 = new System.Windows.Forms.Button();
             buttonClose = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
             panelAssignmentForm.SuspendLayout();
             panelLabels.SuspendLayout();
             PanelMainControls.SuspendLayout();
@@ -51,46 +53,41 @@
             // 
             // textBoxAssignmentName
             // 
-            textBoxAssignmentName.Location = new System.Drawing.Point(387, 35);
-            textBoxAssignmentName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBoxAssignmentName.Location = new System.Drawing.Point(339, 26);
             textBoxAssignmentName.Name = "textBoxAssignmentName";
-            textBoxAssignmentName.Size = new System.Drawing.Size(258, 27);
+            textBoxAssignmentName.Size = new System.Drawing.Size(226, 23);
             textBoxAssignmentName.TabIndex = 0;
             // 
             // textBoxRequiredInput
             // 
-            textBoxRequiredInput.Location = new System.Drawing.Point(387, 80);
-            textBoxRequiredInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBoxRequiredInput.Location = new System.Drawing.Point(339, 60);
             textBoxRequiredInput.Multiline = true;
             textBoxRequiredInput.Name = "textBoxRequiredInput";
-            textBoxRequiredInput.Size = new System.Drawing.Size(258, 48);
+            textBoxRequiredInput.Size = new System.Drawing.Size(226, 37);
             textBoxRequiredInput.TabIndex = 1;
             // 
             // textBoxExpectedOutput
             // 
-            textBoxExpectedOutput.Location = new System.Drawing.Point(387, 136);
-            textBoxExpectedOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBoxExpectedOutput.Location = new System.Drawing.Point(339, 102);
             textBoxExpectedOutput.Multiline = true;
             textBoxExpectedOutput.Name = "textBoxExpectedOutput";
-            textBoxExpectedOutput.Size = new System.Drawing.Size(258, 49);
+            textBoxExpectedOutput.Size = new System.Drawing.Size(226, 38);
             textBoxExpectedOutput.TabIndex = 2;
             // 
             // listBoxAssignments
             // 
             listBoxAssignments.FormattingEnabled = true;
-            listBoxAssignments.ItemHeight = 20;
-            listBoxAssignments.Location = new System.Drawing.Point(10, 261);
-            listBoxAssignments.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listBoxAssignments.ItemHeight = 15;
+            listBoxAssignments.Location = new System.Drawing.Point(9, 196);
             listBoxAssignments.Name = "listBoxAssignments";
-            listBoxAssignments.Size = new System.Drawing.Size(366, 304);
+            listBoxAssignments.Size = new System.Drawing.Size(321, 229);
             listBoxAssignments.TabIndex = 3;
             // 
             // ButtonSaveAssignment
             // 
-            ButtonSaveAssignment.Location = new System.Drawing.Point(432, 15);
-            ButtonSaveAssignment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            ButtonSaveAssignment.Location = new System.Drawing.Point(378, 11);
             ButtonSaveAssignment.Name = "ButtonSaveAssignment";
-            ButtonSaveAssignment.Size = new System.Drawing.Size(178, 111);
+            ButtonSaveAssignment.Size = new System.Drawing.Size(156, 83);
             ButtonSaveAssignment.TabIndex = 4;
             ButtonSaveAssignment.Text = "Save Assignment";
             ButtonSaveAssignment.UseVisualStyleBackColor = true;
@@ -101,9 +98,9 @@
             labelAssignmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             labelAssignmentName.Image = Properties.Resources.icons8_grades_32;
             labelAssignmentName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            labelAssignmentName.Location = new System.Drawing.Point(3, 18);
+            labelAssignmentName.Location = new System.Drawing.Point(3, 14);
             labelAssignmentName.Name = "labelAssignmentName";
-            labelAssignmentName.Size = new System.Drawing.Size(373, 55);
+            labelAssignmentName.Size = new System.Drawing.Size(326, 41);
             labelAssignmentName.TabIndex = 5;
             labelAssignmentName.Text = "Assignment Name:";
             labelAssignmentName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,9 +117,9 @@
             panelAssignmentForm.Controls.Add(textBoxExpectedOutput);
             panelAssignmentForm.Dock = System.Windows.Forms.DockStyle.Fill;
             panelAssignmentForm.Location = new System.Drawing.Point(0, 0);
-            panelAssignmentForm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            panelAssignmentForm.Margin = new System.Windows.Forms.Padding(4);
             panelAssignmentForm.Name = "panelAssignmentForm";
-            panelAssignmentForm.Size = new System.Drawing.Size(658, 720);
+            panelAssignmentForm.Size = new System.Drawing.Size(576, 540);
             panelAssignmentForm.TabIndex = 11;
             // 
             // panelLabels
@@ -136,18 +133,17 @@
             panelLabels.Controls.Add(labelAssignmentName);
             panelLabels.Dock = System.Windows.Forms.DockStyle.Left;
             panelLabels.Location = new System.Drawing.Point(0, 0);
-            panelLabels.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panelLabels.Name = "panelLabels";
-            panelLabels.Size = new System.Drawing.Size(381, 577);
+            panelLabels.Size = new System.Drawing.Size(334, 432);
             panelLabels.TabIndex = 15;
             // 
             // label3
             // 
             label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label3.Location = new System.Drawing.Point(2, 185);
+            label3.Location = new System.Drawing.Point(2, 139);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(374, 55);
+            label3.Size = new System.Drawing.Size(327, 41);
             label3.TabIndex = 8;
             label3.Text = "Description:";
             label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -156,9 +152,9 @@
             // 
             labelInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            labelInput.Location = new System.Drawing.Point(3, 72);
+            labelInput.Location = new System.Drawing.Point(3, 54);
             labelInput.Name = "labelInput";
-            labelInput.Size = new System.Drawing.Size(373, 55);
+            labelInput.Size = new System.Drawing.Size(326, 41);
             labelInput.TabIndex = 7;
             labelInput.Text = "Input:";
             labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -167,20 +163,19 @@
             // 
             label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label1.Location = new System.Drawing.Point(3, 128);
+            label1.Location = new System.Drawing.Point(3, 96);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(373, 55);
+            label1.Size = new System.Drawing.Size(326, 41);
             label1.TabIndex = 6;
             label1.Text = "Output:";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxDescription
             // 
-            textBoxDescription.Location = new System.Drawing.Point(387, 205);
-            textBoxDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBoxDescription.Location = new System.Drawing.Point(339, 154);
             textBoxDescription.Multiline = true;
             textBoxDescription.Name = "textBoxDescription";
-            textBoxDescription.Size = new System.Drawing.Size(258, 363);
+            textBoxDescription.Size = new System.Drawing.Size(226, 273);
             textBoxDescription.TabIndex = 13;
             // 
             // PanelMainControls
@@ -190,42 +185,62 @@
             PanelMainControls.Controls.Add(PanelExit);
             PanelMainControls.Controls.Add(ButtonSaveAssignment);
             PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            PanelMainControls.Location = new System.Drawing.Point(0, 577);
-            PanelMainControls.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            PanelMainControls.Location = new System.Drawing.Point(0, 432);
+            PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
             PanelMainControls.Name = "PanelMainControls";
-            PanelMainControls.Size = new System.Drawing.Size(656, 141);
+            PanelMainControls.Size = new System.Drawing.Size(574, 106);
             PanelMainControls.TabIndex = 12;
             // 
             // PanelExit
             // 
             PanelExit.BackColor = System.Drawing.SystemColors.Info;
             PanelExit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            PanelExit.Controls.Add(button2);
+            PanelExit.Controls.Add(button1);
             PanelExit.Controls.Add(buttonClose);
             PanelExit.Dock = System.Windows.Forms.DockStyle.Left;
             PanelExit.Location = new System.Drawing.Point(0, 0);
-            PanelExit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            PanelExit.Margin = new System.Windows.Forms.Padding(4);
             PanelExit.Name = "PanelExit";
-            PanelExit.Size = new System.Drawing.Size(380, 139);
+            PanelExit.Size = new System.Drawing.Size(333, 104);
             PanelExit.TabIndex = 11;
+            // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(209, 28);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(75, 23);
+            button1.TabIndex = 9;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // buttonClose
             // 
-            buttonClose.Location = new System.Drawing.Point(38, 14);
-            buttonClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            buttonClose.Location = new System.Drawing.Point(33, 10);
             buttonClose.Name = "buttonClose";
-            buttonClose.Size = new System.Drawing.Size(178, 111);
+            buttonClose.Size = new System.Drawing.Size(156, 83);
             buttonClose.TabIndex = 8;
             buttonClose.Text = "Close";
             buttonClose.UseVisualStyleBackColor = true;
             buttonClose.Click += ButtonClose_Click;
             // 
+            // button2
+            // 
+            button2.Location = new System.Drawing.Point(213, 60);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(75, 23);
+            button2.TabIndex = 10;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // FormCreateAssignment
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(658, 720);
+            ClientSize = new System.Drawing.Size(576, 540);
             Controls.Add(panelAssignmentForm);
-            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "FormCreateAssignment";
             Text = "Create Assignment";
             panelAssignmentForm.ResumeLayout(false);
@@ -253,5 +268,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelInput;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -22,6 +24,9 @@ namespace Software_Engineering_Project
         public FormCreateAssignment()
         {
             InitializeComponent();
+
+            assignment = new Assignment();
+
 
             //FormClosing += FormCreateAssignment_FormClosing;
         }
@@ -45,8 +50,6 @@ namespace Software_Engineering_Project
             Assignment newAssignment = new Assignment
             {
                 AssignmentName = assignmentName,
-                RequiredInput = textBoxRequiredInput.Text,
-                ExpectedOutput = textBoxExpectedOutput.Text,
                 InputFilepath = inputFilepath,
                 OutputFilepath = outputFilepath,
                 Submissions = new List<Submission>()
@@ -60,9 +63,6 @@ namespace Software_Engineering_Project
 
 
             string temp = Path.Combine(folderPath, $"{assignmentName}.json");
-
-            // written user info to json
-            File.WriteAllText(temp, json);
 
             // save filepath
             newAssignment.AssignmentDirectory = folderPath;
@@ -103,13 +103,41 @@ namespace Software_Engineering_Project
             pi.SetValue(this, CloseReason.None, null);
         }
 
-        //private void FormCreateAssignment_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    Visible = false;
-        //    e.Cancel = true;//cancel close if user requested
-        //    PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
-        //    pi.SetValue(this, CloseReason.None, null);
-        //}
+        // TODO: set up input and output files
+        
+        private string GetInfo(string assignmentDirectory)
+        {
+            string filePath = "";
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+
+                FileInfo info = new FileInfo(dialog.FileName);
+
+                var fileStream = dialog.OpenFile();
+                var reader = new StreamReader(fileStream);
+                string code = reader.ReadToEnd();
+                string temp = assignmentDirectory;
+                Directory.CreateDirectory(temp);
+                temp = Path.Combine(temp, info.Name);
+                File.WriteAllText(temp, code);
+                filePath = temp;
+            }
+            return filePath;
+        }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string input = GetInfo(assignment.AssignmentDirectory);
+            assignment.InputFilepath = input;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string output = GetInfo(assignment.AssignmentDirectory);
+            assignment.OutputFilepath = output;
+        }
     }
 }

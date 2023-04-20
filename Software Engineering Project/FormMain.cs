@@ -211,7 +211,7 @@ namespace Software_Engineering_Project
 
             if (assignment != null)
             {
-                //listBoxProjectOpener.Items.Add(assignment.AssignmentName);
+                currentAssignment = assignment;
             }
             // Hides the Open File button after use
             HideSubMenu();
@@ -336,8 +336,7 @@ namespace Software_Engineering_Project
             if (result == DialogResult.OK)
             {
                 currentAssignment = form.assignment;
-                //rrentAssignment.AssignmentDirectory = form.assignment.AssignmentDirectory;
-                label1.Text = "True";
+                saveCurrentAssignment();
             }
             form.Dispose();
         }
@@ -367,12 +366,31 @@ namespace Software_Engineering_Project
                 currentAssignment.Submissions.Add(form.submission);
                 listBoxProjectOpener.Items.Add(form.submission);
                 listBoxProjectOpener.Refresh();
-
+                saveCurrentAssignment();
             }
         }
 
         // add a save current assignment method
         /* save json */
+        private void saveCurrentAssignment()
+        {
+
+            // creates a folder called CppGrader
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
+
+            // serialize
+            string json = JsonSerializer.Serialize(currentAssignment);
+
+            // folderpath created
+            folderPath = Path.Combine(folderPath, currentAssignment.AssignmentName);
+            Directory.CreateDirectory(folderPath);
+
+
+            string temp = Path.Combine(folderPath, $"{currentAssignment.AssignmentName}.json");
+
+            // written user info to json
+            File.WriteAllText(temp, json);
+        }
 
         #endregion
 
@@ -415,6 +433,10 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e)
         {
+            if(currentAssignment != null)
+            {
+                saveCurrentAssignment();
+            }
             Application.Exit();
         }
 
