@@ -14,19 +14,24 @@ using System.IO;
 
 namespace Software_Engineering_Project
 {
-    public partial class FormAddSubmissions : Form
+    public partial class FormAddSubmission : Form
     {
         public Submission submission { get; set; }
         private string filePath;
         private string assignmentDirectory;
 
-        public FormAddSubmissions(string directory)
+        public FormAddSubmission(string directory)
         {
             InitializeComponent();
+            EmptyTextBoxes();
 
             assignmentDirectory = directory;
-
-            //FormClosing += FormAddSubmissions_FormClosing;
+        }
+        
+        private void EmptyTextBoxes(){
+            textBoxSubmissionName.Text = "";
+            textBoxCodePreview.Text = "";
+            labelFile.Text = "";
         }
 
         #region Exit buttons
@@ -52,17 +57,17 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonAddSubmissions_Click(object sender, EventArgs e)
+        private void ButtonAddSubmission_Click(object sender, EventArgs e)
         {
             Submission temp = new Submission();
             temp.StudentName = textBoxSubmissionName.Text;
             temp.FilePath = filePath;
             submission = temp;
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
-        private void buttonOpenFile_Click(object sender, EventArgs e)
+        private void ButtonOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             if(dialog.ShowDialog() == DialogResult.OK)
@@ -73,11 +78,13 @@ namespace Software_Engineering_Project
                 var fileStream = dialog.OpenFile();
                 var reader = new StreamReader(fileStream);
                 string code = reader.ReadToEnd();
-                string temp = Path.Combine(assignmentDirectory, "submissions");
+                string temp = Path.Combine(assignmentDirectory, "Submissions");
                 Directory.CreateDirectory(temp);
                 temp = Path.Combine(temp, info.Name);
                 File.WriteAllText(temp, code);
                 filePath = temp;
+                textBoxCodePreview.Text = code;
+                buttonAddSubmission.Enabled = true;
             }
         }
     }
