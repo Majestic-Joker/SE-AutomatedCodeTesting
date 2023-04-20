@@ -9,6 +9,7 @@ namespace Software_Engineering_Project
         public bool Compiled { get; set; }
         public bool RunComplete { get; set; }
         public bool OutputMatchesExpected { get; set; }
+        public string MatchPercentage { get; set; } 
         public string ExeFilepath { get; set; }
         public string ExeOutput { get; set; }
         public BuildResult BuildResult { get; set; }
