@@ -14,17 +14,20 @@ namespace Software_Engineering_Project
     {
         private BuildResult buildResult;
         private string directory;
-        private float matchPercent;
-        private bool doesMatch = false;
+        private float matchPercent = 0.0f;
         private string exeOut;
 
         private readonly CppCompilation compilation;
         private readonly string exePath = null;
+        private readonly float matchTarget = 90.0f;
 
         public BuildResult BuildResult => buildResult;
         public CppCompilation Compilation => compilation;
         public string ExePath => exePath;
+        public string ExeOut => exeOut;
+        public float MatchPercent => matchPercent;
         public bool IsBuilt => buildResult.OverallResult == BuildResultCode.Success;
+        public bool DoesMatch => matchPercent > matchTarget;
 
         public CppService(Assignment assignment, Submission submission) {
             ExeRunner runner = null;
@@ -45,6 +48,7 @@ namespace Software_Engineering_Project
             if(runner != null && runner.RunCompleted)
             {
                 matchPercent = GetMatchPercentage(runner, assignment);
+                UpdateRunResults(submission.Result);
             }
         }
 
@@ -57,13 +61,9 @@ namespace Software_Engineering_Project
 
         private void UpdateRunResults(Result subResult){
             subResult.RunComplete = true;
-                
-                new Result{
-                RunComplete = true,
-                OutputMatchesExpected = true,
-                MatchPercentage = matchPercent.ToString("n2"),
-                ExeOutput = exeOut
-            };
+            subResult.OutputMatchesExpected = DoesMatch;
+            subResult.MatchPercentage = MatchPercent.ToString("n2");
+            subResult.ExeOutput = ExeOut;
         }
 
         private string CreateDirectory(string parentDirectory){
@@ -104,6 +104,7 @@ namespace Software_Engineering_Project
             {
                 Loggers = new[] { new ConsoleLogger() }
             };
+
             var buildRequestData = new BuildRequestData(project.CreateProjectInstance(), new[] { "Build" });
             buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
 
@@ -113,10 +114,6 @@ namespace Software_Engineering_Project
                 var outputPath = project.GetPropertyValue("OutputPath");
                 var outputDir = Path.Combine(project.DirectoryPath, outputPath);
                 var exePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
-            }
-            else
-            {
-                Console.WriteLine("Build failed!");
             }
 
             return exePath;
@@ -135,27 +132,22 @@ namespace Software_Engineering_Project
             string[] exeLines = GetLines(runner.ExeOutput);
             string[] assignmentLines = GetLines(expectedOutput);
 
-            if (matchPercent > 90f)
-                doesMatch = true;
-
-
             float count = 0f;
-
-                for(int i = 0; i < assignmentLines.Length; i++){
-                    for(int j = 0; j < exeLines.Length; i++){
-                        bool full = exeLines[j].Equals(assignmentLines[i]);
-                        bool half = exeLines[j].Equals(assignmentLines[i],  StringComparison.OrdinalIgnoreCase);
+            for(int i = 0; i < assignmentLines.Length; i++){
+                for(int j = 0; j < exeLines.Length; i++){
+                    bool full = exeLines[j].Equals(assignmentLines[i]);
+                    bool half = exeLines[j].Equals(assignmentLines[i],  StringComparison.OrdinalIgnoreCase);
                         
-                        if (full)
-                            count += 0.5f;
+                    if (full)
+                        count += 0.5f;
 
-                        if (half)
-                            count += 0.5f;
+                    if (half)
+                        count += 0.5f;
 
-                        if (full || half)
-                            break;
-                    }
+                    if (full || half)
+                        break;
                 }
+            }
 
             return (count / (float)assignmentLines.Length) * 100;
         }
