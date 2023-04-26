@@ -5,6 +5,7 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Logging;
 using System;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Software_Engineering_Project
@@ -26,28 +27,42 @@ namespace Software_Engineering_Project
         public bool IsBuilt => buildResult.OverallResult == BuildResultCode.Success;
 
         public CppService(Assignment assignment, Submission submission) {
+            ExeRunner runner = null;
+            submission.Result = new Result();
+
             directory = CreateDirectory(assignment.AssignmentDirectory);
 
             compilation = CppParser.ParseFile(submission.FilePath);
+
             string projectPath = CreateProject(directory, submission.FilePath, submission.StudentName);
             exePath = BuildExe(projectPath, submission.StudentName);
 
             if(IsBuilt){
-                TryRunExe(assignment);
-                UpdateResult(submission);
+                UpdateCompilationResults(submission.Result);
+                runner = TryRunExe(assignment);
+            }
+
+            if(runner != null && runner.RunCompleted)
+            {
+                matchPercent = GetMatchPercentage(runner, assignment);
             }
         }
 
-        private void UpdateResult(Submission submission){
-            submission.Result = new Result{
-                Compiled = true,
+        private void UpdateCompilationResults(Result subResult) {
+            subResult.Compiled = true;
+            subResult.CppCompilation = Compilation;
+            subResult.BuildResult = BuildResult;
+            subResult.ExeFilepath = ExePath;
+        }
+
+        private void UpdateRunResults(Result subResult){
+            subResult.RunComplete = true;
+                
+                new Result{
                 RunComplete = true,
                 OutputMatchesExpected = true,
                 MatchPercentage = matchPercent.ToString("n2"),
-                ExeFilepath = ExePath,
-                ExeOutput = exeOut,
-                BuildResult = buildResult,
-                CppCompilation = compilation
+                ExeOutput = exeOut
             };
         }
 
@@ -107,31 +122,29 @@ namespace Software_Engineering_Project
             return exePath;
         }
 
-        private void TryRunExe(Assignment assignment){
+        private ExeRunner TryRunExe(Assignment assignment){
             ExeRunner runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath};
             runner.RunExe();
             exeOut = runner.ExeOutput;
-
-            if(runner.RunCompleted){
-                string expectedOutput = new StreamReader(assignment.OutputFilepath).ReadToEnd();
-
-                string[] exeLines = GetLines(runner.ExeOutput);
-                string[] assignmentLines = GetLines(expectedOutput);
-
-                matchPercent = GetMatchPercentage(exeLines, assignmentLines);
-                
-                if (matchPercent > 90f)
-                    doesMatch = true;
-            }
+            return runner;
         }
 
-        private float GetMatchPercentage(string[] exe, string[] assignment){
+        private float GetMatchPercentage(ExeRunner runner, Assignment assignment){
+            string expectedOutput = new StreamReader(assignment.OutputFilepath).ReadToEnd();
+
+            string[] exeLines = GetLines(runner.ExeOutput);
+            string[] assignmentLines = GetLines(expectedOutput);
+
+            if (matchPercent > 90f)
+                doesMatch = true;
+
+
             float count = 0f;
 
-                for(int i = 0; i < assignment.Length; i++){
-                    for(int j = 0; j < exe.Length; i++){
-                        bool full = exe[j].Equals(assignment[i]);
-                        bool half = exe[j].Equals(assignment[i],  StringComparison.OrdinalIgnoreCase);
+                for(int i = 0; i < assignmentLines.Length; i++){
+                    for(int j = 0; j < exeLines.Length; i++){
+                        bool full = exeLines[j].Equals(assignmentLines[i]);
+                        bool half = exeLines[j].Equals(assignmentLines[i],  StringComparison.OrdinalIgnoreCase);
                         
                         if (full)
                             count += 0.5f;
@@ -144,7 +157,7 @@ namespace Software_Engineering_Project
                     }
                 }
 
-            return (count / (float)assignment.Length) * 100;
+            return (count / (float)assignmentLines.Length) * 100;
         }
 
         private string[] GetLines(string text){
