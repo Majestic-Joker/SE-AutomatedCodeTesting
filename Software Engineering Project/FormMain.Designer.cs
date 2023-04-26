@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.labelTitlecard = new System.Windows.Forms.Label();
-            this.listBoxProjectOpener = new System.Windows.Forms.ListBox();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.textBoxResult = new System.Windows.Forms.TextBox();
             this.buttonAbout = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.PanelMainControls = new System.Windows.Forms.Panel();
@@ -56,7 +53,11 @@
             this.buttonOpenAssignment = new System.Windows.Forms.Button();
             this.buttonAssignments = new System.Windows.Forms.Button();
             this.toolTipFile = new System.Windows.Forms.ToolTip(this.components);
-            this.panelMain.SuspendLayout();
+            this.listBoxProjectOpener = new System.Windows.Forms.ListBox();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.textBoxResult = new System.Windows.Forms.TextBox();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.PanelMainControls.SuspendLayout();
             this.PanelExit.SuspendLayout();
             this.panelSideMenuPanel.SuspendLayout();
@@ -64,6 +65,7 @@
             this.panelSubMenuEdit.SuspendLayout();
             this.SubmissionDockpanel.SuspendLayout();
             this.panelSubMenuFile.SuspendLayout();
+            this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelTitlecard
@@ -77,41 +79,6 @@
             this.labelTitlecard.Size = new System.Drawing.Size(214, 69);
             this.labelTitlecard.TabIndex = 1;
             this.labelTitlecard.Text = "PROGRAM GRADER";
-            // 
-            // listBoxProjectOpener
-            // 
-            this.listBoxProjectOpener.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBoxProjectOpener.ItemHeight = 15;
-            this.listBoxProjectOpener.Location = new System.Drawing.Point(242, 11);
-            this.listBoxProjectOpener.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxProjectOpener.Name = "listBoxProjectOpener";
-            this.listBoxProjectOpener.Size = new System.Drawing.Size(323, 334);
-            this.listBoxProjectOpener.TabIndex = 10;
-            // 
-            // panelMain
-            // 
-            this.panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMain.Controls.Add(this.textBoxResult);
-            this.panelMain.Controls.Add(this.listBoxProjectOpener);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(941, 488);
-            this.panelMain.TabIndex = 10;
-            // 
-            // textBoxResult
-            // 
-            this.textBoxResult.Location = new System.Drawing.Point(603, 11);
-            this.textBoxResult.Multiline = true;
-            this.textBoxResult.Name = "textBoxResult";
-            this.textBoxResult.PlaceholderText = "Compiled submission results are shown here.";
-            this.textBoxResult.ReadOnly = true;
-            this.textBoxResult.Size = new System.Drawing.Size(325, 334);
-            this.textBoxResult.TabIndex = 12;
-            this.textBoxResult.TabStop = false;
             // 
             // buttonAbout
             // 
@@ -469,6 +436,56 @@
             this.buttonAssignments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAssignments.UseVisualStyleBackColor = true;
             // 
+            // listBoxProjectOpener
+            // 
+            this.listBoxProjectOpener.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxProjectOpener.ItemHeight = 15;
+            this.listBoxProjectOpener.Location = new System.Drawing.Point(242, 11);
+            this.listBoxProjectOpener.Margin = new System.Windows.Forms.Padding(4);
+            this.listBoxProjectOpener.Name = "listBoxProjectOpener";
+            this.listBoxProjectOpener.Size = new System.Drawing.Size(323, 334);
+            this.listBoxProjectOpener.TabIndex = 10;
+            // 
+            // panelMain
+            // 
+            this.panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMain.Controls.Add(this.textBoxResult);
+            this.panelMain.Controls.Add(this.listBoxProjectOpener);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(941, 488);
+            this.panelMain.TabIndex = 10;
+            // 
+            // textBoxResult
+            // 
+            this.textBoxResult.Location = new System.Drawing.Point(603, 11);
+            this.textBoxResult.Multiline = true;
+            this.textBoxResult.Name = "textBoxResult";
+            this.textBoxResult.PlaceholderText = "Compiled submission results are shown here.";
+            this.textBoxResult.ReadOnly = true;
+            this.textBoxResult.Size = new System.Drawing.Size(325, 334);
+            this.textBoxResult.TabIndex = 12;
+            this.textBoxResult.TabStop = false;
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintResults);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -482,8 +499,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.Text = "Home";
-            this.panelMain.ResumeLayout(false);
-            this.panelMain.PerformLayout();
             this.PanelMainControls.ResumeLayout(false);
             this.PanelExit.ResumeLayout(false);
             this.panelSideMenuPanel.ResumeLayout(false);
@@ -491,16 +506,16 @@
             this.panelSubMenuEdit.ResumeLayout(false);
             this.SubmissionDockpanel.ResumeLayout(false);
             this.panelSubMenuFile.ResumeLayout(false);
+            this.panelMain.ResumeLayout(false);
+            this.panelMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label labelTitlecard;
-        private System.Windows.Forms.ListBox listBoxProjectOpener;
         private ClassCustomButton buttonRun;
         private ClassCustomButton buttonView;
-        private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Panel PanelMainControls;
         private System.Windows.Forms.Panel panelSideMenuPanel;
         private System.Windows.Forms.Panel panelSubMenuFile;
@@ -521,7 +536,11 @@
         private System.Windows.Forms.Button buttonCreateSubmission;
         private System.Windows.Forms.Button buttonOpenSubmission;
         private System.Windows.Forms.Button buttonSubmission;
+        private System.Windows.Forms.ListBox listBoxProjectOpener;
+        private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.TextBox textBoxResult;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }
 
