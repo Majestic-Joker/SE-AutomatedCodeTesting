@@ -367,7 +367,6 @@ namespace Software_Engineering_Project
         /* save json */
         private void saveCurrentAssignment()
         {
-
             // creates a folder called CppGrader
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
 
@@ -377,7 +376,6 @@ namespace Software_Engineering_Project
             // folderpath created
             folderPath = Path.Combine(folderPath, currentAssignment.AssignmentName);
             Directory.CreateDirectory(folderPath);
-
 
             string temp = Path.Combine(folderPath, $"{currentAssignment.AssignmentName}.json");
 
@@ -416,6 +414,23 @@ namespace Software_Engineering_Project
         }
 
         #endregion
+
+        private void RunCompilerService() { 
+            CppService service;
+            int selectedIndex = listBoxProjectOpener.SelectedIndex;
+            
+            if(currentAssignment != null) {  
+                if(currentAssignment.Submissions.Count > 0) {
+                    Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
+                    service = new CppService(currentAssignment, selectedSubmission);
+                }
+
+                if (currentAssignment.Submissions[selectedIndex].Result.Compiled)
+                    MessageBox.Show("Submission compiled sucessfully.");
+                else
+                    MessageBox.Show("Submission compilation failed.");
+            }
+        }
 
         #region Exit Button
 
