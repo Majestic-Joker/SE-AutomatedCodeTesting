@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
@@ -178,23 +179,29 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonRun_Click(object sender, EventArgs e)
         {
-
+            int selectedIndex = listBoxProjectOpener.SelectedIndex;
+            bool didCompile = false;
             //If a file is selected  
-            var selectedFile = listBoxProjectOpener.SelectedItem as string;
-            if (String.IsNullOrEmpty(selectedFile))
-                return;
+            if(currentAssignment != null ){
+                if(currentAssignment.Submissions.Count > 0) {
+                    Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
+                    didCompile = RunCompilerService(selectedSubmission);
+                    UpdateResultText(selectedSubmission);
+                }
+            } 
 
-            //Open the file
+            if(didCompile){
+                MessageBox.Show("Compilation sucessful");
+            }
+            else{
+                MessageBox.Show("Compilation failed");
+            }
+
+            saveCurrentAssignment();
         }
 
-        /// <summary>
-        /// Will view code in pdf and answers/stats
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonView_Click(object sender, EventArgs e)
-        {
-
+        private void ButtonPrint_Click(object sender, EventArgs e){
+            //Placeholder for printing from the textBoxResult.text
         }
         #endregion
 
@@ -344,11 +351,6 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonOpenSubmission_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
             var form = new FormAddSubmission(currentAssignment.AssignmentDirectory);
@@ -415,21 +417,17 @@ namespace Software_Engineering_Project
 
         #endregion
 
-        private void RunCompilerService() { 
-            CppService service;
-            int selectedIndex = listBoxProjectOpener.SelectedIndex;
-            
-            if(currentAssignment != null) {  
-                if(currentAssignment.Submissions.Count > 0) {
-                    Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
-                    service = new CppService(currentAssignment, selectedSubmission);
-                }
-
-                if (currentAssignment.Submissions[selectedIndex].Result.Compiled)
-                    MessageBox.Show("Submission compiled sucessfully.");
-                else
-                    MessageBox.Show("Submission compilation failed.");
+        private bool RunCompilerService(Submission selectedSubmission) {
+            if(selectedSubmission != null) {
+                CppService service = new CppService(currentAssignment, selectedSubmission);
+                return service.IsBuilt;
             }
+
+            return false;
+        }
+
+        private void UpdateResultText(Submission selectedSubmission){
+            textBoxResult.Text = selectedSubmission.Result.ToString();
         }
 
         #region Exit Button
