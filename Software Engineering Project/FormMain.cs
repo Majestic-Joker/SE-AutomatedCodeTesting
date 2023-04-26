@@ -202,6 +202,18 @@ namespace Software_Engineering_Project
 
         private void ButtonPrint_Click(object sender, EventArgs e){
             //Placeholder for printing from the textBoxResult.text
+            int selectedIndex = listBoxProjectOpener.SelectedIndex;
+            if(currentAssignment != null ){
+                if(currentAssignment.Submissions.Count > 0) {
+                    Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
+                    if(selectedSubmission.Result == null)
+                        selectedSubmission.Result = new Result();
+                    UpdateResultText(selectedSubmission);
+
+                    printPreviewDialog1.Document = printDocument1;
+                    printPreviewDialog1.ShowDialog();
+                }
+            }
         }
         #endregion
 
@@ -427,7 +439,35 @@ namespace Software_Engineering_Project
         }
 
         private void UpdateResultText(Submission selectedSubmission){
+            printDocument1.DocumentName = $"{selectedSubmission.StudentName}_Results";
             textBoxResult.Text = selectedSubmission.Result.ToString();
+        }
+
+        private void PrintResults(object sender, PrintPageEventArgs e){
+            int charactersOnPage = 0;
+            int linesPerPage = 0;
+            string resultText = textBoxResult.Text;
+            Font resultFont = textBoxResult.Font;
+
+            // Sets the value of charactersOnPage to the number of characters
+            // of stringToPrint that will fit within the bounds of the page.
+            e.Graphics.MeasureString(resultText, resultFont,
+                e.MarginBounds.Size, StringFormat.GenericTypographic,
+                out charactersOnPage, out linesPerPage);
+
+            // Draws the string within the bounds of the page.
+            e.Graphics.DrawString(resultText, resultFont, Brushes.Black,
+            e.MarginBounds, StringFormat.GenericTypographic);
+
+            // Remove the portion of the string that has been printed.
+            resultText = resultText.Substring(charactersOnPage);
+
+            // Check to see if more pages are to be printed.
+            e.HasMorePages = (resultText.Length > 0);
+
+            // If there are no more pages, reset the string to be printed.
+            if (!e.HasMorePages)
+                resultText = textBoxResult.Text;
         }
 
         #region Exit Button
