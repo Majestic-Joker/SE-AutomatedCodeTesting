@@ -14,5 +14,14 @@ namespace Software_Engineering_Project
         public string Content { get; set; }
         public string FilePath { get; set; }
         public Result Result { get; set; }
+
+        public override string ToString()
+        {
+            string submissionAsString = string.Empty;
+
+            submissionAsString += $"{StudentName}";
+
+            return submissionAsString;
+        }
     }
 }
