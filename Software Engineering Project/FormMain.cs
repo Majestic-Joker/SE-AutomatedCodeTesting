@@ -66,14 +66,14 @@ namespace Software_Engineering_Project
             buttonRun.MouseHover += ButtonRun_MouseHover;
             buttonView.MouseHover += ButtonView_MouseHover;
             listBoxProjectOpener.MouseHover += ListBoxProjectOpener_MouseHover;
-            listBoxOutput.MouseHover += ListBoxOutput_MouseHover;
+            textBoxResult.MouseHover += ListBoxOutput_MouseHover;
             #endregion
         }
 
         #region MouseHover ToolTips
         private void ListBoxOutput_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(listBoxOutput, "Code will be Here");
+            toolTipFile.SetToolTip(textBoxResult, "results will be Here");
         }
 
         private void ListBoxProjectOpener_MouseHover(object sender, EventArgs e)
@@ -182,31 +182,38 @@ namespace Software_Engineering_Project
             int selectedIndex = listBoxProjectOpener.SelectedIndex;
             bool didCompile = false;
             //If a file is selected  
-            if(currentAssignment != null ){
-                if(currentAssignment.Submissions.Count > 0) {
+            if (currentAssignment != null)
+            {
+                if (currentAssignment.Submissions.Count > 0)
+                {
                     Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
                     didCompile = RunCompilerService(selectedSubmission);
                     UpdateResultText(selectedSubmission);
                 }
-            } 
+            }
 
-            if(didCompile){
+            if (didCompile)
+            {
                 MessageBox.Show("Compilation sucessful");
             }
-            else{
+            else
+            {
                 MessageBox.Show("Compilation failed");
             }
 
             saveCurrentAssignment();
         }
 
-        private void ButtonPrint_Click(object sender, EventArgs e){
+        private void ButtonPrint_Click(object sender, EventArgs e)
+        {
             //Placeholder for printing from the textBoxResult.text
             int selectedIndex = listBoxProjectOpener.SelectedIndex;
-            if(currentAssignment != null ){
-                if(currentAssignment.Submissions.Count > 0) {
+            if (currentAssignment != null)
+            {
+                if (currentAssignment.Submissions.Count > 0)
+                {
                     Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
-                    if(selectedSubmission.Result == null)
+                    if (selectedSubmission.Result == null)
                         selectedSubmission.Result = new Result();
                     UpdateResultText(selectedSubmission);
 
@@ -302,7 +309,7 @@ namespace Software_Engineering_Project
             buttonAssignments.ForeColor = Color.White;
             buttonCreateAssignment.ForeColor = Color.White;
             buttonCreateSubmission.ForeColor = Color.White;
-            buttonOpenSubmission.ForeColor = Color.White;
+            //buttonOpenSubmission.ForeColor = Color.White;
             buttonEdit.ForeColor = Color.White;
             buttonHelp.ForeColor = Color.White;
             //buttonProgramGrader.ForeColor = Color.White;
@@ -406,31 +413,32 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonFile_Click(object sender, EventArgs e)
+        private void buttonAssignments_Click(object sender, EventArgs e)
         {
-            // show sub menu file
             ShowSubMenu(panelSubMenuFile);
         }
 
-        private void ButtonEdit_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(panelSubMenuEdit);
-        }
-
-        private void ButtonHelp_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(panelSubMenuHelp);
-        }
-
-        private void Buttonsubmission_Click(object sender, EventArgs e)
+        private void buttonSubmission_Click(object sender, EventArgs e)
         {
             ShowSubMenu(SubmissionDockpanel);
         }
 
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(panelSubMenuEdit);
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(panelSubMenuHelp);
+        }
+
         #endregion
 
-        private bool RunCompilerService(Submission selectedSubmission) {
-            if(selectedSubmission != null) {
+        private bool RunCompilerService(Submission selectedSubmission)
+        {
+            if (selectedSubmission != null)
+            {
                 CppService service = new CppService(currentAssignment, selectedSubmission);
                 return service.IsBuilt;
             }
@@ -438,12 +446,14 @@ namespace Software_Engineering_Project
             return false;
         }
 
-        private void UpdateResultText(Submission selectedSubmission){
+        private void UpdateResultText(Submission selectedSubmission)
+        {
             printDocument1.DocumentName = $"{selectedSubmission.StudentName}_Results";
             textBoxResult.Text = selectedSubmission.Result.ToString();
         }
 
-        private void PrintResults(object sender, PrintPageEventArgs e){
+        private void PrintResults(object sender, PrintPageEventArgs e)
+        {
             int charactersOnPage = 0;
             int linesPerPage = 0;
             string resultText = textBoxResult.Text;
@@ -479,7 +489,7 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e)
         {
-            if(currentAssignment != null)
+            if (currentAssignment != null)
             {
                 saveCurrentAssignment();
             }

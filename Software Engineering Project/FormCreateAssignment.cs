@@ -17,6 +17,12 @@ namespace Software_Engineering_Project
 {
     public partial class FormCreateAssignment : Form
     {
+        private bool hasName => textBoxAssignmentName.Text != string.Empty;
+        private bool hasInputFile => labelInputFilePath.Text != string.Empty;
+        private bool hasOutputFile => labelOutputFilePath.Text != string.Empty;
+        private bool canSave => hasName && hasInputFile && hasOutputFile;
+        private string codeText;
+
         string assignmentFilepath = "";
 
         public Assignment? assignment { get; set; }
@@ -24,6 +30,7 @@ namespace Software_Engineering_Project
         public FormCreateAssignment()
         {
             InitializeComponent();
+            EmptyTextBoxes();
 
             assignment = new Assignment();
 
@@ -84,7 +91,8 @@ namespace Software_Engineering_Project
             CreateAssignment();
 
 
-            listBoxAssignments.Items.Add(assignmentFilepath);
+            //listBoxAssignments.Items.Add(assignmentFilepath);
+            labelFilePath.Text = assignmentFilepath;
 
             DialogResult = DialogResult.OK;
 
@@ -104,7 +112,7 @@ namespace Software_Engineering_Project
         }
 
         // TODO: set up input and output files
-        
+
         private string GetInfo(string assignmentDirectory)
         {
             string filePath = "";
@@ -123,21 +131,38 @@ namespace Software_Engineering_Project
                 temp = Path.Combine(temp, info.Name);
                 File.WriteAllText(temp, code);
                 filePath = temp;
+                codeText = new StreamReader(dialog.OpenFile()).ReadToEnd();
+                textBoxAssignmentPreview.Text = codeText;
+                ButtonSaveAssignment.Enabled = canSave;
             }
             return filePath;
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonInput_Click(object sender, EventArgs e)
         {
             string input = GetInfo(assignment.AssignmentDirectory);
             assignment.InputFilepath = input;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonOutput_Click(object sender, EventArgs e)
         {
             string output = GetInfo(assignment.AssignmentDirectory);
             assignment.OutputFilepath = output;
+        }
+
+        private void EmptyTextBoxes()
+        {
+            textBoxAssignmentName.Text = string.Empty;
+
+            labelInputFilePath.Text = string.Empty;
+
+            labelOutputFilePath.Text = string.Empty;
+        }
+
+        private void textBoxAssignmentPreview_TextChanged(object sender, EventArgs e)
+        {
+            ButtonSaveAssignment.Enabled = canSave;
         }
     }
 }
