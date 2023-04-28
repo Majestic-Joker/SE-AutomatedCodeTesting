@@ -1,16 +1,8 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Software_Engineering_Project
@@ -20,22 +12,21 @@ namespace Software_Engineering_Project
         private bool hasName => textBoxAssignmentName.Text != string.Empty;
         private bool hasInputFile => labelInputFilePath.Text != string.Empty;
         private bool hasOutputFile => labelOutputFilePath.Text != string.Empty;
-        private bool canSave => hasName && hasInputFile && hasOutputFile;
-        private string codeText;
+        private bool canSave => hasName && hasOutputFile;
 
         string assignmentFilepath = "";
+        private readonly string programDirectory;
 
-        public Assignment? assignment { get; set; }
+        public Assignment assignment { get; set; }
 
-        public FormCreateAssignment()
+        public FormCreateAssignment(string programDirectory)
         {
             InitializeComponent();
             EmptyTextBoxes();
 
+            this.programDirectory = programDirectory;
+
             assignment = new Assignment();
-
-
-            //FormClosing += FormCreateAssignment_FormClosing;
         }
 
         #region assignment functions
@@ -47,20 +38,13 @@ namespace Software_Engineering_Project
         {
             string assignmentName = textBoxAssignmentName.Text;
 
-            // creates a folder called CppGrader
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
-
-            string inputFilepath = "Input.txt";
-            string outputFilepath = "Output.txt";
-
             // assignment
             Assignment newAssignment = new Assignment
             {
                 AssignmentName = assignmentName,
-                InputFilepath = inputFilepath,
-                OutputFilepath = outputFilepath,
                 Submissions = new List<Submission>()
             };
+
             // serialize
             string json = JsonSerializer.Serialize(newAssignment);
 
@@ -68,14 +52,23 @@ namespace Software_Engineering_Project
             folderPath = Path.Combine(folderPath, assignmentName);
             Directory.CreateDirectory(folderPath);
 
-
             string temp = Path.Combine(folderPath, $"{assignmentName}.json");
 
             // save filepath
             newAssignment.AssignmentDirectory = folderPath;
             //assignmentFilepath = folderPath;
             assignment = newAssignment;
+        }
 
+        private string CreateDirectory(){
+
+            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AutomatedCodeTester");
+            Directory.CreateDirectory(temp);
+            return temp;
+        }
+
+        private void WriteFile(string fileText){
+            File.WriteAllText(assignment.AssignmentDirectory, fileText);
         }
 
         #endregion
@@ -90,10 +83,6 @@ namespace Software_Engineering_Project
         {
             CreateAssignment();
 
-
-            //listBoxAssignments.Items.Add(assignmentFilepath);
-            labelFilePath.Text = assignmentFilepath;
-
             DialogResult = DialogResult.OK;
 
             Close();
@@ -106,13 +95,11 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            Visible = false;
-            PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
-            pi.SetValue(this, CloseReason.None, null);
+            DialogResult = DialogResult.Cancel; 
+            Close();
         }
 
         // TODO: set up input and output files
-
         private string GetInfo(string assignmentDirectory)
         {
             string filePath = "";
