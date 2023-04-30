@@ -85,6 +85,8 @@ namespace Software_Engineering_Project
 
         #region Form Theme Functions
 
+        // TODO: Handle with ThemeManager
+
         private void InitializeFormTheme(){
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
@@ -104,6 +106,8 @@ namespace Software_Engineering_Project
             PanelExit.BackColor = Color.Tan;
             PanelMainControls.BackColor = Color.Gray;
         }
+
+        // TODO: Refactor submenu toggling
 
         /// <summary>
         /// Hides Sub Menus after clicked on
@@ -431,6 +435,7 @@ namespace Software_Engineering_Project
             textBoxResult.Text = selectedSubmission.Result.ToString();
         }
 
+        #pragma warning disable CA1416
         private void PrintResults(object sender, PrintPageEventArgs e)
         {
             int charactersOnPage = 0;
@@ -440,13 +445,10 @@ namespace Software_Engineering_Project
 
             // Sets the value of charactersOnPage to the number of characters
             // of stringToPrint that will fit within the bounds of the page.
-            e.Graphics.MeasureString(resultText, resultFont,
-                e.MarginBounds.Size, StringFormat.GenericTypographic,
-                out charactersOnPage, out linesPerPage);
+            SizeF sizeF = e.Graphics.MeasureString(resultText,resultFont,e.MarginBounds.Size,StringFormat.GenericTypographic,out charactersOnPage,out linesPerPage);
 
             // Draws the string within the bounds of the page.
-            e.Graphics.DrawString(resultText, resultFont, Brushes.Black,
-            e.MarginBounds, StringFormat.GenericTypographic);
+            e.Graphics.DrawString(resultText,resultFont,Brushes.Black,e.MarginBounds,StringFormat.GenericTypographic);
 
             // Remove the portion of the string that has been printed.
             resultText = resultText.Substring(charactersOnPage);
@@ -458,6 +460,7 @@ namespace Software_Engineering_Project
             if (!e.HasMorePages)
                 resultText = textBoxResult.Text;
         }
+        #pragma warning restore CA1416
 
         #region Exit Button
 
