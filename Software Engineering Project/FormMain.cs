@@ -27,7 +27,10 @@ namespace Software_Engineering_Project
             InitializeComponent();
             InitializeFormTheme();
 
-            CreateDirectory();
+            while(!ProgramDirectory.Exists)
+                CreateDirectory();
+
+            // TODO: Try to load most recent assignment
         }
 
         private bool CreateDirectory(){
@@ -36,52 +39,6 @@ namespace Software_Engineering_Project
 
             return ProgramDirectory.Exists;
         }
-
-        #region MouseHover Events
-        private void TextboxResults_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(sender as TextBox, "Compilation results and build messages for the selected submission are displayed here");
-        }
-
-        private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(sender as ListBox, "Assignment submissions are displayed here. Select a Submission to use other form functions");
-        }
-
-        private void ButtonPrint_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(sender as Button, "Print contents of the submission results shown above.");
-        }
-        
-        private void ButtonExecute_MouseHover(object sender, EventArgs e){
-            toolTipFile.SetToolTip(sender as Button, "Compile and Run submission with this button");
-        }
-
-        private void ButtonExit_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(ButtonExit, "Exit here");
-        }
-
-        private void ButtonHelp_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonHelp, "Instructions here");
-        }
-
-        private void ButtonThemeSettings_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonEdit, "Change Themes here");
-        }
-
-        private void ButtonAssignments_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
-        }
-
-        private void ButtonSubmissions_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonSubmission, "Open or Create Submissions here");
-        }
-        #endregion
 
         #region Form Theme Functions
 
@@ -150,69 +107,88 @@ namespace Software_Engineering_Project
         }
         #endregion
 
-        #region Compiler Buttons
-        /// <summary>
-        /// Compiles and Runs code from the selected Submission in listboxSubmissions
-        /// </summary>
-        /// <param name="sender">The object running this event</param>
-        /// <param name="e">The EventArguments</param>
-        private void ButtonExecute_Click(object sender, EventArgs e)
+        #region MouseHover Events
+        private void TextboxResults_MouseHover(object sender, EventArgs e)
         {
-            int selectedIndex = listboxSubmissions.SelectedIndex;
-            bool didCompile = false;
-            
-            // TODO: Ensure the listboxSubmissions is the same list as CurrentAssignment.Submissions
-            //If a file is selected  
-            if (CurrentAssignment != null)
-            {
-                if (CurrentAssignment.Submissions.Count > 0)
-                {
-                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
-                    didCompile = RunCompilerService(selectedSubmission);
-                    UpdateResultText(selectedSubmission);
-                }
-            }
-
-            if (didCompile)
-            {
-                MessageBox.Show("Compilation sucessful");
-            }
-            else
-            {
-                MessageBox.Show("Compilation failed");
-            }
-
-            saveCurrentAssignment();
+            toolTipFile.SetToolTip(sender as TextBox, "Compilation results and build messages for the selected submission are displayed here");
         }
 
-        private void ButtonPrint_Click(object sender, EventArgs e)
+        private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
         {
-            //Placeholder for printing from the textBoxResult.text
-            int selectedIndex = listboxSubmissions.SelectedIndex;
-            if (CurrentAssignment != null)
-            {
-                if (CurrentAssignment.Submissions.Count > 0)
-                {
-                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
-                    if (selectedSubmission.Result == null)
-                        selectedSubmission.Result = new Result();
-                    UpdateResultText(selectedSubmission);
+            toolTipFile.SetToolTip(sender as ListBox, "Assignment submissions are displayed here. Select a Submission to use other form functions");
+        }
 
-                    printPreviewDialog1.Document = printDocument1;
-                    printPreviewDialog1.ShowDialog();
-                }
-            }
+        private void ButtonPrint_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(sender as Button, "Print contents of the submission results shown above.");
+        }
+        
+        private void ButtonExecute_MouseHover(object sender, EventArgs e){
+            toolTipFile.SetToolTip(sender as Button, "Compile and Run submission with this button");
+        }
+
+        private void ButtonExit_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(ButtonExit, "Exit here");
+        }
+
+        private void ButtonHelp_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(buttonHelp, "Instructions here");
+        }
+
+        private void ButtonThemeSettings_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(buttonEdit, "Change Themes here");
+        }
+
+        private void ButtonAssignments_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
+        }
+
+        private void ButtonSubmissions_MouseHover(object sender, EventArgs e)
+        {
+            toolTipFile.SetToolTip(buttonSubmission, "Open or Create Submissions here");
         }
         #endregion
 
-        #region Sub Menu Buttons
+        #region Menu Buttons
 
         /// <summary>
-        /// Part of Submenu and its goal is to open files and store them in Listbox
+        /// Opens the Sub menu for files
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonOpenFile_Click(object sender, EventArgs e)
+        private void buttonAssignments_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(Pnl_AssignmentControls);
+        }
+
+        private void buttonSubmission_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(Pnl_SubmissionControls);
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(Pnl_ThemeControls);
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(Pnl_HelpControls);
+        }
+
+        #endregion
+
+        #region Sub Menu Buttons
+        /// <summary>
+        /// Button launches LoadAssignment method and sets the Current Assignment property if LoadAssignment is successful
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOpenAssignment_Click(object sender, EventArgs e)
         {
             Assignment assignment = LoadAssignment();
 
@@ -220,31 +196,9 @@ namespace Software_Engineering_Project
             {
                 CurrentAssignment = assignment;
             }
-            // Hides the Open File button after use
+
+            // Hides the Assignment sub menu after use
             HideSubMenu();
-        }
-
-        /// <summary>
-        /// uses open file dialog to get json file
-        /// </summary>
-        /// <returns></returns>
-        public Assignment LoadAssignment()
-        {
-            Assignment assignment = null;
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string filepath = openFileDialog.FileName;
-
-                var filestream = openFileDialog.OpenFile();
-                var reader = new StreamReader(filestream);
-
-                string json = reader.ReadToEnd();
-                assignment = JsonSerializer.Deserialize<Assignment>(json);
-            }
-            return assignment;
         }
 
         // TODO: Implement ThemeManager class to handle Light/Dark mode in FormMain.cs
@@ -324,7 +278,7 @@ namespace Software_Engineering_Project
         }
 
         /// <summary>
-        /// opens create assignment form. create assignment gives the user the ability to make assignments 
+        /// Button launches OpenFormCreateAssignment method and hides the sub menu. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -332,20 +286,6 @@ namespace Software_Engineering_Project
         {
             OpenFormCreateAssignment();
             HideSubMenu();
-        }
-
-        /// <summary>
-        /// opens create assignment form and brings it to front
-        /// </summary>
-        private void OpenFormCreateAssignment()
-        {
-            var form = new FormCreateAssignment();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                CurrentAssignment = form.assignment;
-                saveCurrentAssignment();
-            }
-            form.Dispose();
         }
 
         /// <summary>
@@ -362,14 +302,53 @@ namespace Software_Engineering_Project
                 CurrentAssignment.Submissions.Add(form.submission);
                 listboxSubmissions.Items.Add(form.submission);
                 listboxSubmissions.Refresh();
-                saveCurrentAssignment();
+                SaveCurrentAssignment();
+            }
+            form.Dispose();
+        }
+        #endregion
+
+        #region Sub Menu Methods
+        /// <summary>
+        /// uses open file dialog to get json file
+        /// </summary>
+        /// <returns></returns>
+        public Assignment LoadAssignment()
+        {
+            Assignment assignment = null;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filepath = openFileDialog.FileName;
+
+                var filestream = openFileDialog.OpenFile();
+                var reader = new StreamReader(filestream);
+
+                string json = reader.ReadToEnd();
+                assignment = JsonSerializer.Deserialize<Assignment>(json);
+            }
+            return assignment;
+        }
+
+        /// <summary>
+        /// opens create assignment form and brings it to front
+        /// </summary>
+        private void OpenFormCreateAssignment()
+        {
+            var form = new FormCreateAssignment();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                CurrentAssignment = form.assignment;
+                SaveCurrentAssignment();
             }
             form.Dispose();
         }
 
-        // add a save current assignment method
+                // add a save current assignment method
         /* save json */
-        private void saveCurrentAssignment()
+        private void SaveCurrentAssignment()
         {
             // creates a folder called CppGrader
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
@@ -386,38 +365,64 @@ namespace Software_Engineering_Project
             // written user info to json
             File.WriteAllText(temp, json);
         }
-
         #endregion
 
-        #region Menu Buttons
-
+        #region Compiler Buttons
         /// <summary>
-        /// Opens the Sub menu for files
+        /// Compiles and Runs code from the selected Submission in listboxSubmissions
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonAssignments_Click(object sender, EventArgs e)
+        /// <param name="sender">The object running this event</param>
+        /// <param name="e">The EventArguments</param>
+        private void ButtonExecute_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(Pnl_AssignmentControls);
+            int selectedIndex = listboxSubmissions.SelectedIndex;
+            bool didCompile = false;
+            
+            // TODO: Ensure the listboxSubmissions is the same list as CurrentAssignment.Submissions
+            //If a file is selected  
+            if (CurrentAssignment != null)
+            {
+                if (CurrentAssignment.Submissions.Count > 0)
+                {
+                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
+                    didCompile = RunCompilerService(selectedSubmission);
+                    UpdateResultText(selectedSubmission);
+                }
+            }
+
+            if (didCompile)
+            {
+                MessageBox.Show("Compilation sucessful");
+            }
+            else
+            {
+                MessageBox.Show("Compilation failed");
+            }
+
+            SaveCurrentAssignment();
         }
 
-        private void buttonSubmission_Click(object sender, EventArgs e)
+        private void ButtonPrint_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(Pnl_SubmissionControls);
-        }
+            //Placeholder for printing from the textBoxResult.text
+            int selectedIndex = listboxSubmissions.SelectedIndex;
+            if (CurrentAssignment != null)
+            {
+                if (CurrentAssignment.Submissions.Count > 0)
+                {
+                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
+                    if (selectedSubmission.Result == null)
+                        selectedSubmission.Result = new Result();
+                    UpdateResultText(selectedSubmission);
 
-        private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(Pnl_ThemeControls);
+                    printPreviewDialog1.Document = printDocument1;
+                    printPreviewDialog1.ShowDialog();
+                }
+            }
         }
-
-        private void buttonHelp_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(Pnl_HelpControls);
-        }
-
         #endregion
 
+        #region Compiler Methods
         private bool RunCompilerService(Submission selectedSubmission)
         {
             if (selectedSubmission != null)
@@ -428,14 +433,15 @@ namespace Software_Engineering_Project
 
             return false;
         }
+        #endregion
 
+        #pragma warning disable CA1416
         private void UpdateResultText(Submission selectedSubmission)
         {
             printDocument1.DocumentName = $"{selectedSubmission.StudentName}_Results";
             textBoxResult.Text = selectedSubmission.Result.ToString();
         }
 
-        #pragma warning disable CA1416
         private void PrintResults(object sender, PrintPageEventArgs e)
         {
             int charactersOnPage = 0;

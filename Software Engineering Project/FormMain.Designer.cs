@@ -54,11 +54,11 @@
             this.toolTipFile = new System.Windows.Forms.ToolTip(this.components);
             this.listboxSubmissions = new System.Windows.Forms.ListBox();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.Lbl_ResultsLabel = new System.Windows.Forms.Label();
+            this.Lbl_SubmissionsTitle = new System.Windows.Forms.Label();
             this.textBoxResult = new System.Windows.Forms.TextBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.Lbl_SubmissionsTitle = new System.Windows.Forms.Label();
-            this.Lbl_ResultsLabel = new System.Windows.Forms.Label();
             this.PanelMainControls.SuspendLayout();
             this.PanelExit.SuspendLayout();
             this.panelSideMenuPanel.SuspendLayout();
@@ -91,7 +91,7 @@
             this.buttonAbout.Image = global::Software_Engineering_Project.Properties.Resources.icons8_info_32;
             this.buttonAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAbout.Location = new System.Drawing.Point(0, 0);
-            this.buttonAbout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAbout.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAbout.Name = "buttonAbout";
             this.buttonAbout.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
             this.buttonAbout.Size = new System.Drawing.Size(214, 64);
@@ -112,7 +112,7 @@
             this.buttonHelp.Image = global::Software_Engineering_Project.Properties.Resources.icons8_help_30;
             this.buttonHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonHelp.Location = new System.Drawing.Point(0, 581);
-            this.buttonHelp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonHelp.Margin = new System.Windows.Forms.Padding(4);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
             this.buttonHelp.Size = new System.Drawing.Size(214, 64);
@@ -133,7 +133,7 @@
             this.PanelMainControls.Controls.Add(this.buttonExecute);
             this.PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PanelMainControls.Location = new System.Drawing.Point(0, 426);
-            this.PanelMainControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
             this.PanelMainControls.Name = "PanelMainControls";
             this.PanelMainControls.Size = new System.Drawing.Size(941, 62);
             this.PanelMainControls.TabIndex = 11;
@@ -145,7 +145,7 @@
             this.PanelExit.Controls.Add(this.ButtonExit);
             this.PanelExit.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanelExit.Location = new System.Drawing.Point(0, 0);
-            this.PanelExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelExit.Margin = new System.Windows.Forms.Padding(4);
             this.PanelExit.Name = "PanelExit";
             this.PanelExit.Size = new System.Drawing.Size(233, 60);
             this.PanelExit.TabIndex = 10;
@@ -156,7 +156,7 @@
             this.ButtonExit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ButtonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonExit.Location = new System.Drawing.Point(21, 6);
-            this.ButtonExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonExit.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonExit.Name = "ButtonExit";
             this.ButtonExit.Size = new System.Drawing.Size(188, 46);
             this.ButtonExit.TabIndex = 0;
@@ -172,7 +172,7 @@
             this.buttonPrint.Enabled = false;
             this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonPrint.Location = new System.Drawing.Point(590, 6);
-            this.buttonPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPrint.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPrint.Name = "buttonPrint";
             this.buttonPrint.Size = new System.Drawing.Size(338, 48);
             this.buttonPrint.TabIndex = 8;
@@ -187,7 +187,7 @@
             this.buttonExecute.Enabled = false;
             this.buttonExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonExecute.Location = new System.Drawing.Point(240, 7);
-            this.buttonExecute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonExecute.Margin = new System.Windows.Forms.Padding(4);
             this.buttonExecute.Name = "buttonExecute";
             this.buttonExecute.Size = new System.Drawing.Size(338, 48);
             this.buttonExecute.TabIndex = 9;
@@ -210,7 +210,7 @@
             this.panelSideMenuPanel.Controls.Add(this.labelTitlecard);
             this.panelSideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideMenuPanel.Location = new System.Drawing.Point(0, 0);
-            this.panelSideMenuPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelSideMenuPanel.Margin = new System.Windows.Forms.Padding(4);
             this.panelSideMenuPanel.Name = "panelSideMenuPanel";
             this.panelSideMenuPanel.Size = new System.Drawing.Size(233, 426);
             this.panelSideMenuPanel.TabIndex = 12;
@@ -222,7 +222,7 @@
             this.Pnl_HelpControls.Controls.Add(this.buttonAbout);
             this.Pnl_HelpControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.Pnl_HelpControls.Location = new System.Drawing.Point(0, 645);
-            this.Pnl_HelpControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_HelpControls.Margin = new System.Windows.Forms.Padding(4);
             this.Pnl_HelpControls.Name = "Pnl_HelpControls";
             this.Pnl_HelpControls.Size = new System.Drawing.Size(214, 64);
             this.Pnl_HelpControls.TabIndex = 9;
@@ -235,7 +235,7 @@
             this.Pnl_ThemeControls.Controls.Add(this.buttonLightTheme);
             this.Pnl_ThemeControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.Pnl_ThemeControls.Location = new System.Drawing.Point(0, 453);
-            this.Pnl_ThemeControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_ThemeControls.Margin = new System.Windows.Forms.Padding(4);
             this.Pnl_ThemeControls.Name = "Pnl_ThemeControls";
             this.Pnl_ThemeControls.Size = new System.Drawing.Size(214, 128);
             this.Pnl_ThemeControls.TabIndex = 8;
@@ -250,7 +250,7 @@
             this.buttonDarkTheme.Image = global::Software_Engineering_Project.Properties.Resources.icons8_layout_32__1_;
             this.buttonDarkTheme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonDarkTheme.Location = new System.Drawing.Point(0, 64);
-            this.buttonDarkTheme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonDarkTheme.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDarkTheme.Name = "buttonDarkTheme";
             this.buttonDarkTheme.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
             this.buttonDarkTheme.Size = new System.Drawing.Size(214, 64);
@@ -269,7 +269,7 @@
             this.buttonLightTheme.Image = global::Software_Engineering_Project.Properties.Resources.icons8_layout_32;
             this.buttonLightTheme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonLightTheme.Location = new System.Drawing.Point(0, 0);
-            this.buttonLightTheme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonLightTheme.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLightTheme.Name = "buttonLightTheme";
             this.buttonLightTheme.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
             this.buttonLightTheme.Size = new System.Drawing.Size(214, 64);
@@ -289,7 +289,7 @@
             this.buttonEdit.Image = global::Software_Engineering_Project.Properties.Resources.icons8_settings_32;
             this.buttonEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonEdit.Location = new System.Drawing.Point(0, 389);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
             this.buttonEdit.Size = new System.Drawing.Size(214, 64);
@@ -307,7 +307,7 @@
             this.Pnl_SubmissionControls.Controls.Add(this.buttonCreateSubmission);
             this.Pnl_SubmissionControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.Pnl_SubmissionControls.Location = new System.Drawing.Point(0, 327);
-            this.Pnl_SubmissionControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_SubmissionControls.Margin = new System.Windows.Forms.Padding(4);
             this.Pnl_SubmissionControls.Name = "Pnl_SubmissionControls";
             this.Pnl_SubmissionControls.Size = new System.Drawing.Size(214, 62);
             this.Pnl_SubmissionControls.TabIndex = 9;
@@ -323,7 +323,7 @@
             this.buttonCreateSubmission.Image = global::Software_Engineering_Project.Properties.Resources.icons8_add_file_32;
             this.buttonCreateSubmission.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonCreateSubmission.Location = new System.Drawing.Point(0, 0);
-            this.buttonCreateSubmission.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCreateSubmission.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCreateSubmission.Name = "buttonCreateSubmission";
             this.buttonCreateSubmission.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
             this.buttonCreateSubmission.Size = new System.Drawing.Size(214, 64);
@@ -344,7 +344,7 @@
             this.buttonSubmission.Image = global::Software_Engineering_Project.Properties.Resources.icons8_file_32;
             this.buttonSubmission.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSubmission.Location = new System.Drawing.Point(0, 263);
-            this.buttonSubmission.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSubmission.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSubmission.Name = "buttonSubmission";
             this.buttonSubmission.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
             this.buttonSubmission.Size = new System.Drawing.Size(214, 64);
@@ -363,7 +363,7 @@
             this.Pnl_AssignmentControls.Controls.Add(this.buttonOpenAssignment);
             this.Pnl_AssignmentControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.Pnl_AssignmentControls.Location = new System.Drawing.Point(0, 133);
-            this.Pnl_AssignmentControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_AssignmentControls.Margin = new System.Windows.Forms.Padding(4);
             this.Pnl_AssignmentControls.Name = "Pnl_AssignmentControls";
             this.Pnl_AssignmentControls.Size = new System.Drawing.Size(214, 130);
             this.Pnl_AssignmentControls.TabIndex = 6;
@@ -378,7 +378,7 @@
             this.buttonCreateAssignment.Image = global::Software_Engineering_Project.Properties.Resources.icons8_add_file_32;
             this.buttonCreateAssignment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonCreateAssignment.Location = new System.Drawing.Point(0, 64);
-            this.buttonCreateAssignment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCreateAssignment.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCreateAssignment.Name = "buttonCreateAssignment";
             this.buttonCreateAssignment.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
             this.buttonCreateAssignment.Size = new System.Drawing.Size(214, 64);
@@ -398,7 +398,7 @@
             this.buttonOpenAssignment.Image = global::Software_Engineering_Project.Properties.Resources.icons8_add_file_32;
             this.buttonOpenAssignment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOpenAssignment.Location = new System.Drawing.Point(0, 0);
-            this.buttonOpenAssignment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonOpenAssignment.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOpenAssignment.Name = "buttonOpenAssignment";
             this.buttonOpenAssignment.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
             this.buttonOpenAssignment.Size = new System.Drawing.Size(214, 64);
@@ -408,6 +408,7 @@
             this.buttonOpenAssignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOpenAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOpenAssignment.UseVisualStyleBackColor = true;
+            this.buttonOpenAssignment.Click += new System.EventHandler(this.ButtonOpenAssignment_Click);
             // 
             // buttonAssignments
             // 
@@ -419,7 +420,7 @@
             this.buttonAssignments.Image = global::Software_Engineering_Project.Properties.Resources.icons8_file_32;
             this.buttonAssignments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAssignments.Location = new System.Drawing.Point(0, 69);
-            this.buttonAssignments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAssignments.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAssignments.Name = "buttonAssignments";
             this.buttonAssignments.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
             this.buttonAssignments.Size = new System.Drawing.Size(214, 64);
@@ -439,7 +440,7 @@
             this.listboxSubmissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listboxSubmissions.ItemHeight = 20;
             this.listboxSubmissions.Location = new System.Drawing.Point(240, 34);
-            this.listboxSubmissions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listboxSubmissions.Margin = new System.Windows.Forms.Padding(4);
             this.listboxSubmissions.Name = "listboxSubmissions";
             this.listboxSubmissions.Size = new System.Drawing.Size(338, 384);
             this.listboxSubmissions.TabIndex = 10;
@@ -455,10 +456,30 @@
             this.panelMain.Controls.Add(this.listboxSubmissions);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(941, 488);
             this.panelMain.TabIndex = 10;
+            // 
+            // Lbl_ResultsLabel
+            // 
+            this.Lbl_ResultsLabel.AutoEllipsis = true;
+            this.Lbl_ResultsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Lbl_ResultsLabel.Location = new System.Drawing.Point(590, 8);
+            this.Lbl_ResultsLabel.Name = "Lbl_ResultsLabel";
+            this.Lbl_ResultsLabel.Size = new System.Drawing.Size(337, 23);
+            this.Lbl_ResultsLabel.TabIndex = 14;
+            this.Lbl_ResultsLabel.Text = "Results: {Submission Name}";
+            // 
+            // Lbl_SubmissionsTitle
+            // 
+            this.Lbl_SubmissionsTitle.AutoEllipsis = true;
+            this.Lbl_SubmissionsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Lbl_SubmissionsTitle.Location = new System.Drawing.Point(242, 8);
+            this.Lbl_SubmissionsTitle.Name = "Lbl_SubmissionsTitle";
+            this.Lbl_SubmissionsTitle.Size = new System.Drawing.Size(336, 23);
+            this.Lbl_SubmissionsTitle.TabIndex = 13;
+            this.Lbl_SubmissionsTitle.Text = "Submissions: {Assignment Name}";
             // 
             // textBoxResult
             // 
@@ -482,26 +503,6 @@
             this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
-            // 
-            // Lbl_SubmissionsTitle
-            // 
-            this.Lbl_SubmissionsTitle.AutoEllipsis = true;
-            this.Lbl_SubmissionsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Lbl_SubmissionsTitle.Location = new System.Drawing.Point(242, 8);
-            this.Lbl_SubmissionsTitle.Name = "Lbl_SubmissionsTitle";
-            this.Lbl_SubmissionsTitle.Size = new System.Drawing.Size(336, 23);
-            this.Lbl_SubmissionsTitle.TabIndex = 13;
-            this.Lbl_SubmissionsTitle.Text = "Submissions: {Assignment Name}";
-            // 
-            // Lbl_ResultsLabel
-            // 
-            this.Lbl_ResultsLabel.AutoEllipsis = true;
-            this.Lbl_ResultsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Lbl_ResultsLabel.Location = new System.Drawing.Point(590, 8);
-            this.Lbl_ResultsLabel.Name = "Lbl_ResultsLabel";
-            this.Lbl_ResultsLabel.Size = new System.Drawing.Size(337, 23);
-            this.Lbl_ResultsLabel.TabIndex = 14;
-            this.Lbl_ResultsLabel.Text = "Results: {Submission Name}";
             // 
             // FormMain
             // 
