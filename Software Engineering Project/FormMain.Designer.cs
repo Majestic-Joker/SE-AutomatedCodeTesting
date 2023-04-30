@@ -169,6 +169,7 @@
             // buttonPrint
             // 
             this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonPrint.Enabled = false;
             this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonPrint.Location = new System.Drawing.Point(590, 6);
             this.buttonPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -183,6 +184,7 @@
             // buttonExecute
             // 
             this.buttonExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonExecute.Enabled = false;
             this.buttonExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonExecute.Location = new System.Drawing.Point(240, 7);
             this.buttonExecute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -310,6 +312,7 @@
             // buttonCreateSubmission
             // 
             this.buttonCreateSubmission.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonCreateSubmission.Enabled = false;
             this.buttonCreateSubmission.FlatAppearance.BorderSize = 0;
             this.buttonCreateSubmission.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCreateSubmission.ForeColor = System.Drawing.SystemColors.MenuText;
@@ -427,6 +430,7 @@
             // 
             this.listboxSubmissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.listboxSubmissions.Enabled = false;
             this.listboxSubmissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listboxSubmissions.ItemHeight = 20;
             this.listboxSubmissions.Location = new System.Drawing.Point(240, 34);
