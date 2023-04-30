@@ -49,7 +49,7 @@ namespace Software_Engineering_Project
             string json = JsonSerializer.Serialize(newAssignment);
 
             // folderpath created
-            folderPath = Path.Combine(folderPath, assignmentName);
+            string folderPath = Path.Combine(folderPath, assignmentName);
             Directory.CreateDirectory(folderPath);
 
             string temp = Path.Combine(folderPath, $"{assignmentName}.json");
@@ -99,7 +99,8 @@ namespace Software_Engineering_Project
             Close();
         }
 
-        // TODO: set up input and output files
+        // TODO: set up input and output files in FormCreateAssignment.cs
+
         private string GetInfo(string assignmentDirectory)
         {
             string filePath = "";
@@ -119,7 +120,6 @@ namespace Software_Engineering_Project
                 File.WriteAllText(temp, code);
                 filePath = temp;
                 codeText = new StreamReader(dialog.OpenFile()).ReadToEnd();
-                textBoxAssignmentPreview.Text = codeText;
                 ButtonSaveAssignment.Enabled = canSave;
             }
             return filePath;

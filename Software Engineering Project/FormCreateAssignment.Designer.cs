@@ -36,11 +36,12 @@
             this.labelInputFilePath = new System.Windows.Forms.Label();
             this.buttonOutput = new System.Windows.Forms.Button();
             this.buttonInput = new System.Windows.Forms.Button();
-            this.labelInput = new System.Windows.Forms.Label();
-            this.labelOutput = new System.Windows.Forms.Label();
             this.PanelMainControls = new System.Windows.Forms.Panel();
             this.PanelExit = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.labelOutput = new System.Windows.Forms.Label();
+            this.labelInput = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panelAssignmentForm.SuspendLayout();
             this.PanelMainControls.SuspendLayout();
             this.PanelExit.SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             this.panelAssignmentForm.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panelAssignmentForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAssignmentForm.Controls.Add(this.textBox1);
             this.panelAssignmentForm.Controls.Add(this.labelOutputFilePath);
             this.panelAssignmentForm.Controls.Add(this.labelInputFilePath);
             this.panelAssignmentForm.Controls.Add(this.buttonOutput);
@@ -95,7 +97,7 @@
             this.panelAssignmentForm.Location = new System.Drawing.Point(0, 0);
             this.panelAssignmentForm.Margin = new System.Windows.Forms.Padding(4);
             this.panelAssignmentForm.Name = "panelAssignmentForm";
-            this.panelAssignmentForm.Size = new System.Drawing.Size(469, 311);
+            this.panelAssignmentForm.Size = new System.Drawing.Size(469, 355);
             this.panelAssignmentForm.TabIndex = 11;
             // 
             // labelOutputFilePath
@@ -112,7 +114,7 @@
             // 
             this.labelInputFilePath.AutoEllipsis = true;
             this.labelInputFilePath.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelInputFilePath.Location = new System.Drawing.Point(81, 64);
+            this.labelInputFilePath.Location = new System.Drawing.Point(79, 64);
             this.labelInputFilePath.Name = "labelInputFilePath";
             this.labelInputFilePath.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelInputFilePath.Size = new System.Drawing.Size(375, 18);
@@ -123,7 +125,7 @@
             // buttonOutput
             // 
             this.buttonOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonOutput.Location = new System.Drawing.Point(272, 146);
+            this.buttonOutput.Location = new System.Drawing.Point(272, 126);
             this.buttonOutput.Name = "buttonOutput";
             this.buttonOutput.Size = new System.Drawing.Size(156, 31);
             this.buttonOutput.TabIndex = 10;
@@ -133,34 +135,12 @@
             // buttonInput
             // 
             this.buttonInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonInput.Location = new System.Drawing.Point(35, 146);
+            this.buttonInput.Location = new System.Drawing.Point(35, 126);
             this.buttonInput.Name = "buttonInput";
             this.buttonInput.Size = new System.Drawing.Size(156, 31);
             this.buttonInput.TabIndex = 9;
             this.buttonInput.Text = "Select Input File";
             this.buttonInput.UseVisualStyleBackColor = true;
-            // 
-            // labelInput
-            // 
-            this.labelInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelInput.Location = new System.Drawing.Point(11, 64);
-            this.labelInput.Name = "labelInput";
-            this.labelInput.Size = new System.Drawing.Size(54, 18);
-            this.labelInput.TabIndex = 7;
-            this.labelInput.Text = "Input:";
-            this.labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelOutput
-            // 
-            this.labelOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelOutput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelOutput.Location = new System.Drawing.Point(9, 94);
-            this.labelOutput.Name = "labelOutput";
-            this.labelOutput.Size = new System.Drawing.Size(64, 18);
-            this.labelOutput.TabIndex = 6;
-            this.labelOutput.Text = "Output:";
-            this.labelOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PanelMainControls
             // 
@@ -169,7 +149,7 @@
             this.PanelMainControls.Controls.Add(this.PanelExit);
             this.PanelMainControls.Controls.Add(this.ButtonSaveAssignment);
             this.PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelMainControls.Location = new System.Drawing.Point(0, 203);
+            this.PanelMainControls.Location = new System.Drawing.Point(0, 247);
             this.PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
             this.PanelMainControls.Name = "PanelMainControls";
             this.PanelMainControls.Size = new System.Drawing.Size(467, 106);
@@ -198,11 +178,40 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
+            // labelOutput
+            // 
+            this.labelOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOutput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelOutput.Location = new System.Drawing.Point(9, 94);
+            this.labelOutput.Name = "labelOutput";
+            this.labelOutput.Size = new System.Drawing.Size(64, 18);
+            this.labelOutput.TabIndex = 6;
+            this.labelOutput.Text = "Output:";
+            this.labelOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelInput
+            // 
+            this.labelInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelInput.Location = new System.Drawing.Point(11, 64);
+            this.labelInput.Name = "labelInput";
+            this.labelInput.Size = new System.Drawing.Size(54, 18);
+            this.labelInput.TabIndex = 7;
+            this.labelInput.Text = "Input:";
+            this.labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(354, 189);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 18;
+            // 
             // FormCreateAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 311);
+            this.ClientSize = new System.Drawing.Size(469, 355);
             this.Controls.Add(this.panelAssignmentForm);
             this.Name = "FormCreateAssignment";
             this.Text = "Create Assignment";
@@ -223,11 +232,12 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Panel PanelMainControls;
         private System.Windows.Forms.Panel PanelExit;
-        private System.Windows.Forms.Label labelInput;
-        private System.Windows.Forms.Label labelOutput;
         private System.Windows.Forms.Button buttonInput;
         private System.Windows.Forms.Button buttonOutput;
         private System.Windows.Forms.Label labelOutputFilePath;
         private System.Windows.Forms.Label labelInputFilePath;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label labelInput;
+        private System.Windows.Forms.Label labelOutput;
     }
 }
