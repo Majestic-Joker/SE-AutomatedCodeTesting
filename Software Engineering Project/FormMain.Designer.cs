@@ -39,15 +39,15 @@
             this.buttonPrint = new Software_Engineering_Project.ClassCustomButton();
             this.buttonExecute = new Software_Engineering_Project.ClassCustomButton();
             this.panelSideMenuPanel = new System.Windows.Forms.Panel();
-            this.panelSubMenuHelp = new System.Windows.Forms.Panel();
-            this.panelSubMenuEdit = new System.Windows.Forms.Panel();
+            this.Pnl_HelpControls = new System.Windows.Forms.Panel();
+            this.Pnl_ThemeControls = new System.Windows.Forms.Panel();
             this.buttonDarkTheme = new System.Windows.Forms.Button();
             this.buttonLightTheme = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
-            this.SubmissionDockpanel = new System.Windows.Forms.Panel();
+            this.Pnl_SubmissionControls = new System.Windows.Forms.Panel();
             this.buttonCreateSubmission = new System.Windows.Forms.Button();
             this.buttonSubmission = new System.Windows.Forms.Button();
-            this.panelSubMenuFile = new System.Windows.Forms.Panel();
+            this.Pnl_AssignmentControls = new System.Windows.Forms.Panel();
             this.buttonCreateAssignment = new System.Windows.Forms.Button();
             this.buttonOpenAssignment = new System.Windows.Forms.Button();
             this.buttonAssignments = new System.Windows.Forms.Button();
@@ -62,10 +62,10 @@
             this.PanelMainControls.SuspendLayout();
             this.PanelExit.SuspendLayout();
             this.panelSideMenuPanel.SuspendLayout();
-            this.panelSubMenuHelp.SuspendLayout();
-            this.panelSubMenuEdit.SuspendLayout();
-            this.SubmissionDockpanel.SuspendLayout();
-            this.panelSubMenuFile.SuspendLayout();
+            this.Pnl_HelpControls.SuspendLayout();
+            this.Pnl_ThemeControls.SuspendLayout();
+            this.Pnl_SubmissionControls.SuspendLayout();
+            this.Pnl_AssignmentControls.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -199,13 +199,13 @@
             this.panelSideMenuPanel.AutoScroll = true;
             this.panelSideMenuPanel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.panelSideMenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSideMenuPanel.Controls.Add(this.panelSubMenuHelp);
+            this.panelSideMenuPanel.Controls.Add(this.Pnl_HelpControls);
             this.panelSideMenuPanel.Controls.Add(this.buttonHelp);
-            this.panelSideMenuPanel.Controls.Add(this.panelSubMenuEdit);
+            this.panelSideMenuPanel.Controls.Add(this.Pnl_ThemeControls);
             this.panelSideMenuPanel.Controls.Add(this.buttonEdit);
-            this.panelSideMenuPanel.Controls.Add(this.SubmissionDockpanel);
+            this.panelSideMenuPanel.Controls.Add(this.Pnl_SubmissionControls);
             this.panelSideMenuPanel.Controls.Add(this.buttonSubmission);
-            this.panelSideMenuPanel.Controls.Add(this.panelSubMenuFile);
+            this.panelSideMenuPanel.Controls.Add(this.Pnl_AssignmentControls);
             this.panelSideMenuPanel.Controls.Add(this.buttonAssignments);
             this.panelSideMenuPanel.Controls.Add(this.labelTitlecard);
             this.panelSideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -215,28 +215,31 @@
             this.panelSideMenuPanel.Size = new System.Drawing.Size(233, 426);
             this.panelSideMenuPanel.TabIndex = 12;
             // 
-            // panelSubMenuHelp
+            // Pnl_HelpControls
             // 
-            this.panelSubMenuHelp.BackColor = System.Drawing.SystemColors.Info;
-            this.panelSubMenuHelp.Controls.Add(this.buttonAbout);
-            this.panelSubMenuHelp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuHelp.Location = new System.Drawing.Point(0, 645);
-            this.panelSubMenuHelp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panelSubMenuHelp.Name = "panelSubMenuHelp";
-            this.panelSubMenuHelp.Size = new System.Drawing.Size(214, 128);
-            this.panelSubMenuHelp.TabIndex = 9;
+            this.Pnl_HelpControls.AutoSize = true;
+            this.Pnl_HelpControls.BackColor = System.Drawing.SystemColors.Info;
+            this.Pnl_HelpControls.Controls.Add(this.buttonAbout);
+            this.Pnl_HelpControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_HelpControls.Location = new System.Drawing.Point(0, 645);
+            this.Pnl_HelpControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_HelpControls.Name = "Pnl_HelpControls";
+            this.Pnl_HelpControls.Size = new System.Drawing.Size(214, 64);
+            this.Pnl_HelpControls.TabIndex = 9;
+            this.Pnl_HelpControls.Visible = false;
             // 
-            // panelSubMenuEdit
+            // Pnl_ThemeControls
             // 
-            this.panelSubMenuEdit.BackColor = System.Drawing.SystemColors.Info;
-            this.panelSubMenuEdit.Controls.Add(this.buttonDarkTheme);
-            this.panelSubMenuEdit.Controls.Add(this.buttonLightTheme);
-            this.panelSubMenuEdit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuEdit.Location = new System.Drawing.Point(0, 453);
-            this.panelSubMenuEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panelSubMenuEdit.Name = "panelSubMenuEdit";
-            this.panelSubMenuEdit.Size = new System.Drawing.Size(214, 128);
-            this.panelSubMenuEdit.TabIndex = 8;
+            this.Pnl_ThemeControls.BackColor = System.Drawing.SystemColors.Info;
+            this.Pnl_ThemeControls.Controls.Add(this.buttonDarkTheme);
+            this.Pnl_ThemeControls.Controls.Add(this.buttonLightTheme);
+            this.Pnl_ThemeControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_ThemeControls.Location = new System.Drawing.Point(0, 453);
+            this.Pnl_ThemeControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_ThemeControls.Name = "Pnl_ThemeControls";
+            this.Pnl_ThemeControls.Size = new System.Drawing.Size(214, 128);
+            this.Pnl_ThemeControls.TabIndex = 8;
+            this.Pnl_ThemeControls.Visible = false;
             // 
             // buttonDarkTheme
             // 
@@ -292,22 +295,23 @@
             this.buttonEdit.Size = new System.Drawing.Size(214, 64);
             this.buttonEdit.TabIndex = 7;
             this.buttonEdit.Tag = "https://icons8.com/icons/set/website";
-            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.Text = "Theme Settings";
             this.buttonEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.MouseHover += new System.EventHandler(this.ButtonThemeSettings_MouseHover);
             // 
-            // SubmissionDockpanel
+            // Pnl_SubmissionControls
             // 
-            this.SubmissionDockpanel.BackColor = System.Drawing.SystemColors.Info;
-            this.SubmissionDockpanel.Controls.Add(this.buttonCreateSubmission);
-            this.SubmissionDockpanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SubmissionDockpanel.Location = new System.Drawing.Point(0, 327);
-            this.SubmissionDockpanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.SubmissionDockpanel.Name = "SubmissionDockpanel";
-            this.SubmissionDockpanel.Size = new System.Drawing.Size(214, 62);
-            this.SubmissionDockpanel.TabIndex = 9;
+            this.Pnl_SubmissionControls.BackColor = System.Drawing.SystemColors.Info;
+            this.Pnl_SubmissionControls.Controls.Add(this.buttonCreateSubmission);
+            this.Pnl_SubmissionControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_SubmissionControls.Location = new System.Drawing.Point(0, 327);
+            this.Pnl_SubmissionControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_SubmissionControls.Name = "Pnl_SubmissionControls";
+            this.Pnl_SubmissionControls.Size = new System.Drawing.Size(214, 62);
+            this.Pnl_SubmissionControls.TabIndex = 9;
+            this.Pnl_SubmissionControls.Visible = false;
             // 
             // buttonCreateSubmission
             // 
@@ -346,23 +350,24 @@
             this.buttonSubmission.Size = new System.Drawing.Size(214, 64);
             this.buttonSubmission.TabIndex = 7;
             this.buttonSubmission.Tag = "https://icons8.com/icons/set/website";
-            this.buttonSubmission.Text = "Submissions";
+            this.buttonSubmission.Text = "Submission";
             this.buttonSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSubmission.UseVisualStyleBackColor = true;
             this.buttonSubmission.MouseHover += new System.EventHandler(this.ButtonSubmissions_MouseHover);
             // 
-            // panelSubMenuFile
+            // Pnl_AssignmentControls
             // 
-            this.panelSubMenuFile.BackColor = System.Drawing.SystemColors.Info;
-            this.panelSubMenuFile.Controls.Add(this.buttonCreateAssignment);
-            this.panelSubMenuFile.Controls.Add(this.buttonOpenAssignment);
-            this.panelSubMenuFile.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuFile.Location = new System.Drawing.Point(0, 133);
-            this.panelSubMenuFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panelSubMenuFile.Name = "panelSubMenuFile";
-            this.panelSubMenuFile.Size = new System.Drawing.Size(214, 130);
-            this.panelSubMenuFile.TabIndex = 6;
+            this.Pnl_AssignmentControls.BackColor = System.Drawing.SystemColors.Info;
+            this.Pnl_AssignmentControls.Controls.Add(this.buttonCreateAssignment);
+            this.Pnl_AssignmentControls.Controls.Add(this.buttonOpenAssignment);
+            this.Pnl_AssignmentControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_AssignmentControls.Location = new System.Drawing.Point(0, 133);
+            this.Pnl_AssignmentControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Pnl_AssignmentControls.Name = "Pnl_AssignmentControls";
+            this.Pnl_AssignmentControls.Size = new System.Drawing.Size(214, 130);
+            this.Pnl_AssignmentControls.TabIndex = 6;
+            this.Pnl_AssignmentControls.Visible = false;
             // 
             // buttonCreateAssignment
             // 
@@ -514,10 +519,11 @@
             this.PanelMainControls.ResumeLayout(false);
             this.PanelExit.ResumeLayout(false);
             this.panelSideMenuPanel.ResumeLayout(false);
-            this.panelSubMenuHelp.ResumeLayout(false);
-            this.panelSubMenuEdit.ResumeLayout(false);
-            this.SubmissionDockpanel.ResumeLayout(false);
-            this.panelSubMenuFile.ResumeLayout(false);
+            this.panelSideMenuPanel.PerformLayout();
+            this.Pnl_HelpControls.ResumeLayout(false);
+            this.Pnl_ThemeControls.ResumeLayout(false);
+            this.Pnl_SubmissionControls.ResumeLayout(false);
+            this.Pnl_AssignmentControls.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             this.ResumeLayout(false);
@@ -530,21 +536,21 @@
         private ClassCustomButton buttonPrint;
         private System.Windows.Forms.Panel PanelMainControls;
         private System.Windows.Forms.Panel panelSideMenuPanel;
-        private System.Windows.Forms.Panel panelSubMenuFile;
+        private System.Windows.Forms.Panel Pnl_AssignmentControls;
         private System.Windows.Forms.Button buttonOpenAssignment;
         private System.Windows.Forms.Button buttonAssignments;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonAbout;
         private System.Windows.Forms.Button buttonHelp;
-        private System.Windows.Forms.Panel panelSubMenuEdit;
+        private System.Windows.Forms.Panel Pnl_ThemeControls;
         private System.Windows.Forms.Button buttonDarkTheme;
         private System.Windows.Forms.Button buttonLightTheme;
         private System.Windows.Forms.Panel PanelExit;
         private System.Windows.Forms.Button ButtonExit;
         private System.Windows.Forms.ToolTip toolTipFile;
         private System.Windows.Forms.Button buttonCreateAssignment;
-        private System.Windows.Forms.Panel panelSubMenuHelp;
-        private System.Windows.Forms.Panel SubmissionDockpanel;
+        private System.Windows.Forms.Panel Pnl_HelpControls;
+        private System.Windows.Forms.Panel Pnl_SubmissionControls;
         private System.Windows.Forms.Button buttonCreateSubmission;
         private System.Windows.Forms.Button buttonSubmission;
         private System.Windows.Forms.ListBox listboxSubmissions;

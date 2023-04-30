@@ -28,9 +28,6 @@ namespace Software_Engineering_Project
             InitializeFormTheme();
 
             CreateDirectory();
-
-            // Hides submenus initially
-            SubMenuDesign();
         }
 
         private bool CreateDirectory(){
@@ -96,10 +93,10 @@ namespace Software_Engineering_Project
             buttonEdit.ForeColor = Color.Black;
             buttonHelp.ForeColor = Color.Black;
             //buttonProgramGrader.ForeColor = Color.Black;
-            panelSubMenuFile.BackColor = Color.Tan;
-            panelSubMenuEdit.BackColor = Color.Tan;
-            panelSubMenuHelp.BackColor = Color.Tan;
-            SubmissionDockpanel.BackColor = Color.Tan;
+            Pnl_AssignmentControls.BackColor = Color.Tan;
+            Pnl_ThemeControls.BackColor = Color.Tan;
+            Pnl_HelpControls.BackColor = Color.Tan;
+            Pnl_SubmissionControls.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
@@ -109,36 +106,25 @@ namespace Software_Engineering_Project
         }
 
         /// <summary>
-        /// Hides all SubMenus
-        /// </summary>
-        private void SubMenuDesign()
-        {
-            panelSubMenuFile.Visible = false;
-            panelSubMenuEdit.Visible = false;
-            panelSubMenuHelp.Visible = false;
-            SubmissionDockpanel.Visible = false;
-        }
-
-        /// <summary>
         /// Hides Sub Menus after clicked on
         /// </summary>
         private void HideSubMenu()
         {
-            if (panelSubMenuFile.Visible == true)
+            if (Pnl_AssignmentControls.Visible == true)
             {
-                panelSubMenuFile.Visible = false;
+                Pnl_AssignmentControls.Visible = false;
             }
-            if (panelSubMenuEdit.Visible == true)
+            if (Pnl_ThemeControls.Visible == true)
             {
-                panelSubMenuEdit.Visible = false;
+                Pnl_ThemeControls.Visible = false;
             }
-            if (panelSubMenuHelp.Visible == true)
+            if (Pnl_HelpControls.Visible == true)
             {
-                panelSubMenuHelp.Visible = false;
+                Pnl_HelpControls.Visible = false;
             }
-            if (SubmissionDockpanel.Visible == true)
+            if (Pnl_SubmissionControls.Visible == true)
             {
-                SubmissionDockpanel.Visible = false;
+                Pnl_SubmissionControls.Visible = false;
             }
         }
 
@@ -273,10 +259,10 @@ namespace Software_Engineering_Project
             buttonEdit.ForeColor = Color.Black;
             buttonHelp.ForeColor = Color.Black;
             //buttonProgramGrader.ForeColor = Color.Black;
-            panelSubMenuFile.BackColor = Color.Tan;
-            panelSubMenuEdit.BackColor = Color.Tan;
-            panelSubMenuHelp.BackColor = Color.Tan;
-            SubmissionDockpanel.BackColor = Color.Tan;
+            Pnl_AssignmentControls.BackColor = Color.Tan;
+            Pnl_ThemeControls.BackColor = Color.Tan;
+            Pnl_HelpControls.BackColor = Color.Tan;
+            Pnl_SubmissionControls.BackColor = Color.Tan;
             buttonLightTheme.ForeColor = Color.Black;
             buttonDarkTheme.ForeColor = Color.Black;
             buttonAbout.ForeColor = Color.Black;
@@ -296,7 +282,7 @@ namespace Software_Engineering_Project
         {
             panelMain.BackColor = Color.SlateGray;
             labelTitlecard.BackColor = Color.DarkSlateGray;
-            SubmissionDockpanel.BackColor = Color.DarkSlateGray;
+            Pnl_SubmissionControls.BackColor = Color.DarkSlateGray;
             buttonSubmission.ForeColor = Color.White;
             panelSideMenuPanel.BackColor = Color.Black;
             buttonAssignments.ForeColor = Color.White;
@@ -306,9 +292,9 @@ namespace Software_Engineering_Project
             buttonEdit.ForeColor = Color.White;
             buttonHelp.ForeColor = Color.White;
             //buttonProgramGrader.ForeColor = Color.White;
-            panelSubMenuFile.BackColor = Color.DarkSlateGray;
-            panelSubMenuEdit.BackColor = Color.DarkSlateGray;
-            panelSubMenuHelp.BackColor = Color.DarkSlateGray;
+            Pnl_AssignmentControls.BackColor = Color.DarkSlateGray;
+            Pnl_ThemeControls.BackColor = Color.DarkSlateGray;
+            Pnl_HelpControls.BackColor = Color.DarkSlateGray;
             buttonLightTheme.ForeColor = Color.White;
             buttonDarkTheme.ForeColor = Color.White;
             buttonAbout.ForeColor = Color.White;
@@ -408,22 +394,22 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void buttonAssignments_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(panelSubMenuFile);
+            ShowSubMenu(Pnl_AssignmentControls);
         }
 
         private void buttonSubmission_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(SubmissionDockpanel);
+            ShowSubMenu(Pnl_SubmissionControls);
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(panelSubMenuEdit);
+            ShowSubMenu(Pnl_ThemeControls);
         }
 
         private void buttonHelp_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(panelSubMenuHelp);
+            ShowSubMenu(Pnl_HelpControls);
         }
 
         #endregion
