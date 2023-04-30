@@ -310,7 +310,7 @@ namespace Software_Engineering_Project
 
         #region Sub Menu Methods
         /// <summary>
-        /// uses open file dialog to get json file
+        /// uses open file dialog to create an assignment from a json file
         /// </summary>
         /// <returns></returns>
         public Assignment LoadAssignment()
@@ -329,15 +329,19 @@ namespace Software_Engineering_Project
                 string json = reader.ReadToEnd();
                 assignment = JsonSerializer.Deserialize<Assignment>(json);
             }
+
             return assignment;
         }
 
         /// <summary>
-        /// opens create assignment form and brings it to front
+        /// Method opens create assignment form, if assignment is created, sets the current assignment
         /// </summary>
         private void OpenFormCreateAssignment()
         {
-            var form = new FormCreateAssignment();
+            SaveCurrentAssignment();
+
+            var form = new FormCreateAssignment(ProgramDirectory);
+
             if (form.ShowDialog() == DialogResult.OK)
             {
                 CurrentAssignment = form.assignment;
@@ -346,24 +350,27 @@ namespace Software_Engineering_Project
             form.Dispose();
         }
 
-                // add a save current assignment method
-        /* save json */
+        /// <summary>
+        /// Method serializes the currentAssignment as json and saves it inside the folder with its name
+        /// </summary>
         private void SaveCurrentAssignment()
         {
-            // creates a folder called CppGrader
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
+            if(!ProgramDirectory.Exists)
+                CreateDirectory();
 
-            // serialize
-            string json = JsonSerializer.Serialize(CurrentAssignment);
+            if(CurrentAssignment != null){
+                // Serialize CurrentAssignment as json
+                string json = JsonSerializer.Serialize(CurrentAssignment);
 
-            // folderpath created
-            folderPath = Path.Combine(folderPath, CurrentAssignment.AssignmentName);
-            Directory.CreateDirectory(folderPath);
+                // folderpath created
+                if(!CurrentAssignment.AssignmentDirectory.Exists) 
+                    CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName);
 
-            string temp = Path.Combine(folderPath, $"{CurrentAssignment.AssignmentName}.json");
+                string temp = Path.Combine(CurrentAssignment.AssignmentDirectory, $"{CurrentAssignment.AssignmentName}.json");
 
-            // written user info to json
-            File.WriteAllText(temp, json);
+                // written user info to json
+                File.WriteAllText(temp, json);
+            }
         }
         #endregion
 
