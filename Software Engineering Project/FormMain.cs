@@ -31,9 +31,6 @@ namespace Software_Engineering_Project
 
             // Hides submenus initially
             SubMenuDesign();
-
-            buttonExecute.Enabled = false;
-            buttonPrint.Enabled = false;
         }
 
         private bool CreateDirectory(){
