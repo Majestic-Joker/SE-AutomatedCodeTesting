@@ -17,45 +17,23 @@ namespace Software_Engineering_Project
 {
     public partial class FormMain : Form
     {
-        #region member variables
-
-        // forms
-        //readonly FormCreateAssignment formCreateAssignment = new FormCreateAssignment();
-
-        public Assignment? currentAssignment = null;
-        //readonly FormAddSubmissions formAddSubmissions = new FormAddSubmissions();
-
+        #region Properties
+        public Assignment CurrentAssignment { get; private set; }
+        public DirectoryInfo ProgramDirectory { get; private set; }
         #endregion
 
         public FormMain()
         {
             InitializeComponent();
+            InitializeFormTheme();
 
-            #region form
-            panelMain.BackColor = Color.LightGray;
-            labelTitlecard.BackColor = Color.Tan;
-            panelSideMenuPanel.BackColor = Color.WhiteSmoke;
-            buttonAssignments.ForeColor = Color.Black;
-            buttonEdit.ForeColor = Color.Black;
-            buttonHelp.ForeColor = Color.Black;
-            //buttonProgramGrader.ForeColor = Color.Black;
-            panelSubMenuFile.BackColor = Color.Tan;
-            panelSubMenuEdit.BackColor = Color.Tan;
-            panelSubMenuHelp.BackColor = Color.Tan;
-            SubmissionDockpanel.BackColor = Color.Tan;
-            buttonLightTheme.ForeColor = Color.Black;
-            buttonDarkTheme.ForeColor = Color.Black;
-            buttonAbout.ForeColor = Color.Black;
-            buttonOpenAssignment.ForeColor = Color.Black;
-            PanelExit.BackColor = Color.Tan;
-            PanelMainControls.BackColor = Color.Gray;
-            #endregion
+            CreateDirectory();
 
             // Hides submenus initially
             SubMenuDesign();
 
-            buttonRun.Enabled = false;
-            buttonView.Enabled = false;
+            buttonExecute.Enabled = false;
+            buttonPrint.Enabled = false;
 
             #region Events
             buttonAssignments.MouseHover += ButtonFile_MouseHover;
@@ -63,12 +41,20 @@ namespace Software_Engineering_Project
             buttonEdit.MouseHover += ButtonEdit_MouseHover;
             buttonHelp.MouseHover += ButtonHelp_MouseHover;
             ButtonExit.MouseHover += ButtonExit_MouseHover;
-            buttonRun.MouseHover += ButtonRun_MouseHover;
-            buttonView.MouseHover += ButtonView_MouseHover;
+            buttonPrint.MouseHover += ButtonView_MouseHover;
             listBoxProjectOpener.MouseHover += ListBoxProjectOpener_MouseHover;
             textBoxResult.MouseHover += ListBoxOutput_MouseHover;
             #endregion
         }
+
+        private bool CreateDirectory(){
+            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Automated Code Metrics");
+            ProgramDirectory = Directory.CreateDirectory(temp);
+
+            return ProgramDirectory.Exists;
+        }
+
+        
 
         #region MouseHover ToolTips
         private void ListBoxOutput_MouseHover(object sender, EventArgs e)
@@ -83,12 +69,11 @@ namespace Software_Engineering_Project
 
         private void ButtonView_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(buttonView, "View Statistics and more here");
+            toolTipFile.SetToolTip(buttonPrint, "View Statistics and more here");
         }
-
-        private void ButtonRun_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonRun, "Run Code here");
+        
+        private void ButtonExecute_MouseHover(object sender, EventArgs e){
+            toolTipFile.SetToolTip(sender as Button, "Compile and Run submission with this button");
         }
 
         private void ButtonExit_MouseHover(object sender, EventArgs e)
@@ -117,7 +102,27 @@ namespace Software_Engineering_Project
         }
         #endregion
 
-        #region Sub Menu Stuff
+        #region Form Theme Functions
+
+        private void InitializeFormTheme(){
+            panelMain.BackColor = Color.LightGray;
+            labelTitlecard.BackColor = Color.Tan;
+            panelSideMenuPanel.BackColor = Color.WhiteSmoke;
+            buttonAssignments.ForeColor = Color.Black;
+            buttonEdit.ForeColor = Color.Black;
+            buttonHelp.ForeColor = Color.Black;
+            //buttonProgramGrader.ForeColor = Color.Black;
+            panelSubMenuFile.BackColor = Color.Tan;
+            panelSubMenuEdit.BackColor = Color.Tan;
+            panelSubMenuHelp.BackColor = Color.Tan;
+            SubmissionDockpanel.BackColor = Color.Tan;
+            buttonLightTheme.ForeColor = Color.Black;
+            buttonDarkTheme.ForeColor = Color.Black;
+            buttonAbout.ForeColor = Color.Black;
+            buttonOpenAssignment.ForeColor = Color.Black;
+            PanelExit.BackColor = Color.Tan;
+            PanelMainControls.BackColor = Color.Gray;
+        }
 
         /// <summary>
         /// Hides all SubMenus
@@ -182,11 +187,11 @@ namespace Software_Engineering_Project
             int selectedIndex = listBoxProjectOpener.SelectedIndex;
             bool didCompile = false;
             //If a file is selected  
-            if (currentAssignment != null)
+            if (CurrentAssignment != null)
             {
-                if (currentAssignment.Submissions.Count > 0)
+                if (CurrentAssignment.Submissions.Count > 0)
                 {
-                    Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
+                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
                     didCompile = RunCompilerService(selectedSubmission);
                     UpdateResultText(selectedSubmission);
                 }
@@ -208,11 +213,11 @@ namespace Software_Engineering_Project
         {
             //Placeholder for printing from the textBoxResult.text
             int selectedIndex = listBoxProjectOpener.SelectedIndex;
-            if (currentAssignment != null)
+            if (CurrentAssignment != null)
             {
-                if (currentAssignment.Submissions.Count > 0)
+                if (CurrentAssignment.Submissions.Count > 0)
                 {
-                    Submission selectedSubmission = currentAssignment.Submissions[selectedIndex];
+                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
                     if (selectedSubmission.Result == null)
                         selectedSubmission.Result = new Result();
                     UpdateResultText(selectedSubmission);
@@ -237,7 +242,7 @@ namespace Software_Engineering_Project
 
             if (assignment != null)
             {
-                currentAssignment = assignment;
+                CurrentAssignment = assignment;
             }
             // Hides the Open File button after use
             HideSubMenu();
@@ -265,6 +270,8 @@ namespace Software_Engineering_Project
             }
             return assignment;
         }
+
+        // TODO: Implement ThemeManager class to handle Light/Dark mode in FormMain.cs
 
         /// <summary>
         /// This button gives you the ability to go back to the normal theme
@@ -359,7 +366,7 @@ namespace Software_Engineering_Project
             var form = new FormCreateAssignment();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                currentAssignment = form.assignment;
+                CurrentAssignment = form.assignment;
                 saveCurrentAssignment();
             }
             form.Dispose();
@@ -372,11 +379,11 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-            var form = new FormAddSubmission(currentAssignment.AssignmentDirectory);
+            var form = new FormAddSubmission(CurrentAssignment.AssignmentDirectory);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                currentAssignment.Submissions.Add(form.submission);
+                CurrentAssignment.Submissions.Add(form.submission);
                 listBoxProjectOpener.Items.Add(form.submission);
                 listBoxProjectOpener.Refresh();
                 saveCurrentAssignment();
@@ -392,13 +399,13 @@ namespace Software_Engineering_Project
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
 
             // serialize
-            string json = JsonSerializer.Serialize(currentAssignment);
+            string json = JsonSerializer.Serialize(CurrentAssignment);
 
             // folderpath created
-            folderPath = Path.Combine(folderPath, currentAssignment.AssignmentName);
+            folderPath = Path.Combine(folderPath, CurrentAssignment.AssignmentName);
             Directory.CreateDirectory(folderPath);
 
-            string temp = Path.Combine(folderPath, $"{currentAssignment.AssignmentName}.json");
+            string temp = Path.Combine(folderPath, $"{CurrentAssignment.AssignmentName}.json");
 
             // written user info to json
             File.WriteAllText(temp, json);
@@ -439,7 +446,7 @@ namespace Software_Engineering_Project
         {
             if (selectedSubmission != null)
             {
-                CppService service = new CppService(currentAssignment, selectedSubmission);
+                CppService service = new CppService(CurrentAssignment, selectedSubmission);
                 return service.IsBuilt;
             }
 
@@ -489,7 +496,7 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e)
         {
-            if (currentAssignment != null)
+            if (CurrentAssignment != null)
             {
                 saveCurrentAssignment();
             }
