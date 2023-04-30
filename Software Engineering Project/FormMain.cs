@@ -34,17 +34,6 @@ namespace Software_Engineering_Project
 
             buttonExecute.Enabled = false;
             buttonPrint.Enabled = false;
-
-            #region Events
-            buttonAssignments.MouseHover += ButtonFile_MouseHover;
-            buttonSubmission.MouseHover += ButtonSubmission_MouseHover;
-            buttonEdit.MouseHover += ButtonEdit_MouseHover;
-            buttonHelp.MouseHover += ButtonHelp_MouseHover;
-            ButtonExit.MouseHover += ButtonExit_MouseHover;
-            buttonPrint.MouseHover += ButtonView_MouseHover;
-            listboxSubmissions.MouseHover += ListBoxProjectOpener_MouseHover;
-            textBoxResult.MouseHover += ListBoxOutput_MouseHover;
-            #endregion
         }
 
         private bool CreateDirectory(){
@@ -54,22 +43,20 @@ namespace Software_Engineering_Project
             return ProgramDirectory.Exists;
         }
 
-        
-
-        #region MouseHover ToolTips
-        private void ListBoxOutput_MouseHover(object sender, EventArgs e)
+        #region MouseHover Events
+        private void TextboxResults_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(textBoxResult, "results will be Here");
+            toolTipFile.SetToolTip(sender as TextBox, "Compilation results and build messages for the selected submission are displayed here");
         }
 
-        private void ListBoxProjectOpener_MouseHover(object sender, EventArgs e)
+        private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(listboxSubmissions, "Files will be placed here");
+            toolTipFile.SetToolTip(sender as ListBox, "Assignment submissions are displayed here. Select a Submission to use other form functions");
         }
 
-        private void ButtonView_MouseHover(object sender, EventArgs e)
+        private void ButtonPrint_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(buttonPrint, "View Statistics and more here");
+            toolTipFile.SetToolTip(sender as Button, "Print contents of the submission results shown above.");
         }
         
         private void ButtonExecute_MouseHover(object sender, EventArgs e){
@@ -86,17 +73,17 @@ namespace Software_Engineering_Project
             toolTipFile.SetToolTip(buttonHelp, "Instructions here");
         }
 
-        private void ButtonEdit_MouseHover(object sender, EventArgs e)
+        private void ButtonThemeSettings_MouseHover(object sender, EventArgs e)
         {
             toolTipFile.SetToolTip(buttonEdit, "Change Themes here");
         }
 
-        private void ButtonFile_MouseHover(object sender, EventArgs e)
+        private void ButtonAssignments_MouseHover(object sender, EventArgs e)
         {
             toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
         }
 
-        private void ButtonSubmission_MouseHover(object sender, EventArgs e)
+        private void ButtonSubmissions_MouseHover(object sender, EventArgs e)
         {
             toolTipFile.SetToolTip(buttonSubmission, "Open or Create Submissions here");
         }
