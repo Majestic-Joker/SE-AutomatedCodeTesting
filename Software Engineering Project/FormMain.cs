@@ -42,7 +42,7 @@ namespace Software_Engineering_Project
             buttonHelp.MouseHover += ButtonHelp_MouseHover;
             ButtonExit.MouseHover += ButtonExit_MouseHover;
             buttonPrint.MouseHover += ButtonView_MouseHover;
-            listBoxProjectOpener.MouseHover += ListBoxProjectOpener_MouseHover;
+            listboxSubmissions.MouseHover += ListBoxProjectOpener_MouseHover;
             textBoxResult.MouseHover += ListBoxOutput_MouseHover;
             #endregion
         }
@@ -64,7 +64,7 @@ namespace Software_Engineering_Project
 
         private void ListBoxProjectOpener_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(listBoxProjectOpener, "Files will be placed here");
+            toolTipFile.SetToolTip(listboxSubmissions, "Files will be placed here");
         }
 
         private void ButtonView_MouseHover(object sender, EventArgs e)
@@ -178,14 +178,16 @@ namespace Software_Engineering_Project
 
         #region Compiler Buttons
         /// <summary>
-        /// Supposed to take and run the code from ListBoxProjectOpener
+        /// Compiles and Runs code from the selected Submission in listboxSubmissions
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonRun_Click(object sender, EventArgs e)
+        /// <param name="sender">The object running this event</param>
+        /// <param name="e">The EventArguments</param>
+        private void ButtonExecute_Click(object sender, EventArgs e)
         {
-            int selectedIndex = listBoxProjectOpener.SelectedIndex;
+            int selectedIndex = listboxSubmissions.SelectedIndex;
             bool didCompile = false;
+            
+            // TODO: Ensure the listboxSubmissions is the same list as CurrentAssignment.Submissions
             //If a file is selected  
             if (CurrentAssignment != null)
             {
@@ -212,7 +214,7 @@ namespace Software_Engineering_Project
         private void ButtonPrint_Click(object sender, EventArgs e)
         {
             //Placeholder for printing from the textBoxResult.text
-            int selectedIndex = listBoxProjectOpener.SelectedIndex;
+            int selectedIndex = listboxSubmissions.SelectedIndex;
             if (CurrentAssignment != null)
             {
                 if (CurrentAssignment.Submissions.Count > 0)
@@ -384,8 +386,8 @@ namespace Software_Engineering_Project
             if (form.ShowDialog() == DialogResult.OK)
             {
                 CurrentAssignment.Submissions.Add(form.submission);
-                listBoxProjectOpener.Items.Add(form.submission);
-                listBoxProjectOpener.Refresh();
+                listboxSubmissions.Items.Add(form.submission);
+                listboxSubmissions.Refresh();
                 saveCurrentAssignment();
             }
             form.Dispose();

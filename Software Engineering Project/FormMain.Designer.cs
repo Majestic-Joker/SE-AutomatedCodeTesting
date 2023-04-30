@@ -52,7 +52,7 @@
             this.buttonOpenAssignment = new System.Windows.Forms.Button();
             this.buttonAssignments = new System.Windows.Forms.Button();
             this.toolTipFile = new System.Windows.Forms.ToolTip(this.components);
-            this.listBoxProjectOpener = new System.Windows.Forms.ListBox();
+            this.listboxSubmissions = new System.Windows.Forms.ListBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.textBoxResult = new System.Windows.Forms.TextBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -173,6 +173,7 @@
             this.buttonPrint.TabIndex = 8;
             this.buttonPrint.Text = "Print";
             this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.ButtonPrint_Click);
             // 
             // buttonExecute
             // 
@@ -184,6 +185,7 @@
             this.buttonExecute.Size = new System.Drawing.Size(325, 70);
             this.buttonExecute.TabIndex = 9;
             this.buttonExecute.Text = "Execute";
+            this.buttonExecute.Click += new System.EventHandler(this.ButtonExecute_Click);
             // 
             // panelSideMenuPanel
             // 
@@ -413,23 +415,23 @@
             this.buttonAssignments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAssignments.UseVisualStyleBackColor = true;
             // 
-            // listBoxProjectOpener
+            // listboxSubmissions
             // 
-            this.listBoxProjectOpener.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listboxSubmissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBoxProjectOpener.ItemHeight = 15;
-            this.listBoxProjectOpener.Location = new System.Drawing.Point(242, 11);
-            this.listBoxProjectOpener.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxProjectOpener.Name = "listBoxProjectOpener";
-            this.listBoxProjectOpener.Size = new System.Drawing.Size(323, 319);
-            this.listBoxProjectOpener.TabIndex = 10;
+            this.listboxSubmissions.ItemHeight = 15;
+            this.listboxSubmissions.Location = new System.Drawing.Point(242, 11);
+            this.listboxSubmissions.Margin = new System.Windows.Forms.Padding(4);
+            this.listboxSubmissions.Name = "listboxSubmissions";
+            this.listboxSubmissions.Size = new System.Drawing.Size(323, 319);
+            this.listboxSubmissions.TabIndex = 10;
             // 
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMain.Controls.Add(this.textBoxResult);
-            this.panelMain.Controls.Add(this.listBoxProjectOpener);
+            this.panelMain.Controls.Add(this.listboxSubmissions);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Margin = new System.Windows.Forms.Padding(4);
@@ -508,7 +510,7 @@
         private System.Windows.Forms.Panel SubmissionDockpanel;
         private System.Windows.Forms.Button buttonCreateSubmission;
         private System.Windows.Forms.Button buttonSubmission;
-        private System.Windows.Forms.ListBox listBoxProjectOpener;
+        private System.Windows.Forms.ListBox listboxSubmissions;
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.TextBox textBoxResult;
         private System.Drawing.Printing.PrintDocument printDocument1;
