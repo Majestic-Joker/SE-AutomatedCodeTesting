@@ -15,11 +15,11 @@ namespace Software_Engineering_Project
         private bool canSave => hasName && hasOutputFile;
 
         string assignmentFilepath = "";
-        private readonly string programDirectory;
+        private readonly DirectoryInfo programDirectory;
 
         public Assignment assignment { get; set; }
 
-        public FormCreateAssignment(string programDirectory)
+        public FormCreateAssignment(DirectoryInfo programDirectory)
         {
             InitializeComponent();
             EmptyTextBoxes();
