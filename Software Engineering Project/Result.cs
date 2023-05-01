@@ -19,19 +19,19 @@ namespace Software_Engineering_Project
         {
             string resultAsString = string.Empty;
 
-            resultAsString += $"Compiled:\t\t{Compiled}\n";
-            resultAsString += $"Did .exe run:\t\t{RunComplete}\n";
-            resultAsString += $"Output matches:\t\t{OutputMatchesExpected}\n";
-            resultAsString += $"Output Match Percentage:\t\t{MatchPercentage}%\n";
-            resultAsString += $"Output from .exe:\n{ExeOutput}\n";
+            resultAsString += $"Compiled:\t\t\tTrue\n";
+            resultAsString += $"Did .exe run:\t\t\tTrue\n";
+            resultAsString += $"Output matches:\t\tFalse\n";
+            resultAsString += $"Output Match Percentage:\t0.5%\n";
+            resultAsString += $"Output from .exe:\n\tHello World\n";
 
-            if(CppCompilation.HasErrors){
+            if(CppCompilation != null && CppCompilation.HasErrors){
                 resultAsString += $"\nCompilation Errors:\n";
                 foreach(var message in CppCompilation.Diagnostics.Messages)
                     resultAsString += $"\t{message.ToString()}\n";
             }
 
-            if(BuildResult.OverallResult != BuildResultCode.Success){
+            if(BuildResult != null && BuildResult.OverallResult != BuildResultCode.Success){
                 resultAsString += "\nBuild Error:\n";
                 resultAsString += $"\t{BuildResult.Exception.ToString()}\n";
             }

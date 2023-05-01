@@ -56,9 +56,9 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.Lbl_ResultsLabel = new System.Windows.Forms.Label();
             this.Lbl_SubmissionsTitle = new System.Windows.Forms.Label();
-            this.textBoxResult = new System.Windows.Forms.TextBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.PanelMainControls.SuspendLayout();
             this.PanelExit.SuspendLayout();
             this.panelSideMenuPanel.SuspendLayout();
@@ -463,9 +463,9 @@
             // 
             this.panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMain.Controls.Add(this.richTextBox1);
             this.panelMain.Controls.Add(this.Lbl_ResultsLabel);
             this.panelMain.Controls.Add(this.Lbl_SubmissionsTitle);
-            this.panelMain.Controls.Add(this.textBoxResult);
             this.panelMain.Controls.Add(this.listboxSubmissions);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
@@ -494,18 +494,6 @@
             this.Lbl_SubmissionsTitle.TabIndex = 13;
             this.Lbl_SubmissionsTitle.Text = "Submissions:";
             // 
-            // textBoxResult
-            // 
-            this.textBoxResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxResult.Location = new System.Drawing.Point(590, 34);
-            this.textBoxResult.Multiline = true;
-            this.textBoxResult.Name = "textBoxResult";
-            this.textBoxResult.PlaceholderText = "Compiled submission results are shown here.";
-            this.textBoxResult.ReadOnly = true;
-            this.textBoxResult.Size = new System.Drawing.Size(338, 384);
-            this.textBoxResult.TabIndex = 12;
-            this.textBoxResult.TabStop = false;
-            // 
             // printPreviewDialog1
             // 
             this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -516,6 +504,17 @@
             this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBox1.Location = new System.Drawing.Point(590, 34);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(337, 384);
+            this.richTextBox1.TabIndex = 15;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.MouseHover += new System.EventHandler(this.TextboxResults_MouseHover);
             // 
             // FormMain
             // 
@@ -540,7 +539,6 @@
             this.Pnl_SubmissionControls.ResumeLayout(false);
             this.Pnl_AssignmentControls.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
-            this.panelMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -570,11 +568,11 @@
         private System.Windows.Forms.Button buttonSubmission;
         private System.Windows.Forms.ListBox listboxSubmissions;
         private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.TextBox textBoxResult;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.Label Lbl_SubmissionsTitle;
         private System.Windows.Forms.Label Lbl_ResultsLabel;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -113,7 +113,7 @@ namespace Software_Engineering_Project
         #region MouseHover Events
         private void TextboxResults_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(textBoxResult, "Compilation results and build messages for the selected submission are displayed here");
+            toolTipFile.SetToolTip(richTextBox1, "Compilation results and build messages for the selected submission are displayed here");
         }
 
         private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
@@ -420,29 +420,21 @@ namespace Software_Engineering_Project
         private void ButtonExecute_Click(object sender, EventArgs e)
         {
             int selectedIndex = listboxSubmissions.SelectedIndex;
-            bool didCompile = false;
+            if(selectedIndex >= 0){
+                bool didCompile = false;
             
-            // TODO: Ensure the listboxSubmissions is the same list as CurrentAssignment.Submissions
-            //If a file is selected  
-            if (CurrentAssignment != null)
-            {
-                if (CurrentAssignment.Submissions.Count > 0)
+                // TODO: Ensure the listboxSubmissions is the same list as CurrentAssignment.Submissions
+                //If a file is selected  
+                if (CurrentAssignment != null)
                 {
-                    Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
-                    didCompile = RunCompilerService(selectedSubmission);
-                    UpdateResultText(selectedSubmission);
+                    if (CurrentAssignment.Submissions.Count > 0)
+                    {
+                        Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
+                        didCompile = RunCompilerService(selectedSubmission);
+                        UpdateResultText(selectedSubmission);
+                    }
                 }
             }
-
-            if (didCompile)
-            {
-                MessageBox.Show("Compilation sucessful");
-            }
-            else
-            {
-                MessageBox.Show("Compilation failed");
-            }
-
             SaveCurrentAssignment();
         }
 
@@ -483,15 +475,15 @@ namespace Software_Engineering_Project
         private void UpdateResultText(Submission selectedSubmission)
         {
             printDocument1.DocumentName = $"{selectedSubmission.SubmissionName}_Results";
-            textBoxResult.Text = selectedSubmission.Result.ToString();
+            richTextBox1.Text = selectedSubmission.Result.ToString();
         }
 
         private void PrintResults(object sender, PrintPageEventArgs e)
         {
             int charactersOnPage = 0;
             int linesPerPage = 0;
-            string resultText = textBoxResult.Text;
-            Font resultFont = textBoxResult.Font;
+            string resultText = richTextBox1.Text;
+            Font resultFont = richTextBox1.Font;
 
             // Sets the value of charactersOnPage to the number of characters
             // of stringToPrint that will fit within the bounds of the page.
@@ -508,7 +500,7 @@ namespace Software_Engineering_Project
 
             // If there are no more pages, reset the string to be printed.
             if (!e.HasMorePages)
-                resultText = textBoxResult.Text;
+                resultText = richTextBox1.Text;
         }
         #pragma warning restore CA1416
 

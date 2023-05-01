@@ -32,7 +32,7 @@ namespace Software_Engineering_Project
             ExeRunner runner = null;
             submission.Result = new Result();
 
-            submission.Result.CppCompilation = CppParser.ParseFile(submission.FilePath);
+            //submission.Result.CppCompilation = CppParser.ParseFile(submission.FilePath);
 
             string projectPath = CreateProject(CreateDirectory(assignment), submission.FilePath, submission.SubmissionName);
             exePath = BuildExe(projectPath, submission.SubmissionName);
