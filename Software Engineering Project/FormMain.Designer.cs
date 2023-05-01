@@ -444,6 +444,7 @@
             this.listboxSubmissions.Name = "listboxSubmissions";
             this.listboxSubmissions.Size = new System.Drawing.Size(338, 384);
             this.listboxSubmissions.TabIndex = 10;
+            this.listboxSubmissions.SelectedIndexChanged += new System.EventHandler(this.listboxSubmissions_SelectedIndexChanged);
             this.listboxSubmissions.MouseHover += new System.EventHandler(this.ListboxSubmissions_MouseHover);
             // 
             // panelMain
@@ -469,7 +470,7 @@
             this.Lbl_ResultsLabel.Name = "Lbl_ResultsLabel";
             this.Lbl_ResultsLabel.Size = new System.Drawing.Size(337, 23);
             this.Lbl_ResultsLabel.TabIndex = 14;
-            this.Lbl_ResultsLabel.Text = "Results: {Submission Name}";
+            this.Lbl_ResultsLabel.Text = "Results:";
             // 
             // Lbl_SubmissionsTitle
             // 
@@ -479,7 +480,7 @@
             this.Lbl_SubmissionsTitle.Name = "Lbl_SubmissionsTitle";
             this.Lbl_SubmissionsTitle.Size = new System.Drawing.Size(336, 23);
             this.Lbl_SubmissionsTitle.TabIndex = 13;
-            this.Lbl_SubmissionsTitle.Text = "Submissions: {Assignment Name}";
+            this.Lbl_SubmissionsTitle.Text = "Submissions:";
             // 
             // textBoxResult
             // 

@@ -9,7 +9,6 @@ namespace Software_Engineering_Project
         public Submission submission { get; set; }
 
         private FileInfo codeInfo;
-        private string codeFilepath;
 
         private bool hasName => submission.SubmissionName.Length > 0;
         private bool hasFile => codeInfo.Exists;

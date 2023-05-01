@@ -32,10 +32,10 @@ namespace Software_Engineering_Project
             ExeRunner runner = null;
             submission.Result = new Result();
 
-            compilation = CppParser.ParseFile(submission.FilePath);
+            compilation = CppParser.ParseFile(submission.FilePath.FullName);
 
-            string projectPath = CreateProject(assignment.AssignmentDirectory.FullName, submission.FilePath, submission.StudentName);
-            exePath = BuildExe(projectPath, submission.StudentName);
+            string projectPath = CreateProject(CreateDirectory(assignment), submission.FilePath.FullName, submission.SubmissionName);
+            exePath = BuildExe(projectPath, submission.SubmissionName);
 
             if(IsBuilt){
                 UpdateCompilationResults(submission.Result);
@@ -63,10 +63,9 @@ namespace Software_Engineering_Project
             subResult.ExeOutput = ExeOut;
         }
 
-        private string CreateDirectory(string parentDirectory){
-            string temp = Path.Combine(parentDirectory, "Projects");
-            Directory.CreateDirectory(temp);
-            return temp;
+        private string CreateDirectory(Assignment assignment){
+            var projectDirectory = assignment.AssignmentDirectory.CreateSubdirectory("Projects");
+            return projectDirectory.FullName;
         }
 
         private string CreateProject(string filepath, string codePath, string projectName = "Test")

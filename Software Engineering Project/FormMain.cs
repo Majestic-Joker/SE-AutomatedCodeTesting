@@ -29,10 +29,8 @@ namespace Software_Engineering_Project
             InitializeComponent();
             InitializeFormTheme();
 
-            while(!ProgramDirectory.Exists){
-                CreateDirectory();
-                recentAssignment = new FileInfo(Path.Combine(ProgramDirectory.FullName,"recent.json"));
-            }
+            CreateDirectory();
+            recentAssignment = new FileInfo(Path.Combine(ProgramDirectory.FullName,"recent.json"));
 
             if(recentAssignment.Exists)
                 LoadRecentAssignment();
@@ -201,6 +199,7 @@ namespace Software_Engineering_Project
                 SaveCurrentAssignment();
                 CurrentAssignment = assignment;
                 SaveCurrentAssignment();
+                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
             }
 
             // Hides the Assignment sub menu after use
@@ -301,7 +300,7 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-            var form = new FormAddSubmission(CurrentAssignment.AssignmentDirectory.FullName);
+            var form = new FormAddSubmission(CurrentAssignment);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -355,6 +354,8 @@ namespace Software_Engineering_Project
                 SaveCurrentAssignment();
             }
             form.Dispose();
+
+
         }
 
         /// <summary>
@@ -394,6 +395,8 @@ namespace Software_Engineering_Project
 
             string json = reader.ReadToEnd();
             CurrentAssignment = JsonSerializer.Deserialize<Assignment>(json);
+
+            Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
         }
         #endregion
 
@@ -468,7 +471,7 @@ namespace Software_Engineering_Project
         #pragma warning disable CA1416
         private void UpdateResultText(Submission selectedSubmission)
         {
-            printDocument1.DocumentName = $"{selectedSubmission.StudentName}_Results";
+            printDocument1.DocumentName = $"{selectedSubmission.SubmissionName}_Results";
             textBoxResult.Text = selectedSubmission.Result.ToString();
         }
 
@@ -515,5 +518,11 @@ namespace Software_Engineering_Project
         }
 
         #endregion
+
+        private void listboxSubmissions_SelectedIndexChanged(object sender,EventArgs e)
+        {
+            var senderObj = sender as ListBox;
+            Lbl_ResultsLabel.Text = $"Results: {CurrentAssignment.Submissions[senderObj.SelectedIndex]}";
+        }
     }
 }
