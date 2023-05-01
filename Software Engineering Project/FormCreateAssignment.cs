@@ -40,9 +40,8 @@ namespace Software_Engineering_Project
         {
             CreateAssignmentDirectory();
             CreateAssignmentFileInfo();
-
-            if(assignment.AssignmentFile.Exists)
-                WriteFile(assignment.AssignmentFile, JsonSerializer.Serialize(assignment));
+            WriteFile(assignment.AssignmentFile, JsonSerializer.Serialize(assignment));
+            assignment.SubmissionsDirectory = assignment.AssignmentDirectory.CreateSubdirectory("Submissions");
 
             if(inputTemp.Exists){
                 assignment.InputFilepath = CopyFileInfo(inputTemp);

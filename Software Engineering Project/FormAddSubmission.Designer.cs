@@ -82,7 +82,7 @@
             this.labelFile.Name = "labelFile";
             this.labelFile.Size = new System.Drawing.Size(445, 27);
             this.labelFile.TabIndex = 17;
-            this.labelFile.Text = "{C:/User/MyDocuments/2021-CodingAssignments/Assignment1/Code/codefile.txt}";
+            this.labelFile.Text = "No File Selected";
             // 
             // buttonOpenFile
             // 
@@ -113,10 +113,10 @@
             this.textBoxCodePreview.Location = new System.Drawing.Point(11, 153);
             this.textBoxCodePreview.Multiline = true;
             this.textBoxCodePreview.Name = "textBoxCodePreview";
+            this.textBoxCodePreview.PlaceholderText = "A preview of the opened file is displayed here.";
             this.textBoxCodePreview.ReadOnly = true;
             this.textBoxCodePreview.Size = new System.Drawing.Size(445, 273);
             this.textBoxCodePreview.TabIndex = 13;
-            this.textBoxCodePreview.Text = "{Code from the opened file is printed here. Lorem ipsum, la dee da dee da}";
             // 
             // PanelSubmissionsControls
             // 
@@ -170,9 +170,9 @@
             this.textBoxSubmissionName.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxSubmissionName.Location = new System.Drawing.Point(189, 19);
             this.textBoxSubmissionName.Name = "textBoxSubmissionName";
+            this.textBoxSubmissionName.PlaceholderText = "Enter a name for this submission ";
             this.textBoxSubmissionName.Size = new System.Drawing.Size(267, 26);
             this.textBoxSubmissionName.TabIndex = 0;
-            this.textBoxSubmissionName.Text = "{CodeSubmissionName}";
             this.textBoxSubmissionName.TextChanged += new System.EventHandler(this.textBoxSubmissionName_TextChanged);
             // 
             // FormAddSubmission

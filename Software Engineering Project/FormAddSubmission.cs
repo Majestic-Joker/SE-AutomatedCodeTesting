@@ -7,31 +7,23 @@ namespace Software_Engineering_Project
     public partial class FormAddSubmission : Form
     {
         public Submission submission { get; set; }
-        private string codeFilepath;
-        private string codeText;
-        private string assignmentDirectory;
-        private string submissionDirectory;
 
-        private bool hasName => textBoxSubmissionName.Text != string.Empty;
-        private bool hasFile => textBoxCodePreview.Text != string.Empty;
+        private FileInfo codeInfo;
+        private string codeFilepath;
+
+        private bool hasName => submission.SubmissionName.Length > 0;
+        private bool hasFile => codeInfo.Exists;
         private bool canSave => hasName && hasFile;
 
-        public FormAddSubmission(string directory)
+        private readonly Assignment assignment;
+
+        public FormAddSubmission(Assignment assignment)
         {
             InitializeComponent();
-            EmptyTextBoxes();
+
+            this.assignment = assignment;
 
             submission = new Submission();
-            assignmentDirectory = directory;
-            submissionDirectory = CreateDirectory();
-        }
-        
-        private void EmptyTextBoxes(){
-            textBoxSubmissionName.Text = string.Empty;
-
-            textBoxCodePreview.Text = string.Empty;
-
-            labelFile.Text = string.Empty;
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -40,14 +32,9 @@ namespace Software_Engineering_Project
             Close();
         }
 
-        private string CreateDirectory(){
-            string temp = Path.Combine(assignmentDirectory, "Submissions");
-            Directory.CreateDirectory(temp);
-            return temp;
-        }
 
         private void WriteFile(){
-            File.WriteAllText(codeFilepath, codeText);
+            File.WriteAllText(submission.FilePath.FullName, GetCodeText(submission.FilePath));
         }
 
         /// <summary>
@@ -57,34 +44,54 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonAddSubmission_Click(object sender, EventArgs e)
         {
-            WriteFile();
-
-            submission.StudentName = textBoxSubmissionName.Text;
-            submission.FilePath = codeFilepath;
-
-            DialogResult = DialogResult.OK;
-            Close();
+            if(canSave){
+                CopyCodeInfo();
+                WriteFile();
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else{
+                var result = MessageBox.Show("SubmissionName and CodeFile are required fields.\nPressing OK will discard any progress you have made on this form.\nPressing Cancel returns you to the form.","Unable to Save - Missing Requirements", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK){
+                    DialogResult = DialogResult.Cancel;
+                    Close();
+                }
+            }
         }
 
         private void ButtonOpenFile_Click(object sender, EventArgs e)
         {
+            codeInfo = GetFileInfo();
+            if(codeInfo.Exists)
+                textBoxCodePreview.Text = GetCodeText(codeInfo);
+            else
+                textBoxCodePreview.Text = "Unable to open file.";
+        }
+
+        private FileInfo GetFileInfo(){
+            FileInfo info = null;
+
             OpenFileDialog dialog = new OpenFileDialog();
             if(dialog.ShowDialog() == DialogResult.OK)
-            {
-                FileInfo info = new FileInfo(dialog.FileName);
+                info = new FileInfo(dialog.FileName);
 
-                codeText = new StreamReader(dialog.OpenFile()).ReadToEnd();
+            return info;
+        }
 
-                codeFilepath = Path.Combine(submissionDirectory, info.Name);
+        private void CopyCodeInfo(){
+            string fileName = $"{assignment.Submissions.Count + 1} - {codeInfo.Name}";
+            string path = Path.Combine(assignment.SubmissionsDirectory.FullName, fileName);
+            submission.FilePath = new FileInfo(path);
+        }
 
-                textBoxCodePreview.Text = codeText;
-                buttonAddSubmission.Enabled = canSave;
-            }
+        private string GetCodeText(FileInfo info){
+            return new StreamReader(info.OpenRead()).ReadToEnd();
         }
 
         private void textBoxSubmissionName_TextChanged(object sender,EventArgs e)
         {
-            buttonAddSubmission.Enabled = canSave;
+            if(textBoxSubmissionName.Text.Length > 0)
+                submission.SubmissionName = textBoxSubmissionName.Text;
         }
     }
 }

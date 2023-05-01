@@ -13,7 +13,6 @@ namespace Software_Engineering_Project
     public class CppService
     {
         private BuildResult buildResult;
-        private string directory;
         private float matchPercent = 0.0f;
         private string exeOut;
 
@@ -33,11 +32,9 @@ namespace Software_Engineering_Project
             ExeRunner runner = null;
             submission.Result = new Result();
 
-            directory = CreateDirectory(assignment.AssignmentDirectory);
-
             compilation = CppParser.ParseFile(submission.FilePath);
 
-            string projectPath = CreateProject(directory, submission.FilePath, submission.StudentName);
+            string projectPath = CreateProject(assignment.AssignmentDirectory.FullName, submission.FilePath, submission.StudentName);
             exePath = BuildExe(projectPath, submission.StudentName);
 
             if(IsBuilt){
@@ -120,14 +117,14 @@ namespace Software_Engineering_Project
         }
 
         private ExeRunner TryRunExe(Assignment assignment){
-            ExeRunner runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath};
+            ExeRunner runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath.FullName};
             runner.RunExe();
             exeOut = runner.ExeOutput;
             return runner;
         }
 
         private float GetMatchPercentage(ExeRunner runner, Assignment assignment){
-            string expectedOutput = new StreamReader(assignment.OutputFilepath).ReadToEnd();
+            string expectedOutput = new StreamReader(assignment.OutputFilepath.FullName).ReadToEnd();
 
             string[] exeLines = GetLines(runner.ExeOutput);
             string[] assignmentLines = GetLines(expectedOutput);

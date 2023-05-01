@@ -17,6 +17,8 @@ namespace Software_Engineering_Project
 {
     public partial class FormMain : Form
     {
+        private FileInfo recentAssignment;
+
         #region Properties
         public Assignment CurrentAssignment { get; private set; }
         public DirectoryInfo ProgramDirectory { get; private set; }
@@ -27,16 +29,18 @@ namespace Software_Engineering_Project
             InitializeComponent();
             InitializeFormTheme();
 
-            while(!ProgramDirectory.Exists)
+            while(!ProgramDirectory.Exists){
                 CreateDirectory();
+                recentAssignment = new FileInfo(Path.Combine(ProgramDirectory.FullName,"recent.json"));
+            }
 
-            // TODO: Try to load most recent assignment
+            if(recentAssignment.Exists)
+                LoadRecentAssignment();
         }
 
         private bool CreateDirectory(){
             string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Automated Code Metrics");
             ProgramDirectory = Directory.CreateDirectory(temp);
-
             return ProgramDirectory.Exists;
         }
 
@@ -194,7 +198,9 @@ namespace Software_Engineering_Project
 
             if (assignment != null)
             {
+                SaveCurrentAssignment();
                 CurrentAssignment = assignment;
+                SaveCurrentAssignment();
             }
 
             // Hides the Assignment sub menu after use
@@ -372,6 +378,22 @@ namespace Software_Engineering_Project
                 // written user info to json
                 File.WriteAllText(temp, json);
             }
+            SaveRecentAssignment();
+        }
+
+        private void SaveRecentAssignment(){
+            if(CurrentAssignment != null){
+                File.WriteAllText(recentAssignment.FullName, JsonSerializer.Serialize(CurrentAssignment));
+            }
+        }
+
+        //TODO: Implement Load Recent Assignment
+        private void LoadRecentAssignment(){
+            var filestream = recentAssignment.OpenRead();
+            var reader = new StreamReader(filestream);
+
+            string json = reader.ReadToEnd();
+            CurrentAssignment = JsonSerializer.Deserialize<Assignment>(json);
         }
         #endregion
 

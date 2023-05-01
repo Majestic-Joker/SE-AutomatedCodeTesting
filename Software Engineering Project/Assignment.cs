@@ -12,6 +12,7 @@ namespace Software_Engineering_Project
     {
         public string AssignmentName { get; set; }
         public DirectoryInfo AssignmentDirectory { get; set; }
+        public DirectoryInfo SubmissionsDirectory { get; set; }
         public FileInfo AssignmentFile { get; set; }
         public List<Submission> Submissions { get; set; }
         public FileInfo InputFilepath { get; set; }
