@@ -295,7 +295,7 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-            var form = new FormAddSubmission(CurrentAssignment.AssignmentDirectory);
+            var form = new FormAddSubmission(CurrentAssignment.AssignmentDirectory.FullName);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -304,6 +304,7 @@ namespace Software_Engineering_Project
                 listboxSubmissions.Refresh();
                 SaveCurrentAssignment();
             }
+
             form.Dispose();
         }
         #endregion
@@ -366,7 +367,7 @@ namespace Software_Engineering_Project
                 if(!CurrentAssignment.AssignmentDirectory.Exists) 
                     CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName);
 
-                string temp = Path.Combine(CurrentAssignment.AssignmentDirectory, $"{CurrentAssignment.AssignmentName}.json");
+                string temp = Path.Combine(CurrentAssignment.AssignmentDirectory.FullName, $"{CurrentAssignment.AssignmentName}.json");
 
                 // written user info to json
                 File.WriteAllText(temp, json);
@@ -486,7 +487,7 @@ namespace Software_Engineering_Project
         {
             if (CurrentAssignment != null)
             {
-                saveCurrentAssignment();
+                SaveCurrentAssignment();
             }
             Application.Exit();
         }
