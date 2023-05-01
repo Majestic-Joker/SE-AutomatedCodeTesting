@@ -13,7 +13,7 @@ namespace Software_Engineering_Project
         private FileInfo outputTemp;
 
         private bool hasName => assignment.AssignmentName.Length > 0;
-        private bool hasOutputFile => outputTemp.Exists;
+        private bool hasOutputFile => outputTemp != null && outputTemp.Exists;
         private bool canSave => hasName && hasOutputFile;
 
         public Assignment assignment { get; set; }

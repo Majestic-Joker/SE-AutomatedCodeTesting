@@ -112,21 +112,21 @@ namespace Software_Engineering_Project
         #region MouseHover Events
         private void TextboxResults_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(sender as TextBox, "Compilation results and build messages for the selected submission are displayed here");
+            toolTipFile.SetToolTip(textboxResults, "Compilation results and build messages for the selected submission are displayed here");
         }
 
         private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(sender as ListBox, "Assignment submissions are displayed here. Select a Submission to use other form functions");
+            toolTipFile.SetToolTip(listboxSubmissions, "Assignment submissions are displayed here. Select a Submission to use other form functions");
         }
 
         private void ButtonPrint_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(sender as Button, "Print contents of the submission results shown above.");
+            toolTipFile.SetToolTip(buttonPrint, "Print contents of the submission results shown above.");
         }
         
         private void ButtonExecute_MouseHover(object sender, EventArgs e){
-            toolTipFile.SetToolTip(sender as Button, "Compile and Run submission with this button");
+            toolTipFile.SetToolTip(buttonExecute, "Compile and Run submission with this button");
         }
 
         private void ButtonExit_MouseHover(object sender, EventArgs e)
@@ -523,6 +523,14 @@ namespace Software_Engineering_Project
         {
             var senderObj = sender as ListBox;
             Lbl_ResultsLabel.Text = $"Results: {CurrentAssignment.Submissions[senderObj.SelectedIndex]}";
+        }
+
+        private void FormMain_FormClosing(object sender,FormClosingEventArgs e)
+        {
+            if (CurrentAssignment != null)
+            {
+                SaveCurrentAssignment();
+            }
         }
     }
 }

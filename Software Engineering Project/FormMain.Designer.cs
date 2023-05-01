@@ -101,6 +101,7 @@
             this.buttonAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAbout.UseVisualStyleBackColor = true;
+            this.buttonAbout.Click += new System.EventHandler(this.ButtonAbout_Click);
             // 
             // buttonHelp
             // 
@@ -122,6 +123,7 @@
             this.buttonHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
             this.buttonHelp.MouseHover += new System.EventHandler(this.ButtonHelp_MouseHover);
             // 
             // PanelMainControls
@@ -164,6 +166,7 @@
             this.ButtonExit.Text = "&Exit";
             this.ButtonExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ButtonExit.UseVisualStyleBackColor = true;
+            this.ButtonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             this.ButtonExit.MouseHover += new System.EventHandler(this.ButtonExit_MouseHover);
             // 
             // buttonPrint
@@ -259,6 +262,7 @@
             this.buttonDarkTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonDarkTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonDarkTheme.UseVisualStyleBackColor = true;
+            this.buttonDarkTheme.Click += new System.EventHandler(this.ButtonDarkTheme_Click);
             // 
             // buttonLightTheme
             // 
@@ -278,6 +282,7 @@
             this.buttonLightTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonLightTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonLightTheme.UseVisualStyleBackColor = true;
+            this.buttonLightTheme.Click += new System.EventHandler(this.ButtonLightTheme_Click);
             // 
             // buttonEdit
             // 
@@ -299,6 +304,7 @@
             this.buttonEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             this.buttonEdit.MouseHover += new System.EventHandler(this.ButtonThemeSettings_MouseHover);
             // 
             // Pnl_SubmissionControls
@@ -333,6 +339,7 @@
             this.buttonCreateSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonCreateSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCreateSubmission.UseVisualStyleBackColor = true;
+            this.buttonCreateSubmission.Click += new System.EventHandler(this.ButtonCreateSubmission_Click);
             // 
             // buttonSubmission
             // 
@@ -354,6 +361,7 @@
             this.buttonSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSubmission.UseVisualStyleBackColor = true;
+            this.buttonSubmission.Click += new System.EventHandler(this.buttonSubmission_Click);
             this.buttonSubmission.MouseHover += new System.EventHandler(this.ButtonSubmissions_MouseHover);
             // 
             // Pnl_AssignmentControls
@@ -388,6 +396,7 @@
             this.buttonCreateAssignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonCreateAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCreateAssignment.UseVisualStyleBackColor = true;
+            this.buttonCreateAssignment.Click += new System.EventHandler(this.ButtonCreateAssignment_Click);
             // 
             // buttonOpenAssignment
             // 
@@ -430,6 +439,7 @@
             this.buttonAssignments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAssignments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAssignments.UseVisualStyleBackColor = true;
+            this.buttonAssignments.Click += new System.EventHandler(this.buttonAssignments_Click);
             this.buttonAssignments.MouseHover += new System.EventHandler(this.ButtonAssignments_MouseHover);
             // 
             // listboxSubmissions
@@ -518,6 +528,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.Text = "Automated Code Metics";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.PanelMainControls.ResumeLayout(false);
             this.PanelExit.ResumeLayout(false);
             this.panelSideMenuPanel.ResumeLayout(false);

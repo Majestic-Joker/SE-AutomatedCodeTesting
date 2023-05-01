@@ -11,7 +11,7 @@ namespace Software_Engineering_Project
         private FileInfo codeInfo;
 
         private bool hasName => submission.SubmissionName.Length > 0;
-        private bool hasFile => codeInfo.Exists;
+        private bool hasFile => codeInfo != null && codeInfo.Exists;
         private bool canSave => hasName && hasFile;
 
         private readonly Assignment assignment;
