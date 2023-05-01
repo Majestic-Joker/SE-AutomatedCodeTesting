@@ -61,7 +61,6 @@
             // 
             // ButtonSaveAssignment
             // 
-            this.ButtonSaveAssignment.Enabled = false;
             this.ButtonSaveAssignment.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonSaveAssignment.Location = new System.Drawing.Point(271, 11);
             this.ButtonSaveAssignment.Name = "ButtonSaveAssignment";
@@ -164,7 +163,6 @@
             // 
             // buttonInput
             // 
-            this.buttonInput.Enabled = false;
             this.buttonInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonInput.Location = new System.Drawing.Point(35, 139);
             this.buttonInput.Name = "buttonInput";
