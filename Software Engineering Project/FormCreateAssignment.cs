@@ -40,17 +40,19 @@ namespace Software_Engineering_Project
         {
             CreateAssignmentDirectory();
             CreateAssignmentFileInfo();
-            WriteFile(assignment.AssignmentFile, JsonSerializer.Serialize(assignment));
-            assignment.SubmissionsDirectory = assignment.AssignmentDirectory.CreateSubdirectory("Submissions");
+            WriteFile(new FileInfo(assignment.AssignmentFile), JsonSerializer.Serialize(assignment));
+            assignment.SubmissionsDirectory = Directory.CreateDirectory(Path.Combine(assignment.AssignmentDirectory, "Submissions")).FullName;
 
-            if(inputTemp.Exists){
-                assignment.InputFilepath = CopyFileInfo(inputTemp);
-                WriteFile(assignment.InputFilepath, GetFileText(assignment.InputFilepath));
+            if(inputTemp != null && inputTemp.Exists){
+                assignment.InputFilepath = CopyFileInfo(inputTemp).FullName;
+                var inInfo = new FileInfo(assignment.InputFilepath);
+                WriteFile(inInfo, GetFileText(inputTemp));
             }
 
-            if(outputTemp.Exists){
-                assignment.OutputFilepath = CopyFileInfo(outputTemp);
-                WriteFile(assignment.OutputFilepath, GetFileText(assignment.OutputFilepath));
+            if(outputTemp != null && outputTemp.Exists){
+                assignment.OutputFilepath = CopyFileInfo(outputTemp).FullName;
+                var outInfo = new FileInfo(assignment.OutputFilepath);
+                WriteFile(outInfo, GetFileText(outputTemp));
             }
         }
 
@@ -59,8 +61,8 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <returns></returns>
         private bool CreateAssignmentDirectory(){
-            assignment.AssignmentDirectory = programDirectory.CreateSubdirectory(assignment.AssignmentName);
-            return assignment.AssignmentDirectory.Exists;
+            assignment.AssignmentDirectory = programDirectory.CreateSubdirectory(assignment.AssignmentName).FullName;
+            return assignment.AssignmentDirectory.Length > 0;
         }
 
         /// <summary>
@@ -68,9 +70,9 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <returns></returns>
         private bool CreateAssignmentFileInfo(){
-            string temp = Path.Combine(assignment.AssignmentDirectory.FullName, $"{assignment.AssignmentName}.json");
-            assignment.AssignmentFile = new FileInfo(temp);
-            return assignment.AssignmentFile.Exists;
+            string temp = Path.Combine(assignment.AssignmentDirectory, $"{assignment.AssignmentName}.json");
+            assignment.AssignmentFile = new FileInfo(temp).FullName;
+            return assignment.AssignmentFile.Length > 0;
         }
 
         /// <summary>
@@ -78,8 +80,11 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="fileInfo"></param>
         /// <param name="fileText"></param>
-        private void WriteFile(FileInfo fileInfo, string fileText){
-            File.WriteAllText(fileInfo.FullName, fileText);
+        private async void WriteFile(FileInfo fileInfo, string fileText){
+            var task = File.WriteAllTextAsync(fileInfo.FullName, fileText);
+            
+            while(!task.IsCompleted)
+                await System.Threading.Tasks.Task.Delay(50);
         }
 
         /// <summary>
@@ -105,7 +110,7 @@ namespace Software_Engineering_Project
         private FileInfo CopyFileInfo(FileInfo info){
             FileInfo returnable = null;
 
-            string path = Path.Combine(assignment.AssignmentDirectory.FullName, info.Name);
+            string path = Path.Combine(assignment.AssignmentDirectory, info.Name);
             returnable = new FileInfo(path);
 
             return returnable;
@@ -167,6 +172,8 @@ namespace Software_Engineering_Project
         private void buttonInput_Click(object sender, EventArgs e)
         {
             inputTemp = GetFileInfo();
+            if(inputTemp != null && inputTemp.Exists)
+                labelInputFilePath.Text = inputTemp.Name;
         }
 
         /// <summary>
@@ -177,6 +184,8 @@ namespace Software_Engineering_Project
         private void buttonOutput_Click(object sender, EventArgs e)
         {
             outputTemp = GetFileInfo();
+            if(outputTemp != null && outputTemp.Exists)
+                labelOutputFilePath.Text = outputTemp.Name;
         }
 
         /// <summary>

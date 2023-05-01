@@ -11,12 +11,12 @@ namespace Software_Engineering_Project
     public class Assignment
     {
         public string AssignmentName { get; set; }
-        public DirectoryInfo AssignmentDirectory { get; set; }
-        public DirectoryInfo SubmissionsDirectory { get; set; }
-        public FileInfo AssignmentFile { get; set; }
+        public string AssignmentDirectory { get; set; }
+        public string SubmissionsDirectory { get; set; }
+        public string AssignmentFile { get; set; }
         public List<Submission> Submissions { get; set; }
-        public FileInfo InputFilepath { get; set; }
-        public FileInfo OutputFilepath { get; set; }
+        public string InputFilepath { get; set; }
+        public string OutputFilepath { get; set; }
         public float MatchRequirement { get; set; }
     }
 }

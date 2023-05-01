@@ -13,7 +13,7 @@ namespace Software_Engineering_Project
         public string SubmissionName { get; set; }
         public int SubmissionID { get; set; }
         public string Content { get; set; }
-        public FileInfo FilePath { get; set; }
+        public string FilePath { get; set; }
         public Result Result { get; set; }
 
         public override string ToString()

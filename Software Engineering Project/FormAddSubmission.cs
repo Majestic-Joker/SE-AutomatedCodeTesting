@@ -32,8 +32,11 @@ namespace Software_Engineering_Project
         }
 
 
-        private void WriteFile(){
-            File.WriteAllText(submission.FilePath.FullName, GetCodeText(submission.FilePath));
+        private async void WriteFile(){
+            var task = File.WriteAllTextAsync(submission.FilePath, GetCodeText(codeInfo));
+            
+            while(!task.IsCompleted)
+                await System.Threading.Tasks.Task.Delay(50);
         }
 
         /// <summary>
@@ -45,6 +48,7 @@ namespace Software_Engineering_Project
         {
             if(canSave){
                 CopyCodeInfo();
+                submission.Result = new Result();
                 WriteFile();
                 DialogResult = DialogResult.OK;
                 Close();
@@ -61,7 +65,7 @@ namespace Software_Engineering_Project
         private void ButtonOpenFile_Click(object sender, EventArgs e)
         {
             codeInfo = GetFileInfo();
-            if(codeInfo.Exists)
+            if(codeInfo != null && codeInfo.Exists)
                 textBoxCodePreview.Text = GetCodeText(codeInfo);
             else
                 textBoxCodePreview.Text = "Unable to open file.";
@@ -78,9 +82,9 @@ namespace Software_Engineering_Project
         }
 
         private void CopyCodeInfo(){
-            string fileName = $"{assignment.Submissions.Count + 1} - {codeInfo.Name}";
-            string path = Path.Combine(assignment.SubmissionsDirectory.FullName, fileName);
-            submission.FilePath = new FileInfo(path);
+            string fileName = $"{assignment.Submissions.Count + 1}_{submission.SubmissionName}_{codeInfo.Name}";
+            string path = Path.Combine(assignment.SubmissionsDirectory, fileName);
+            submission.FilePath = path;
         }
 
         private string GetCodeText(FileInfo info){

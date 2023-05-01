@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Build.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -112,7 +113,7 @@ namespace Software_Engineering_Project
         #region MouseHover Events
         private void TextboxResults_MouseHover(object sender, EventArgs e)
         {
-            toolTipFile.SetToolTip(textboxResults, "Compilation results and build messages for the selected submission are displayed here");
+            toolTipFile.SetToolTip(textBoxResult, "Compilation results and build messages for the selected submission are displayed here");
         }
 
         private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
@@ -291,6 +292,7 @@ namespace Software_Engineering_Project
         {
             OpenFormCreateAssignment();
             HideSubMenu();
+            Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
         }
 
         /// <summary>
@@ -300,17 +302,22 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonCreateSubmission_Click(object sender, EventArgs e)
         {
-            var form = new FormAddSubmission(CurrentAssignment);
+            if(CurrentAssignment != null){
+                var form = new FormAddSubmission(CurrentAssignment);
 
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                CurrentAssignment.Submissions.Add(form.submission);
-                listboxSubmissions.Items.Add(form.submission);
-                listboxSubmissions.Refresh();
-                SaveCurrentAssignment();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    CurrentAssignment.Submissions.Add(form.submission);
+                    listboxSubmissions.Items.Add(form.submission);
+                    listboxSubmissions.Refresh();
+                    SaveCurrentAssignment();
+                }
+
+                form.Dispose();
             }
-
-            form.Dispose();
+            else
+                MessageBox.Show("Must have an assignment open before adding submissions.","Unable to Add Submission - Missing Requirements", MessageBoxButtons.OK);
+                
         }
         #endregion
 
@@ -355,7 +362,6 @@ namespace Software_Engineering_Project
             }
             form.Dispose();
 
-
         }
 
         /// <summary>
@@ -371,21 +377,26 @@ namespace Software_Engineering_Project
                 string json = JsonSerializer.Serialize(CurrentAssignment);
 
                 // folderpath created
-                if(!CurrentAssignment.AssignmentDirectory.Exists) 
-                    CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName);
-
-                string temp = Path.Combine(CurrentAssignment.AssignmentDirectory.FullName, $"{CurrentAssignment.AssignmentName}.json");
-
+                if(!Directory.Exists(CurrentAssignment.AssignmentDirectory)){ 
+                    CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName).FullName;
+                    CurrentAssignment.AssignmentFile = Path.Combine(CurrentAssignment.AssignmentDirectory, $"{CurrentAssignment.AssignmentName}.json");
+                }
                 // written user info to json
-                File.WriteAllText(temp, json);
+                WriteFile(CurrentAssignment.AssignmentFile, json);
             }
-            SaveRecentAssignment();
         }
 
         private void SaveRecentAssignment(){
             if(CurrentAssignment != null){
-                File.WriteAllText(recentAssignment.FullName, JsonSerializer.Serialize(CurrentAssignment));
+                WriteFile(recentAssignment.FullName, JsonSerializer.Serialize(CurrentAssignment));
             }
+        }
+
+        private async void WriteFile(string filePath, string text){
+            var task = File.WriteAllTextAsync(filePath, text);
+
+            while(!task.IsCompleted)
+                await System.Threading.Tasks.Task.Delay(50);
         }
 
         //TODO: Implement Load Recent Assignment
@@ -530,6 +541,7 @@ namespace Software_Engineering_Project
             if (CurrentAssignment != null)
             {
                 SaveCurrentAssignment();
+                SaveRecentAssignment();
             }
         }
     }

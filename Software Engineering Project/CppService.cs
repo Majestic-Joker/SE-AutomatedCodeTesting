@@ -32,9 +32,9 @@ namespace Software_Engineering_Project
             ExeRunner runner = null;
             submission.Result = new Result();
 
-            compilation = CppParser.ParseFile(submission.FilePath.FullName);
+            submission.Result.CppCompilation = CppParser.ParseFile(submission.FilePath);
 
-            string projectPath = CreateProject(CreateDirectory(assignment), submission.FilePath.FullName, submission.SubmissionName);
+            string projectPath = CreateProject(CreateDirectory(assignment), submission.FilePath, submission.SubmissionName);
             exePath = BuildExe(projectPath, submission.SubmissionName);
 
             if(IsBuilt){
@@ -64,8 +64,7 @@ namespace Software_Engineering_Project
         }
 
         private string CreateDirectory(Assignment assignment){
-            var projectDirectory = assignment.AssignmentDirectory.CreateSubdirectory("Projects");
-            return projectDirectory.FullName;
+            return Path.Combine(assignment.AssignmentDirectory, "Projects");
         }
 
         private string CreateProject(string filepath, string codePath, string projectName = "Test")
@@ -73,7 +72,7 @@ namespace Software_Engineering_Project
             var projectRootElement = ProjectRootElement.Create();
             projectRootElement.AddProperty("ProjectName", projectName);
             projectRootElement.AddProperty("Configuration", "Release");
-            projectRootElement.AddProperty("Platform", "x64");
+            projectRootElement.AddProperty("Platform", "x86");
             projectRootElement.AddProperty("ProjectGuid", Guid.NewGuid().ToString());
             projectRootElement.AddProperty("Keyword", "Win32Proj");
 
@@ -94,6 +93,7 @@ namespace Software_Engineering_Project
             // Load the project file
             var projectCollection = new ProjectCollection();
             var project = projectCollection.LoadProject(projectPath);
+            string ePath = null;
 
             // Build the project
             var buildParameters = new BuildParameters
@@ -109,21 +109,26 @@ namespace Software_Engineering_Project
             {
                 var outputPath = project.GetPropertyValue("OutputPath");
                 var outputDir = Path.Combine(project.DirectoryPath, outputPath);
-                var exePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
+                ePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
             }
 
-            return exePath;
+            return ePath;
         }
 
         private ExeRunner TryRunExe(Assignment assignment){
-            ExeRunner runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath.FullName};
-            runner.RunExe();
-            exeOut = runner.ExeOutput;
+            ExeRunner runner = null;
+            
+            if(ExePath.Length > 0){
+                runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath};
+                runner.RunExe();
+                exeOut = runner.ExeOutput;
+            }
+            
             return runner;
         }
 
         private float GetMatchPercentage(ExeRunner runner, Assignment assignment){
-            string expectedOutput = new StreamReader(assignment.OutputFilepath.FullName).ReadToEnd();
+            string expectedOutput = new StreamReader(assignment.OutputFilepath).ReadToEnd();
 
             string[] exeLines = GetLines(runner.ExeOutput);
             string[] assignmentLines = GetLines(expectedOutput);
