@@ -69,6 +69,7 @@
             this.ButtonSaveAssignment.TabIndex = 4;
             this.ButtonSaveAssignment.Text = "Save Assignment";
             this.ButtonSaveAssignment.UseVisualStyleBackColor = true;
+            this.ButtonSaveAssignment.Click += new System.EventHandler(this.ButtonSaveAssignment_Click);
             // 
             // labelAssignmentName
             // 
@@ -159,6 +160,7 @@
             this.buttonOutput.TabIndex = 10;
             this.buttonOutput.Text = "Select Output File";
             this.buttonOutput.UseVisualStyleBackColor = true;
+            this.buttonOutput.Click += new System.EventHandler(this.buttonOutput_Click);
             // 
             // buttonInput
             // 
@@ -170,6 +172,7 @@
             this.buttonInput.TabIndex = 9;
             this.buttonInput.Text = "Select Input File";
             this.buttonInput.UseVisualStyleBackColor = true;
+            this.buttonInput.Click += new System.EventHandler(this.buttonInput_Click);
             // 
             // labelInput
             // 
