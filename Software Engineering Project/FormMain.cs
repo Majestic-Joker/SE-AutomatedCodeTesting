@@ -292,7 +292,8 @@ namespace Software_Engineering_Project
         {
             OpenFormCreateAssignment();
             HideSubMenu();
-            Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+            if(CurrentAssignment != null)
+                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
         }
 
         /// <summary>
@@ -524,8 +525,8 @@ namespace Software_Engineering_Project
 
         private void listboxSubmissions_SelectedIndexChanged(object sender,EventArgs e)
         {
-            var senderObj = sender as ListBox;
-            Lbl_ResultsLabel.Text = $"Results: {CurrentAssignment.Submissions[senderObj.SelectedIndex]}";
+            if(CurrentAssignment.Submissions.Count > listboxSubmissions.SelectedIndex)
+                Lbl_ResultsLabel.Text = $"Results: {CurrentAssignment.Submissions[listboxSubmissions.SelectedIndex]}";
         }
 
         private void FormMain_FormClosing(object sender,FormClosingEventArgs e)

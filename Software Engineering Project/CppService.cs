@@ -25,17 +25,12 @@ namespace Software_Engineering_Project
         public string ExePath => exePath;
         public string ExeOut => exeOut;
         public float MatchPercent => matchPercent;
-        public bool IsBuilt => buildResult.OverallResult == BuildResultCode.Success;
+        public bool IsBuilt => false;
         public bool DoesMatch => matchPercent > matchTarget;
 
         public CppService(Assignment assignment, Submission submission) {
             ExeRunner runner = null;
             submission.Result = new Result();
-
-            //submission.Result.CppCompilation = CppParser.ParseFile(submission.FilePath);
-
-            string projectPath = CreateProject(CreateDirectory(assignment), submission.FilePath, submission.SubmissionName);
-            exePath = BuildExe(projectPath, submission.SubmissionName);
 
             if(IsBuilt){
                 UpdateCompilationResults(submission.Result);
@@ -83,7 +78,7 @@ namespace Software_Engineering_Project
             string returnable = Path.Combine(filepath, "/project.vcxproj");
 
             // Save the project file
-            projectRootElement.Save(returnable);
+            //projectRootElement.Save(returnable);
 
             return returnable;
         }

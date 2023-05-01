@@ -65,8 +65,10 @@ namespace Software_Engineering_Project
         private void ButtonOpenFile_Click(object sender, EventArgs e)
         {
             codeInfo = GetFileInfo();
-            if(codeInfo != null && codeInfo.Exists)
+            if(codeInfo != null && codeInfo.Exists) { 
                 textBoxCodePreview.Text = GetCodeText(codeInfo);
+                labelFile.Text = codeInfo.Name;
+            }
             else
                 textBoxCodePreview.Text = "Unable to open file.";
         }
