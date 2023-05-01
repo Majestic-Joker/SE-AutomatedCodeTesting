@@ -9,15 +9,14 @@ namespace Software_Engineering_Project
 {
     public partial class FormCreateAssignment : Form
     {
-        private bool hasName => textBoxAssignmentName.Text != string.Empty;
-        private bool hasInputFile => labelInputFilePath.Text != string.Empty;
-        private bool hasOutputFile => labelOutputFilePath.Text != string.Empty;
+        private bool hasName => assignment.AssignmentName != string.Empty;
+        private bool hasInputFile => assignment.InputFilepath.Exists;
+        private bool hasOutputFile => assignment.OutputFilepath.Exists;
         private bool canSave => hasName && hasOutputFile;
 
-        string assignmentFilepath = "";
-        private readonly DirectoryInfo programDirectory;
-
         public Assignment assignment { get; set; }
+
+        private readonly DirectoryInfo programDirectory;
 
         public FormCreateAssignment(DirectoryInfo programDirectory)
         {
@@ -25,8 +24,8 @@ namespace Software_Engineering_Project
             EmptyTextBoxes();
 
             this.programDirectory = programDirectory;
-
             assignment = new Assignment();
+            assignment.Submissions = new List<Submission>();
         }
 
         #region assignment functions
@@ -36,39 +35,27 @@ namespace Software_Engineering_Project
         /// </summary>
         public void CreateAssignment()
         {
-            string assignmentName = textBoxAssignmentName.Text;
+            CreateAssignmentDirectory();
+            CreateAssignmentFileInfo();
 
-            // assignment
-            Assignment newAssignment = new Assignment
-            {
-                AssignmentName = assignmentName,
-                Submissions = new List<Submission>()
-            };
-
-            // serialize
-            string json = JsonSerializer.Serialize(newAssignment);
-
-            // folderpath created
-            string folderPath = Path.Combine(folderPath, assignmentName);
-            Directory.CreateDirectory(folderPath);
-
-            string temp = Path.Combine(folderPath, $"{assignmentName}.json");
-
-            // save filepath
-            newAssignment.AssignmentDirectory = folderPath;
-            //assignmentFilepath = folderPath;
-            assignment = newAssignment;
+            if(assignment.AssignmentFile.Exists)
+                WriteFile();
         }
 
-        private string CreateDirectory(){
-
-            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AutomatedCodeTester");
-            Directory.CreateDirectory(temp);
-            return temp;
+        private bool CreateAssignmentDirectory(){
+            assignment.AssignmentDirectory = programDirectory.CreateSubdirectory(assignment.AssignmentName);
+            return assignment.AssignmentDirectory.Exists;
         }
 
-        private void WriteFile(string fileText){
-            File.WriteAllText(assignment.AssignmentDirectory, fileText);
+        private bool CreateAssignmentFileInfo(){
+            string temp = Path.Combine(assignment.AssignmentDirectory.FullName, $"{assignment.AssignmentName}.json");
+            assignment.AssignmentFile = new FileInfo(temp);
+            return assignment.AssignmentFile.Exists;
+        }
+
+        private void WriteFile(){
+            string json = JsonSerializer.Serialize(assignment);
+            File.WriteAllText(assignment.AssignmentFile.FullName, json);
         }
 
         #endregion
@@ -101,41 +88,39 @@ namespace Software_Engineering_Project
 
         // TODO: set up input and output files in FormCreateAssignment.cs
 
-        private string GetInfo(string assignmentDirectory)
+        private FileInfo GetInfo()
         {
-            string filePath = "";
+            FileInfo info = null;
+            
             OpenFileDialog dialog = new OpenFileDialog();
-
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-
-                FileInfo info = new FileInfo(dialog.FileName);
+                FileInfo ofdInfo = new FileInfo(dialog.FileName);
 
                 var fileStream = dialog.OpenFile();
                 var reader = new StreamReader(fileStream);
-                string code = reader.ReadToEnd();
-                string temp = assignmentDirectory;
-                Directory.CreateDirectory(temp);
-                temp = Path.Combine(temp, info.Name);
-                File.WriteAllText(temp, code);
-                filePath = temp;
-                codeText = new StreamReader(dialog.OpenFile()).ReadToEnd();
-                ButtonSaveAssignment.Enabled = canSave;
+                string fileText = reader.ReadToEnd();
+
+                string temp = Path.Combine(assignment.AssignmentDirectory.FullName, ofdInfo.Name);
+                File.WriteAllText(temp, fileText);
+
+                info = new FileInfo(temp);
             }
-            return filePath;
+
+            return info;
         }
         #endregion
 
         private void buttonInput_Click(object sender, EventArgs e)
         {
-            string input = GetInfo(assignment.AssignmentDirectory);
-            assignment.InputFilepath = input;
+            assignment.InputFilepath = GetInfo();
         }
 
         private void buttonOutput_Click(object sender, EventArgs e)
         {
-            string output = GetInfo(assignment.AssignmentDirectory);
-            assignment.OutputFilepath = output;
+            assignment.OutputFilepath = GetInfo();
+
+            ButtonSaveAssignment.Enabled = assignment.OutputFilepath.Exists;
         }
 
         private void EmptyTextBoxes()
@@ -150,6 +135,24 @@ namespace Software_Engineering_Project
         private void textBoxAssignmentPreview_TextChanged(object sender, EventArgs e)
         {
             ButtonSaveAssignment.Enabled = canSave;
+        }
+
+        private void textBoxAssignmentName_TextChanged(object sender,EventArgs e)
+        {
+            //TODO: Copy output and input files if exists
+            if(assignment.AssignmentDirectory.Exists)
+                assignment.AssignmentDirectory.Delete();
+            
+            CreateAssignmentDirectory();
+            CreateAssignmentFileInfo();
+
+            if(textBoxAssignmentName.Text.Length > 0)
+                assignment.AssignmentName = textBoxAssignmentName.Text;
+
+            buttonInput.Enabled = hasName;
+            buttonOutput.Enabled = hasName;
+
+            ButtonSaveAssignment.Enabled = canSave;                
         }
     }
 }
