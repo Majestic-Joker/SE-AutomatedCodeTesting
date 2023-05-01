@@ -54,9 +54,9 @@
             this.textBoxAssignmentName.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxAssignmentName.Location = new System.Drawing.Point(197, 19);
             this.textBoxAssignmentName.Name = "textBoxAssignmentName";
+            this.textBoxAssignmentName.PlaceholderText = "Enter a name for this assignment";
             this.textBoxAssignmentName.Size = new System.Drawing.Size(259, 26);
             this.textBoxAssignmentName.TabIndex = 0;
-            this.textBoxAssignmentName.Text = "{Assignment Name}";
             this.textBoxAssignmentName.TextChanged += new System.EventHandler(this.textBoxAssignmentName_TextChanged);
             // 
             // ButtonSaveAssignment
@@ -116,6 +116,7 @@
             0,
             0,
             0});
+            this.Nud_MatchReqSelector.ValueChanged += new System.EventHandler(this.Nud_MatchReqSelector_ValueChanged);
             // 
             // label1
             // 
@@ -152,7 +153,7 @@
             // buttonOutput
             // 
             this.buttonOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonOutput.Location = new System.Drawing.Point(272, 126);
+            this.buttonOutput.Location = new System.Drawing.Point(272, 139);
             this.buttonOutput.Name = "buttonOutput";
             this.buttonOutput.Size = new System.Drawing.Size(156, 31);
             this.buttonOutput.TabIndex = 10;
@@ -163,7 +164,7 @@
             // 
             this.buttonInput.Enabled = false;
             this.buttonInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonInput.Location = new System.Drawing.Point(35, 126);
+            this.buttonInput.Location = new System.Drawing.Point(35, 139);
             this.buttonInput.Name = "buttonInput";
             this.buttonInput.Size = new System.Drawing.Size(156, 31);
             this.buttonInput.TabIndex = 9;
