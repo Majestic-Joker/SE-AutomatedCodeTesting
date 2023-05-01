@@ -32,17 +32,19 @@
             this.ButtonSaveAssignment = new System.Windows.Forms.Button();
             this.labelAssignmentName = new System.Windows.Forms.Label();
             this.panelAssignmentForm = new System.Windows.Forms.Panel();
+            this.Nud_MatchReqSelector = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelOutputFilePath = new System.Windows.Forms.Label();
             this.labelInputFilePath = new System.Windows.Forms.Label();
             this.buttonOutput = new System.Windows.Forms.Button();
             this.buttonInput = new System.Windows.Forms.Button();
+            this.labelInput = new System.Windows.Forms.Label();
+            this.labelOutput = new System.Windows.Forms.Label();
             this.PanelMainControls = new System.Windows.Forms.Panel();
             this.PanelExit = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.labelOutput = new System.Windows.Forms.Label();
-            this.labelInput = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panelAssignmentForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Nud_MatchReqSelector)).BeginInit();
             this.PanelMainControls.SuspendLayout();
             this.PanelExit.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +57,7 @@
             this.textBoxAssignmentName.Size = new System.Drawing.Size(259, 26);
             this.textBoxAssignmentName.TabIndex = 0;
             this.textBoxAssignmentName.Text = "{Assignment Name}";
+            this.textBoxAssignmentName.TextChanged += new System.EventHandler(this.textBoxAssignmentName_TextChanged);
             // 
             // ButtonSaveAssignment
             // 
@@ -83,7 +86,8 @@
             // 
             this.panelAssignmentForm.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panelAssignmentForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelAssignmentForm.Controls.Add(this.textBox1);
+            this.panelAssignmentForm.Controls.Add(this.Nud_MatchReqSelector);
+            this.panelAssignmentForm.Controls.Add(this.label1);
             this.panelAssignmentForm.Controls.Add(this.labelOutputFilePath);
             this.panelAssignmentForm.Controls.Add(this.labelInputFilePath);
             this.panelAssignmentForm.Controls.Add(this.buttonOutput);
@@ -99,6 +103,29 @@
             this.panelAssignmentForm.Name = "panelAssignmentForm";
             this.panelAssignmentForm.Size = new System.Drawing.Size(469, 355);
             this.panelAssignmentForm.TabIndex = 11;
+            // 
+            // Nud_MatchReqSelector
+            // 
+            this.Nud_MatchReqSelector.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Nud_MatchReqSelector.Location = new System.Drawing.Point(308, 193);
+            this.Nud_MatchReqSelector.Name = "Nud_MatchReqSelector";
+            this.Nud_MatchReqSelector.Size = new System.Drawing.Size(120, 26);
+            this.Nud_MatchReqSelector.TabIndex = 20;
+            this.Nud_MatchReqSelector.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(9, 195);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(210, 18);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Output Match Requirement:";
             // 
             // labelOutputFilePath
             // 
@@ -134,6 +161,7 @@
             // 
             // buttonInput
             // 
+            this.buttonInput.Enabled = false;
             this.buttonInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonInput.Location = new System.Drawing.Point(35, 126);
             this.buttonInput.Name = "buttonInput";
@@ -141,6 +169,28 @@
             this.buttonInput.TabIndex = 9;
             this.buttonInput.Text = "Select Input File";
             this.buttonInput.UseVisualStyleBackColor = true;
+            // 
+            // labelInput
+            // 
+            this.labelInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelInput.Location = new System.Drawing.Point(11, 64);
+            this.labelInput.Name = "labelInput";
+            this.labelInput.Size = new System.Drawing.Size(54, 18);
+            this.labelInput.TabIndex = 7;
+            this.labelInput.Text = "Input:";
+            this.labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelOutput
+            // 
+            this.labelOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOutput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelOutput.Location = new System.Drawing.Point(9, 94);
+            this.labelOutput.Name = "labelOutput";
+            this.labelOutput.Size = new System.Drawing.Size(64, 18);
+            this.labelOutput.TabIndex = 6;
+            this.labelOutput.Text = "Output:";
+            this.labelOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PanelMainControls
             // 
@@ -178,35 +228,6 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
-            // labelOutput
-            // 
-            this.labelOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelOutput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelOutput.Location = new System.Drawing.Point(9, 94);
-            this.labelOutput.Name = "labelOutput";
-            this.labelOutput.Size = new System.Drawing.Size(64, 18);
-            this.labelOutput.TabIndex = 6;
-            this.labelOutput.Text = "Output:";
-            this.labelOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelInput
-            // 
-            this.labelInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelInput.Location = new System.Drawing.Point(11, 64);
-            this.labelInput.Name = "labelInput";
-            this.labelInput.Size = new System.Drawing.Size(54, 18);
-            this.labelInput.TabIndex = 7;
-            this.labelInput.Text = "Input:";
-            this.labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(354, 189);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 18;
-            // 
             // FormCreateAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -217,6 +238,7 @@
             this.Text = "Create Assignment";
             this.panelAssignmentForm.ResumeLayout(false);
             this.panelAssignmentForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Nud_MatchReqSelector)).EndInit();
             this.PanelMainControls.ResumeLayout(false);
             this.PanelExit.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -236,8 +258,9 @@
         private System.Windows.Forms.Button buttonOutput;
         private System.Windows.Forms.Label labelOutputFilePath;
         private System.Windows.Forms.Label labelInputFilePath;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label labelInput;
         private System.Windows.Forms.Label labelOutput;
+        private System.Windows.Forms.NumericUpDown Nud_MatchReqSelector;
+        private System.Windows.Forms.Label label1;
     }
 }
