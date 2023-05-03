@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 
 namespace Software_Engineering_Project
 {
+    //TODO: Extensive Unit Tests to ensure everything works
+    //TODO: Walk through CPPast package installation steps to ensure proper setup.
     public class CppService
     {
         private BuildResult buildResult;

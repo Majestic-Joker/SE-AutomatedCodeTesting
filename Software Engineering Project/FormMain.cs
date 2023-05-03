@@ -59,7 +59,7 @@ namespace Software_Engineering_Project
 
         #region Form Theme Functions
 
-        // TODO: Handle with ThemeManager
+        // TODO: Stretch Goal - Handle theme initialization with ThemeManager
 
         private void InitializeFormTheme()
         {
@@ -82,7 +82,7 @@ namespace Software_Engineering_Project
             PanelMainControls.BackColor = Color.Gray;
         }
 
-        // TODO: Refactor submenu toggling
+        // TODO: Stretch Goal - Refactor submenu toggling
 
         /// <summary>
         /// Hides Sub Menus after clicked on
@@ -168,14 +168,14 @@ namespace Software_Engineering_Project
                 SaveCurrentAssignment();
                 CurrentAssignment = assignment;
                 SaveCurrentAssignment();
-                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+                SetAssignmentTitle();
             }
 
             // Hides the Assignment sub menu after use
             HideSubMenu();
         }
 
-        // TODO: Implement ThemeManager class to handle Light/Dark mode in FormMain.cs
+        // TODO: Stretch Goal - Implement ThemeManager class to handle Light/Dark mode in FormMain.cs
 
         /// <summary>
         /// This button gives you the ability to go back to the normal theme
@@ -260,8 +260,7 @@ namespace Software_Engineering_Project
         {
             OpenFormCreateAssignment();
             HideSubMenu();
-            if (CurrentAssignment != null)
-                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+            SetAssignmentTitle();
         }
 
         /// <summary>
@@ -329,6 +328,7 @@ namespace Software_Engineering_Project
             {
                 CurrentAssignment = form.assignment;
                 SaveCurrentAssignment();
+                SetAssignmentTitle();
             }
             form.Dispose();
         }
@@ -381,7 +381,7 @@ namespace Software_Engineering_Project
             string json = reader.ReadToEnd();
             CurrentAssignment = JsonSerializer.Deserialize<Assignment>(json);
 
-            Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+            SetAssignmentTitle();
             RefreshListBox();
         }
         #endregion
@@ -448,11 +448,18 @@ namespace Software_Engineering_Project
 
         private void RefreshListBox(){
             if(CurrentAssignment != null && CurrentAssignment.Submissions.Count > 0){
+                listboxSubmissions.Items.Clear();
+
                 foreach(Submission submission in CurrentAssignment.Submissions)
                     listboxSubmissions.Items.Add(submission);
 
                 listboxSubmissions.Refresh();
             }
+        }
+
+        private void SetAssignmentTitle(){
+            if (CurrentAssignment != null)
+                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";                
         }
 
         //TODO: figure out print preview not showing what's in Rtb_Results
