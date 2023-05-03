@@ -28,519 +28,515 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.labelTitlecard = new System.Windows.Forms.Label();
-            this.buttonAbout = new System.Windows.Forms.Button();
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.PanelMainControls = new System.Windows.Forms.Panel();
-            this.PanelExit = new System.Windows.Forms.Panel();
-            this.ButtonExit = new System.Windows.Forms.Button();
-            this.buttonPrint = new Software_Engineering_Project.ClassCustomButton();
-            this.buttonExecute = new Software_Engineering_Project.ClassCustomButton();
-            this.panelSideMenuPanel = new System.Windows.Forms.Panel();
-            this.Pnl_HelpControls = new System.Windows.Forms.Panel();
-            this.Pnl_ThemeControls = new System.Windows.Forms.Panel();
-            this.buttonDarkTheme = new System.Windows.Forms.Button();
-            this.buttonLightTheme = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
-            this.Pnl_SubmissionControls = new System.Windows.Forms.Panel();
-            this.buttonCreateSubmission = new System.Windows.Forms.Button();
-            this.buttonSubmission = new System.Windows.Forms.Button();
-            this.Pnl_AssignmentControls = new System.Windows.Forms.Panel();
-            this.buttonCreateAssignment = new System.Windows.Forms.Button();
-            this.buttonOpenAssignment = new System.Windows.Forms.Button();
-            this.buttonAssignments = new System.Windows.Forms.Button();
-            this.toolTipFile = new System.Windows.Forms.ToolTip(this.components);
-            this.listboxSubmissions = new System.Windows.Forms.ListBox();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.Lbl_ResultsLabel = new System.Windows.Forms.Label();
-            this.Lbl_SubmissionsTitle = new System.Windows.Forms.Label();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.PanelMainControls.SuspendLayout();
-            this.PanelExit.SuspendLayout();
-            this.panelSideMenuPanel.SuspendLayout();
-            this.Pnl_HelpControls.SuspendLayout();
-            this.Pnl_ThemeControls.SuspendLayout();
-            this.Pnl_SubmissionControls.SuspendLayout();
-            this.Pnl_AssignmentControls.SuspendLayout();
-            this.panelMain.SuspendLayout();
-            this.SuspendLayout();
+            labelTitlecard = new System.Windows.Forms.Label();
+            buttonAbout = new System.Windows.Forms.Button();
+            buttonHelp = new System.Windows.Forms.Button();
+            PanelMainControls = new System.Windows.Forms.Panel();
+            PanelExit = new System.Windows.Forms.Panel();
+            ButtonExit = new System.Windows.Forms.Button();
+            buttonPrint = new ClassCustomButton();
+            buttonExecute = new ClassCustomButton();
+            panelSideMenuPanel = new System.Windows.Forms.Panel();
+            Pnl_HelpControls = new System.Windows.Forms.Panel();
+            Pnl_ThemeControls = new System.Windows.Forms.Panel();
+            buttonDarkTheme = new System.Windows.Forms.Button();
+            buttonLightTheme = new System.Windows.Forms.Button();
+            buttonEdit = new System.Windows.Forms.Button();
+            Pnl_SubmissionControls = new System.Windows.Forms.Panel();
+            buttonCreateSubmission = new System.Windows.Forms.Button();
+            buttonSubmission = new System.Windows.Forms.Button();
+            Pnl_AssignmentControls = new System.Windows.Forms.Panel();
+            buttonCreateAssignment = new System.Windows.Forms.Button();
+            buttonOpenAssignment = new System.Windows.Forms.Button();
+            buttonAssignments = new System.Windows.Forms.Button();
+            toolTipFile = new System.Windows.Forms.ToolTip(components);
+            listboxSubmissions = new System.Windows.Forms.ListBox();
+            panelMain = new System.Windows.Forms.Panel();
+            richTextBox1 = new System.Windows.Forms.RichTextBox();
+            Lbl_ResultsLabel = new System.Windows.Forms.Label();
+            Lbl_SubmissionsTitle = new System.Windows.Forms.Label();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            PanelMainControls.SuspendLayout();
+            PanelExit.SuspendLayout();
+            panelSideMenuPanel.SuspendLayout();
+            Pnl_HelpControls.SuspendLayout();
+            Pnl_ThemeControls.SuspendLayout();
+            Pnl_SubmissionControls.SuspendLayout();
+            Pnl_AssignmentControls.SuspendLayout();
+            panelMain.SuspendLayout();
+            SuspendLayout();
             // 
             // labelTitlecard
             // 
-            this.labelTitlecard.BackColor = System.Drawing.SystemColors.Info;
-            this.labelTitlecard.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelTitlecard.Font = new System.Drawing.Font("Middle Ages", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.labelTitlecard.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.labelTitlecard.Location = new System.Drawing.Point(0, 0);
-            this.labelTitlecard.Name = "labelTitlecard";
-            this.labelTitlecard.Size = new System.Drawing.Size(214, 69);
-            this.labelTitlecard.TabIndex = 1;
-            this.labelTitlecard.Text = "AUTOMATED CODE METRICS";
-            this.labelTitlecard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelTitlecard.BackColor = System.Drawing.SystemColors.Info;
+            labelTitlecard.Dock = System.Windows.Forms.DockStyle.Top;
+            labelTitlecard.Font = new System.Drawing.Font("Middle Ages",18F,System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic,System.Drawing.GraphicsUnit.Point);
+            labelTitlecard.ForeColor = System.Drawing.SystemColors.WindowText;
+            labelTitlecard.Location = new System.Drawing.Point(0,0);
+            labelTitlecard.Name = "labelTitlecard";
+            labelTitlecard.Size = new System.Drawing.Size(214,69);
+            labelTitlecard.TabIndex = 1;
+            labelTitlecard.Text = "AUTOMATED CODE METRICS";
+            labelTitlecard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelTitlecard.Click += labelTitlecard_Click;
             // 
             // buttonAbout
             // 
-            this.buttonAbout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonAbout.FlatAppearance.BorderSize = 0;
-            this.buttonAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAbout.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.buttonAbout.Image = global::Software_Engineering_Project.Properties.Resources.icons8_info_32;
-            this.buttonAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAbout.Location = new System.Drawing.Point(0, 0);
-            this.buttonAbout.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonAbout.Name = "buttonAbout";
-            this.buttonAbout.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
-            this.buttonAbout.Size = new System.Drawing.Size(214, 64);
-            this.buttonAbout.TabIndex = 6;
-            this.buttonAbout.Tag = "https://icons8.com/icons/set/website";
-            this.buttonAbout.Text = "About";
-            this.buttonAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonAbout.UseVisualStyleBackColor = true;
-            this.buttonAbout.Click += new System.EventHandler(this.ButtonAbout_Click);
+            buttonAbout.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonAbout.FlatAppearance.BorderSize = 0;
+            buttonAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonAbout.ForeColor = System.Drawing.SystemColors.InfoText;
+            buttonAbout.Image = Properties.Resources.icons8_info_32;
+            buttonAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonAbout.Location = new System.Drawing.Point(0,0);
+            buttonAbout.Margin = new System.Windows.Forms.Padding(4);
+            buttonAbout.Name = "buttonAbout";
+            buttonAbout.Padding = new System.Windows.Forms.Padding(41,0,0,0);
+            buttonAbout.Size = new System.Drawing.Size(214,64);
+            buttonAbout.TabIndex = 6;
+            buttonAbout.Tag = "https://icons8.com/icons/set/website";
+            buttonAbout.Text = "About";
+            buttonAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonAbout.UseVisualStyleBackColor = true;
+            buttonAbout.Click += ButtonAbout_Click;
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonHelp.FlatAppearance.BorderSize = 0;
-            this.buttonHelp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonHelp.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonHelp.Image = global::Software_Engineering_Project.Properties.Resources.icons8_help_30;
-            this.buttonHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonHelp.Location = new System.Drawing.Point(0, 581);
-            this.buttonHelp.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-            this.buttonHelp.Size = new System.Drawing.Size(214, 64);
-            this.buttonHelp.TabIndex = 10;
-            this.buttonHelp.Tag = "https://icons8.com/icons/set/website";
-            this.buttonHelp.Text = "Help";
-            this.buttonHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonHelp.UseVisualStyleBackColor = true;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
-            this.buttonHelp.MouseHover += new System.EventHandler(this.ButtonHelp_MouseHover);
+            buttonHelp.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonHelp.FlatAppearance.BorderSize = 0;
+            buttonHelp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(64,64,64);
+            buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonHelp.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonHelp.Image = Properties.Resources.icons8_help_30;
+            buttonHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonHelp.Location = new System.Drawing.Point(0,581);
+            buttonHelp.Margin = new System.Windows.Forms.Padding(4);
+            buttonHelp.Name = "buttonHelp";
+            buttonHelp.Padding = new System.Windows.Forms.Padding(18,0,0,0);
+            buttonHelp.Size = new System.Drawing.Size(214,64);
+            buttonHelp.TabIndex = 10;
+            buttonHelp.Tag = "https://icons8.com/icons/set/website";
+            buttonHelp.Text = "Help";
+            buttonHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonHelp.UseVisualStyleBackColor = true;
+            buttonHelp.Click += buttonHelp_Click;
             // 
             // PanelMainControls
             // 
-            this.PanelMainControls.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.PanelMainControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelMainControls.Controls.Add(this.PanelExit);
-            this.PanelMainControls.Controls.Add(this.buttonPrint);
-            this.PanelMainControls.Controls.Add(this.buttonExecute);
-            this.PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelMainControls.Location = new System.Drawing.Point(0, 426);
-            this.PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelMainControls.Name = "PanelMainControls";
-            this.PanelMainControls.Size = new System.Drawing.Size(941, 62);
-            this.PanelMainControls.TabIndex = 11;
+            PanelMainControls.BackColor = System.Drawing.SystemColors.WindowFrame;
+            PanelMainControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            PanelMainControls.Controls.Add(PanelExit);
+            PanelMainControls.Controls.Add(buttonPrint);
+            PanelMainControls.Controls.Add(buttonExecute);
+            PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            PanelMainControls.Location = new System.Drawing.Point(0,426);
+            PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
+            PanelMainControls.Name = "PanelMainControls";
+            PanelMainControls.Size = new System.Drawing.Size(941,62);
+            PanelMainControls.TabIndex = 11;
             // 
             // PanelExit
             // 
-            this.PanelExit.BackColor = System.Drawing.SystemColors.Info;
-            this.PanelExit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelExit.Controls.Add(this.ButtonExit);
-            this.PanelExit.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelExit.Location = new System.Drawing.Point(0, 0);
-            this.PanelExit.Margin = new System.Windows.Forms.Padding(4);
-            this.PanelExit.Name = "PanelExit";
-            this.PanelExit.Size = new System.Drawing.Size(233, 60);
-            this.PanelExit.TabIndex = 10;
+            PanelExit.BackColor = System.Drawing.SystemColors.Info;
+            PanelExit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            PanelExit.Controls.Add(ButtonExit);
+            PanelExit.Dock = System.Windows.Forms.DockStyle.Left;
+            PanelExit.Location = new System.Drawing.Point(0,0);
+            PanelExit.Margin = new System.Windows.Forms.Padding(4);
+            PanelExit.Name = "PanelExit";
+            PanelExit.Size = new System.Drawing.Size(233,60);
+            PanelExit.TabIndex = 10;
             // 
             // ButtonExit
             // 
-            this.ButtonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.ButtonExit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ButtonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonExit.Location = new System.Drawing.Point(21, 6);
-            this.ButtonExit.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonExit.Name = "ButtonExit";
-            this.ButtonExit.Size = new System.Drawing.Size(188, 46);
-            this.ButtonExit.TabIndex = 0;
-            this.ButtonExit.Tag = "https://icons8.com/icons/set/website";
-            this.ButtonExit.Text = "&Exit";
-            this.ButtonExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ButtonExit.UseVisualStyleBackColor = true;
-            this.ButtonExit.Click += new System.EventHandler(this.ButtonExit_Click);
-            this.ButtonExit.MouseHover += new System.EventHandler(this.ButtonExit_MouseHover);
+            ButtonExit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+            ButtonExit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            ButtonExit.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            ButtonExit.Location = new System.Drawing.Point(21,6);
+            ButtonExit.Margin = new System.Windows.Forms.Padding(4);
+            ButtonExit.Name = "ButtonExit";
+            ButtonExit.Size = new System.Drawing.Size(188,46);
+            ButtonExit.TabIndex = 0;
+            ButtonExit.Tag = "https://icons8.com/icons/set/website";
+            ButtonExit.Text = "&Exit";
+            ButtonExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            ButtonExit.UseVisualStyleBackColor = true;
+            ButtonExit.Click += ButtonExit_Click;
             // 
             // buttonPrint
             // 
-            this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonPrint.Location = new System.Drawing.Point(590, 6);
-            this.buttonPrint.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(338, 48);
-            this.buttonPrint.TabIndex = 8;
-            this.buttonPrint.Text = "Print";
-            this.buttonPrint.UseVisualStyleBackColor = true;
-            this.buttonPrint.Click += new System.EventHandler(this.ButtonPrint_Click);
-            this.buttonPrint.MouseHover += new System.EventHandler(this.ButtonPrint_MouseHover);
+            buttonPrint.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+            buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            buttonPrint.Location = new System.Drawing.Point(590,6);
+            buttonPrint.Margin = new System.Windows.Forms.Padding(4);
+            buttonPrint.Name = "buttonPrint";
+            buttonPrint.Size = new System.Drawing.Size(338,48);
+            buttonPrint.TabIndex = 8;
+            buttonPrint.Text = "Print";
+            buttonPrint.UseVisualStyleBackColor = true;
+            buttonPrint.Click += ButtonPrint_Click;
             // 
             // buttonExecute
             // 
-            this.buttonExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonExecute.Location = new System.Drawing.Point(240, 7);
-            this.buttonExecute.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonExecute.Name = "buttonExecute";
-            this.buttonExecute.Size = new System.Drawing.Size(338, 48);
-            this.buttonExecute.TabIndex = 9;
-            this.buttonExecute.Text = "Execute";
-            this.buttonExecute.Click += new System.EventHandler(this.ButtonExecute_Click);
+            buttonExecute.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+            buttonExecute.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            buttonExecute.Location = new System.Drawing.Point(240,7);
+            buttonExecute.Margin = new System.Windows.Forms.Padding(4);
+            buttonExecute.Name = "buttonExecute";
+            buttonExecute.Size = new System.Drawing.Size(338,48);
+            buttonExecute.TabIndex = 9;
+            buttonExecute.Text = "Execute";
+            buttonExecute.Click += ButtonExecute_Click;
             // 
             // panelSideMenuPanel
             // 
-            this.panelSideMenuPanel.AutoScroll = true;
-            this.panelSideMenuPanel.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.panelSideMenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSideMenuPanel.Controls.Add(this.Pnl_HelpControls);
-            this.panelSideMenuPanel.Controls.Add(this.buttonHelp);
-            this.panelSideMenuPanel.Controls.Add(this.Pnl_ThemeControls);
-            this.panelSideMenuPanel.Controls.Add(this.buttonEdit);
-            this.panelSideMenuPanel.Controls.Add(this.Pnl_SubmissionControls);
-            this.panelSideMenuPanel.Controls.Add(this.buttonSubmission);
-            this.panelSideMenuPanel.Controls.Add(this.Pnl_AssignmentControls);
-            this.panelSideMenuPanel.Controls.Add(this.buttonAssignments);
-            this.panelSideMenuPanel.Controls.Add(this.labelTitlecard);
-            this.panelSideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSideMenuPanel.Location = new System.Drawing.Point(0, 0);
-            this.panelSideMenuPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.panelSideMenuPanel.Name = "panelSideMenuPanel";
-            this.panelSideMenuPanel.Size = new System.Drawing.Size(233, 426);
-            this.panelSideMenuPanel.TabIndex = 12;
+            panelSideMenuPanel.AutoScroll = true;
+            panelSideMenuPanel.BackColor = System.Drawing.SystemColors.MenuBar;
+            panelSideMenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panelSideMenuPanel.Controls.Add(Pnl_HelpControls);
+            panelSideMenuPanel.Controls.Add(buttonHelp);
+            panelSideMenuPanel.Controls.Add(Pnl_ThemeControls);
+            panelSideMenuPanel.Controls.Add(buttonEdit);
+            panelSideMenuPanel.Controls.Add(Pnl_SubmissionControls);
+            panelSideMenuPanel.Controls.Add(buttonSubmission);
+            panelSideMenuPanel.Controls.Add(Pnl_AssignmentControls);
+            panelSideMenuPanel.Controls.Add(buttonAssignments);
+            panelSideMenuPanel.Controls.Add(labelTitlecard);
+            panelSideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            panelSideMenuPanel.Location = new System.Drawing.Point(0,0);
+            panelSideMenuPanel.Margin = new System.Windows.Forms.Padding(4);
+            panelSideMenuPanel.Name = "panelSideMenuPanel";
+            panelSideMenuPanel.Size = new System.Drawing.Size(233,426);
+            panelSideMenuPanel.TabIndex = 12;
             // 
             // Pnl_HelpControls
             // 
-            this.Pnl_HelpControls.AutoSize = true;
-            this.Pnl_HelpControls.BackColor = System.Drawing.SystemColors.Info;
-            this.Pnl_HelpControls.Controls.Add(this.buttonAbout);
-            this.Pnl_HelpControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_HelpControls.Location = new System.Drawing.Point(0, 645);
-            this.Pnl_HelpControls.Margin = new System.Windows.Forms.Padding(4);
-            this.Pnl_HelpControls.Name = "Pnl_HelpControls";
-            this.Pnl_HelpControls.Size = new System.Drawing.Size(214, 64);
-            this.Pnl_HelpControls.TabIndex = 9;
-            this.Pnl_HelpControls.Visible = false;
+            Pnl_HelpControls.AutoSize = true;
+            Pnl_HelpControls.BackColor = System.Drawing.SystemColors.Info;
+            Pnl_HelpControls.Controls.Add(buttonAbout);
+            Pnl_HelpControls.Dock = System.Windows.Forms.DockStyle.Top;
+            Pnl_HelpControls.Location = new System.Drawing.Point(0,645);
+            Pnl_HelpControls.Margin = new System.Windows.Forms.Padding(4);
+            Pnl_HelpControls.Name = "Pnl_HelpControls";
+            Pnl_HelpControls.Size = new System.Drawing.Size(214,64);
+            Pnl_HelpControls.TabIndex = 9;
+            Pnl_HelpControls.Visible = false;
             // 
             // Pnl_ThemeControls
             // 
-            this.Pnl_ThemeControls.BackColor = System.Drawing.SystemColors.Info;
-            this.Pnl_ThemeControls.Controls.Add(this.buttonDarkTheme);
-            this.Pnl_ThemeControls.Controls.Add(this.buttonLightTheme);
-            this.Pnl_ThemeControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_ThemeControls.Location = new System.Drawing.Point(0, 453);
-            this.Pnl_ThemeControls.Margin = new System.Windows.Forms.Padding(4);
-            this.Pnl_ThemeControls.Name = "Pnl_ThemeControls";
-            this.Pnl_ThemeControls.Size = new System.Drawing.Size(214, 128);
-            this.Pnl_ThemeControls.TabIndex = 8;
-            this.Pnl_ThemeControls.Visible = false;
+            Pnl_ThemeControls.BackColor = System.Drawing.SystemColors.Info;
+            Pnl_ThemeControls.Controls.Add(buttonDarkTheme);
+            Pnl_ThemeControls.Controls.Add(buttonLightTheme);
+            Pnl_ThemeControls.Dock = System.Windows.Forms.DockStyle.Top;
+            Pnl_ThemeControls.Location = new System.Drawing.Point(0,453);
+            Pnl_ThemeControls.Margin = new System.Windows.Forms.Padding(4);
+            Pnl_ThemeControls.Name = "Pnl_ThemeControls";
+            Pnl_ThemeControls.Size = new System.Drawing.Size(214,128);
+            Pnl_ThemeControls.TabIndex = 8;
+            Pnl_ThemeControls.Visible = false;
             // 
             // buttonDarkTheme
             // 
-            this.buttonDarkTheme.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonDarkTheme.FlatAppearance.BorderSize = 0;
-            this.buttonDarkTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDarkTheme.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.buttonDarkTheme.Image = global::Software_Engineering_Project.Properties.Resources.icons8_layout_32__1_;
-            this.buttonDarkTheme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDarkTheme.Location = new System.Drawing.Point(0, 64);
-            this.buttonDarkTheme.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonDarkTheme.Name = "buttonDarkTheme";
-            this.buttonDarkTheme.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
-            this.buttonDarkTheme.Size = new System.Drawing.Size(214, 64);
-            this.buttonDarkTheme.TabIndex = 6;
-            this.buttonDarkTheme.Text = "Dark Theme";
-            this.buttonDarkTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDarkTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonDarkTheme.UseVisualStyleBackColor = true;
-            this.buttonDarkTheme.Click += new System.EventHandler(this.ButtonDarkTheme_Click);
+            buttonDarkTheme.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonDarkTheme.FlatAppearance.BorderSize = 0;
+            buttonDarkTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonDarkTheme.ForeColor = System.Drawing.SystemColors.InfoText;
+            buttonDarkTheme.Image = Properties.Resources.icons8_layout_32__1_;
+            buttonDarkTheme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonDarkTheme.Location = new System.Drawing.Point(0,64);
+            buttonDarkTheme.Margin = new System.Windows.Forms.Padding(4);
+            buttonDarkTheme.Name = "buttonDarkTheme";
+            buttonDarkTheme.Padding = new System.Windows.Forms.Padding(41,0,0,0);
+            buttonDarkTheme.Size = new System.Drawing.Size(214,64);
+            buttonDarkTheme.TabIndex = 6;
+            buttonDarkTheme.Text = "Dark Theme";
+            buttonDarkTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonDarkTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonDarkTheme.UseVisualStyleBackColor = true;
+            buttonDarkTheme.Click += ButtonDarkTheme_Click;
             // 
             // buttonLightTheme
             // 
-            this.buttonLightTheme.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonLightTheme.FlatAppearance.BorderSize = 0;
-            this.buttonLightTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLightTheme.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.buttonLightTheme.Image = global::Software_Engineering_Project.Properties.Resources.icons8_layout_32;
-            this.buttonLightTheme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonLightTheme.Location = new System.Drawing.Point(0, 0);
-            this.buttonLightTheme.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonLightTheme.Name = "buttonLightTheme";
-            this.buttonLightTheme.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
-            this.buttonLightTheme.Size = new System.Drawing.Size(214, 64);
-            this.buttonLightTheme.TabIndex = 5;
-            this.buttonLightTheme.Text = "Light Theme";
-            this.buttonLightTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonLightTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonLightTheme.UseVisualStyleBackColor = true;
-            this.buttonLightTheme.Click += new System.EventHandler(this.ButtonLightTheme_Click);
+            buttonLightTheme.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonLightTheme.FlatAppearance.BorderSize = 0;
+            buttonLightTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonLightTheme.ForeColor = System.Drawing.SystemColors.InfoText;
+            buttonLightTheme.Image = Properties.Resources.icons8_layout_32;
+            buttonLightTheme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonLightTheme.Location = new System.Drawing.Point(0,0);
+            buttonLightTheme.Margin = new System.Windows.Forms.Padding(4);
+            buttonLightTheme.Name = "buttonLightTheme";
+            buttonLightTheme.Padding = new System.Windows.Forms.Padding(41,0,0,0);
+            buttonLightTheme.Size = new System.Drawing.Size(214,64);
+            buttonLightTheme.TabIndex = 5;
+            buttonLightTheme.Text = "Light Theme";
+            buttonLightTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonLightTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonLightTheme.UseVisualStyleBackColor = true;
+            buttonLightTheme.Click += ButtonLightTheme_Click;
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonEdit.FlatAppearance.BorderSize = 0;
-            this.buttonEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEdit.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonEdit.Image = global::Software_Engineering_Project.Properties.Resources.icons8_settings_32;
-            this.buttonEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonEdit.Location = new System.Drawing.Point(0, 389);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-            this.buttonEdit.Size = new System.Drawing.Size(214, 64);
-            this.buttonEdit.TabIndex = 7;
-            this.buttonEdit.Tag = "https://icons8.com/icons/set/website";
-            this.buttonEdit.Text = "Theme Settings";
-            this.buttonEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
-            this.buttonEdit.MouseHover += new System.EventHandler(this.ButtonThemeSettings_MouseHover);
+            buttonEdit.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonEdit.FlatAppearance.BorderSize = 0;
+            buttonEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(64,64,64);
+            buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonEdit.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonEdit.Image = Properties.Resources.icons8_settings_32;
+            buttonEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonEdit.Location = new System.Drawing.Point(0,389);
+            buttonEdit.Margin = new System.Windows.Forms.Padding(4);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Padding = new System.Windows.Forms.Padding(18,0,0,0);
+            buttonEdit.Size = new System.Drawing.Size(214,64);
+            buttonEdit.TabIndex = 7;
+            buttonEdit.Tag = "https://icons8.com/icons/set/website";
+            buttonEdit.Text = "Theme Settings";
+            buttonEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // Pnl_SubmissionControls
             // 
-            this.Pnl_SubmissionControls.BackColor = System.Drawing.SystemColors.Info;
-            this.Pnl_SubmissionControls.Controls.Add(this.buttonCreateSubmission);
-            this.Pnl_SubmissionControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_SubmissionControls.Location = new System.Drawing.Point(0, 327);
-            this.Pnl_SubmissionControls.Margin = new System.Windows.Forms.Padding(4);
-            this.Pnl_SubmissionControls.Name = "Pnl_SubmissionControls";
-            this.Pnl_SubmissionControls.Size = new System.Drawing.Size(214, 62);
-            this.Pnl_SubmissionControls.TabIndex = 9;
-            this.Pnl_SubmissionControls.Visible = false;
+            Pnl_SubmissionControls.BackColor = System.Drawing.SystemColors.Info;
+            Pnl_SubmissionControls.Controls.Add(buttonCreateSubmission);
+            Pnl_SubmissionControls.Dock = System.Windows.Forms.DockStyle.Top;
+            Pnl_SubmissionControls.Location = new System.Drawing.Point(0,327);
+            Pnl_SubmissionControls.Margin = new System.Windows.Forms.Padding(4);
+            Pnl_SubmissionControls.Name = "Pnl_SubmissionControls";
+            Pnl_SubmissionControls.Size = new System.Drawing.Size(214,62);
+            Pnl_SubmissionControls.TabIndex = 9;
+            Pnl_SubmissionControls.Visible = false;
             // 
             // buttonCreateSubmission
             // 
-            this.buttonCreateSubmission.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonCreateSubmission.FlatAppearance.BorderSize = 0;
-            this.buttonCreateSubmission.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCreateSubmission.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonCreateSubmission.Image = global::Software_Engineering_Project.Properties.Resources.icons8_add_file_32;
-            this.buttonCreateSubmission.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCreateSubmission.Location = new System.Drawing.Point(0, 0);
-            this.buttonCreateSubmission.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCreateSubmission.Name = "buttonCreateSubmission";
-            this.buttonCreateSubmission.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
-            this.buttonCreateSubmission.Size = new System.Drawing.Size(214, 64);
-            this.buttonCreateSubmission.TabIndex = 6;
-            this.buttonCreateSubmission.Tag = "https://icons8.com/icons/set/website";
-            this.buttonCreateSubmission.Text = "&Create Submissions";
-            this.buttonCreateSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCreateSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonCreateSubmission.UseVisualStyleBackColor = true;
-            this.buttonCreateSubmission.Click += new System.EventHandler(this.ButtonCreateSubmission_Click);
+            buttonCreateSubmission.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonCreateSubmission.FlatAppearance.BorderSize = 0;
+            buttonCreateSubmission.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonCreateSubmission.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonCreateSubmission.Image = Properties.Resources.icons8_add_file_32;
+            buttonCreateSubmission.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonCreateSubmission.Location = new System.Drawing.Point(0,0);
+            buttonCreateSubmission.Margin = new System.Windows.Forms.Padding(4);
+            buttonCreateSubmission.Name = "buttonCreateSubmission";
+            buttonCreateSubmission.Padding = new System.Windows.Forms.Padding(41,0,0,0);
+            buttonCreateSubmission.Size = new System.Drawing.Size(214,64);
+            buttonCreateSubmission.TabIndex = 6;
+            buttonCreateSubmission.Tag = "https://icons8.com/icons/set/website";
+            buttonCreateSubmission.Text = "&Create Submissions";
+            buttonCreateSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonCreateSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonCreateSubmission.UseVisualStyleBackColor = true;
+            buttonCreateSubmission.Click += ButtonCreateSubmission_Click;
             // 
             // buttonSubmission
             // 
-            this.buttonSubmission.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonSubmission.FlatAppearance.BorderSize = 0;
-            this.buttonSubmission.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonSubmission.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSubmission.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonSubmission.Image = global::Software_Engineering_Project.Properties.Resources.icons8_file_32;
-            this.buttonSubmission.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSubmission.Location = new System.Drawing.Point(0, 263);
-            this.buttonSubmission.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonSubmission.Name = "buttonSubmission";
-            this.buttonSubmission.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-            this.buttonSubmission.Size = new System.Drawing.Size(214, 64);
-            this.buttonSubmission.TabIndex = 7;
-            this.buttonSubmission.Tag = "https://icons8.com/icons/set/website";
-            this.buttonSubmission.Text = "Submission";
-            this.buttonSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonSubmission.UseVisualStyleBackColor = true;
-            this.buttonSubmission.Click += new System.EventHandler(this.buttonSubmission_Click);
-            this.buttonSubmission.MouseHover += new System.EventHandler(this.ButtonSubmissions_MouseHover);
+            buttonSubmission.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonSubmission.FlatAppearance.BorderSize = 0;
+            buttonSubmission.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(64,64,64);
+            buttonSubmission.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonSubmission.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonSubmission.Image = Properties.Resources.icons8_file_32;
+            buttonSubmission.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonSubmission.Location = new System.Drawing.Point(0,263);
+            buttonSubmission.Margin = new System.Windows.Forms.Padding(4);
+            buttonSubmission.Name = "buttonSubmission";
+            buttonSubmission.Padding = new System.Windows.Forms.Padding(18,0,0,0);
+            buttonSubmission.Size = new System.Drawing.Size(214,64);
+            buttonSubmission.TabIndex = 7;
+            buttonSubmission.Tag = "https://icons8.com/icons/set/website";
+            buttonSubmission.Text = "Submission";
+            buttonSubmission.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonSubmission.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonSubmission.UseVisualStyleBackColor = true;
+            buttonSubmission.Click += buttonSubmission_Click;
             // 
             // Pnl_AssignmentControls
             // 
-            this.Pnl_AssignmentControls.BackColor = System.Drawing.SystemColors.Info;
-            this.Pnl_AssignmentControls.Controls.Add(this.buttonCreateAssignment);
-            this.Pnl_AssignmentControls.Controls.Add(this.buttonOpenAssignment);
-            this.Pnl_AssignmentControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_AssignmentControls.Location = new System.Drawing.Point(0, 133);
-            this.Pnl_AssignmentControls.Margin = new System.Windows.Forms.Padding(4);
-            this.Pnl_AssignmentControls.Name = "Pnl_AssignmentControls";
-            this.Pnl_AssignmentControls.Size = new System.Drawing.Size(214, 130);
-            this.Pnl_AssignmentControls.TabIndex = 6;
-            this.Pnl_AssignmentControls.Visible = false;
+            Pnl_AssignmentControls.BackColor = System.Drawing.SystemColors.Info;
+            Pnl_AssignmentControls.Controls.Add(buttonCreateAssignment);
+            Pnl_AssignmentControls.Controls.Add(buttonOpenAssignment);
+            Pnl_AssignmentControls.Dock = System.Windows.Forms.DockStyle.Top;
+            Pnl_AssignmentControls.Location = new System.Drawing.Point(0,133);
+            Pnl_AssignmentControls.Margin = new System.Windows.Forms.Padding(4);
+            Pnl_AssignmentControls.Name = "Pnl_AssignmentControls";
+            Pnl_AssignmentControls.Size = new System.Drawing.Size(214,130);
+            Pnl_AssignmentControls.TabIndex = 6;
+            Pnl_AssignmentControls.Visible = false;
             // 
             // buttonCreateAssignment
             // 
-            this.buttonCreateAssignment.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonCreateAssignment.FlatAppearance.BorderSize = 0;
-            this.buttonCreateAssignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCreateAssignment.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonCreateAssignment.Image = global::Software_Engineering_Project.Properties.Resources.icons8_add_file_32;
-            this.buttonCreateAssignment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCreateAssignment.Location = new System.Drawing.Point(0, 64);
-            this.buttonCreateAssignment.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCreateAssignment.Name = "buttonCreateAssignment";
-            this.buttonCreateAssignment.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
-            this.buttonCreateAssignment.Size = new System.Drawing.Size(214, 64);
-            this.buttonCreateAssignment.TabIndex = 5;
-            this.buttonCreateAssignment.Tag = "https://icons8.com/icons/set/website";
-            this.buttonCreateAssignment.Text = "&Create Assignment";
-            this.buttonCreateAssignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCreateAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonCreateAssignment.UseVisualStyleBackColor = true;
-            this.buttonCreateAssignment.Click += new System.EventHandler(this.ButtonCreateAssignment_Click);
+            buttonCreateAssignment.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonCreateAssignment.FlatAppearance.BorderSize = 0;
+            buttonCreateAssignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonCreateAssignment.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonCreateAssignment.Image = Properties.Resources.icons8_add_file_32;
+            buttonCreateAssignment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonCreateAssignment.Location = new System.Drawing.Point(0,64);
+            buttonCreateAssignment.Margin = new System.Windows.Forms.Padding(4);
+            buttonCreateAssignment.Name = "buttonCreateAssignment";
+            buttonCreateAssignment.Padding = new System.Windows.Forms.Padding(41,0,0,0);
+            buttonCreateAssignment.Size = new System.Drawing.Size(214,64);
+            buttonCreateAssignment.TabIndex = 5;
+            buttonCreateAssignment.Tag = "https://icons8.com/icons/set/website";
+            buttonCreateAssignment.Text = "&Create Assignment";
+            buttonCreateAssignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonCreateAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonCreateAssignment.UseVisualStyleBackColor = true;
+            buttonCreateAssignment.Click += ButtonCreateAssignment_Click;
             // 
             // buttonOpenAssignment
             // 
-            this.buttonOpenAssignment.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonOpenAssignment.FlatAppearance.BorderSize = 0;
-            this.buttonOpenAssignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOpenAssignment.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonOpenAssignment.Image = global::Software_Engineering_Project.Properties.Resources.icons8_add_file_32;
-            this.buttonOpenAssignment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOpenAssignment.Location = new System.Drawing.Point(0, 0);
-            this.buttonOpenAssignment.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonOpenAssignment.Name = "buttonOpenAssignment";
-            this.buttonOpenAssignment.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
-            this.buttonOpenAssignment.Size = new System.Drawing.Size(214, 64);
-            this.buttonOpenAssignment.TabIndex = 4;
-            this.buttonOpenAssignment.Tag = "https://icons8.com/icons/set/website";
-            this.buttonOpenAssignment.Text = "&Open Assignment";
-            this.buttonOpenAssignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOpenAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonOpenAssignment.UseVisualStyleBackColor = true;
-            this.buttonOpenAssignment.Click += new System.EventHandler(this.ButtonOpenAssignment_Click);
+            buttonOpenAssignment.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonOpenAssignment.FlatAppearance.BorderSize = 0;
+            buttonOpenAssignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonOpenAssignment.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonOpenAssignment.Image = Properties.Resources.icons8_add_file_32;
+            buttonOpenAssignment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonOpenAssignment.Location = new System.Drawing.Point(0,0);
+            buttonOpenAssignment.Margin = new System.Windows.Forms.Padding(4);
+            buttonOpenAssignment.Name = "buttonOpenAssignment";
+            buttonOpenAssignment.Padding = new System.Windows.Forms.Padding(41,0,0,0);
+            buttonOpenAssignment.Size = new System.Drawing.Size(214,64);
+            buttonOpenAssignment.TabIndex = 4;
+            buttonOpenAssignment.Tag = "https://icons8.com/icons/set/website";
+            buttonOpenAssignment.Text = "&Open Assignment";
+            buttonOpenAssignment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonOpenAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonOpenAssignment.UseVisualStyleBackColor = true;
+            buttonOpenAssignment.Click += ButtonOpenAssignment_Click;
             // 
             // buttonAssignments
             // 
-            this.buttonAssignments.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonAssignments.FlatAppearance.BorderSize = 0;
-            this.buttonAssignments.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAssignments.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.buttonAssignments.Image = global::Software_Engineering_Project.Properties.Resources.icons8_file_32;
-            this.buttonAssignments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAssignments.Location = new System.Drawing.Point(0, 69);
-            this.buttonAssignments.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonAssignments.Name = "buttonAssignments";
-            this.buttonAssignments.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-            this.buttonAssignments.Size = new System.Drawing.Size(214, 64);
-            this.buttonAssignments.TabIndex = 2;
-            this.buttonAssignments.Tag = "https://icons8.com/icons/set/website";
-            this.buttonAssignments.Text = "Assignments";
-            this.buttonAssignments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAssignments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonAssignments.UseVisualStyleBackColor = true;
-            this.buttonAssignments.Click += new System.EventHandler(this.buttonAssignments_Click);
-            this.buttonAssignments.MouseHover += new System.EventHandler(this.ButtonAssignments_MouseHover);
+            buttonAssignments.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonAssignments.FlatAppearance.BorderSize = 0;
+            buttonAssignments.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(64,64,64);
+            buttonAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonAssignments.ForeColor = System.Drawing.SystemColors.MenuText;
+            buttonAssignments.Image = Properties.Resources.icons8_file_32;
+            buttonAssignments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonAssignments.Location = new System.Drawing.Point(0,69);
+            buttonAssignments.Margin = new System.Windows.Forms.Padding(4);
+            buttonAssignments.Name = "buttonAssignments";
+            buttonAssignments.Padding = new System.Windows.Forms.Padding(18,0,0,0);
+            buttonAssignments.Size = new System.Drawing.Size(214,64);
+            buttonAssignments.TabIndex = 2;
+            buttonAssignments.Tag = "https://icons8.com/icons/set/website";
+            buttonAssignments.Text = "Assignments";
+            buttonAssignments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            buttonAssignments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            buttonAssignments.UseVisualStyleBackColor = true;
+            buttonAssignments.Click += buttonAssignments_Click;
             // 
             // toolTipFile
             // 
-            this.toolTipFile.AutoPopDelay = 5000;
-            this.toolTipFile.InitialDelay = 250;
-            this.toolTipFile.ReshowDelay = 100;
+            toolTipFile.AutomaticDelay = 0;
+            toolTipFile.AutoPopDelay = 0;
+            toolTipFile.InitialDelay = 0;
+            toolTipFile.ReshowDelay = 0;
             // 
             // listboxSubmissions
             // 
-            this.listboxSubmissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listboxSubmissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.listboxSubmissions.ItemHeight = 20;
-            this.listboxSubmissions.Location = new System.Drawing.Point(240, 34);
-            this.listboxSubmissions.Margin = new System.Windows.Forms.Padding(4);
-            this.listboxSubmissions.Name = "listboxSubmissions";
-            this.listboxSubmissions.Size = new System.Drawing.Size(338, 384);
-            this.listboxSubmissions.TabIndex = 10;
-            this.listboxSubmissions.SelectedIndexChanged += new System.EventHandler(this.listboxSubmissions_SelectedIndexChanged);
-            this.listboxSubmissions.MouseHover += new System.EventHandler(this.ListboxSubmissions_MouseHover);
+            listboxSubmissions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            listboxSubmissions.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            listboxSubmissions.ItemHeight = 20;
+            listboxSubmissions.Location = new System.Drawing.Point(240,34);
+            listboxSubmissions.Margin = new System.Windows.Forms.Padding(4);
+            listboxSubmissions.Name = "listboxSubmissions";
+            listboxSubmissions.Size = new System.Drawing.Size(338,384);
+            listboxSubmissions.TabIndex = 10;
+            listboxSubmissions.SelectedIndexChanged += listboxSubmissions_SelectedIndexChanged;
             // 
             // panelMain
             // 
-            this.panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMain.Controls.Add(this.richTextBox1);
-            this.panelMain.Controls.Add(this.Lbl_ResultsLabel);
-            this.panelMain.Controls.Add(this.Lbl_SubmissionsTitle);
-            this.panelMain.Controls.Add(this.listboxSubmissions);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(941, 488);
-            this.panelMain.TabIndex = 10;
-            // 
-            // Lbl_ResultsLabel
-            // 
-            this.Lbl_ResultsLabel.AutoEllipsis = true;
-            this.Lbl_ResultsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Lbl_ResultsLabel.Location = new System.Drawing.Point(590, 8);
-            this.Lbl_ResultsLabel.Name = "Lbl_ResultsLabel";
-            this.Lbl_ResultsLabel.Size = new System.Drawing.Size(337, 23);
-            this.Lbl_ResultsLabel.TabIndex = 14;
-            this.Lbl_ResultsLabel.Text = "Results:";
-            // 
-            // Lbl_SubmissionsTitle
-            // 
-            this.Lbl_SubmissionsTitle.AutoEllipsis = true;
-            this.Lbl_SubmissionsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Lbl_SubmissionsTitle.Location = new System.Drawing.Point(242, 8);
-            this.Lbl_SubmissionsTitle.Name = "Lbl_SubmissionsTitle";
-            this.Lbl_SubmissionsTitle.Size = new System.Drawing.Size(336, 23);
-            this.Lbl_SubmissionsTitle.TabIndex = 13;
-            this.Lbl_SubmissionsTitle.Text = "Submissions:";
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Document = this.printDocument1;
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
+            panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panelMain.Controls.Add(richTextBox1);
+            panelMain.Controls.Add(Lbl_ResultsLabel);
+            panelMain.Controls.Add(Lbl_SubmissionsTitle);
+            panelMain.Controls.Add(listboxSubmissions);
+            panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelMain.Location = new System.Drawing.Point(0,0);
+            panelMain.Margin = new System.Windows.Forms.Padding(4);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new System.Drawing.Size(941,488);
+            panelMain.TabIndex = 10;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox1.Location = new System.Drawing.Point(590, 34);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(337, 384);
-            this.richTextBox1.TabIndex = 15;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.MouseHover += new System.EventHandler(this.TextboxResults_MouseHover);
+            richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            richTextBox1.Location = new System.Drawing.Point(590,34);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new System.Drawing.Size(337,384);
+            richTextBox1.TabIndex = 15;
+            richTextBox1.Text = "";
+            // 
+            // Lbl_ResultsLabel
+            // 
+            Lbl_ResultsLabel.AutoEllipsis = true;
+            Lbl_ResultsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            Lbl_ResultsLabel.Location = new System.Drawing.Point(590,8);
+            Lbl_ResultsLabel.Name = "Lbl_ResultsLabel";
+            Lbl_ResultsLabel.Size = new System.Drawing.Size(337,23);
+            Lbl_ResultsLabel.TabIndex = 14;
+            Lbl_ResultsLabel.Text = "Results:";
+            // 
+            // Lbl_SubmissionsTitle
+            // 
+            Lbl_SubmissionsTitle.AutoEllipsis = true;
+            Lbl_SubmissionsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            Lbl_SubmissionsTitle.Location = new System.Drawing.Point(242,8);
+            Lbl_SubmissionsTitle.Name = "Lbl_SubmissionsTitle";
+            Lbl_SubmissionsTitle.Size = new System.Drawing.Size(336,23);
+            Lbl_SubmissionsTitle.TabIndex = 13;
+            Lbl_SubmissionsTitle.Text = "Submissions:";
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += PrintResults;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0,0);
+            printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0,0);
+            printPreviewDialog1.ClientSize = new System.Drawing.Size(400,300);
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (System.Drawing.Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.WindowText;
-            this.ClientSize = new System.Drawing.Size(941, 488);
-            this.Controls.Add(this.panelSideMenuPanel);
-            this.Controls.Add(this.PanelMainControls);
-            this.Controls.Add(this.panelMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "FormMain";
-            this.Text = "Automated Code Metics";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
-            this.PanelMainControls.ResumeLayout(false);
-            this.PanelExit.ResumeLayout(false);
-            this.panelSideMenuPanel.ResumeLayout(false);
-            this.panelSideMenuPanel.PerformLayout();
-            this.Pnl_HelpControls.ResumeLayout(false);
-            this.Pnl_ThemeControls.ResumeLayout(false);
-            this.Pnl_SubmissionControls.ResumeLayout(false);
-            this.Pnl_AssignmentControls.ResumeLayout(false);
-            this.panelMain.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F,15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.WindowText;
+            ClientSize = new System.Drawing.Size(941,488);
+            Controls.Add(panelSideMenuPanel);
+            Controls.Add(PanelMainControls);
+            Controls.Add(panelMain);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(3,2,3,2);
+            Name = "FormMain";
+            Text = "Automated Code Metics";
+            FormClosing += FormMain_FormClosing;
+            PanelMainControls.ResumeLayout(false);
+            PanelExit.ResumeLayout(false);
+            panelSideMenuPanel.ResumeLayout(false);
+            panelSideMenuPanel.PerformLayout();
+            Pnl_HelpControls.ResumeLayout(false);
+            Pnl_ThemeControls.ResumeLayout(false);
+            Pnl_SubmissionControls.ResumeLayout(false);
+            Pnl_AssignmentControls.ResumeLayout(false);
+            panelMain.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

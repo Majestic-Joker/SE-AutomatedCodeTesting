@@ -16,38 +16,62 @@ using System.Windows.Forms;
 
 namespace Software_Engineering_Project
 {
-    public partial class FormMain : Form
+    public partial class FormMain:Form
     {
         private FileInfo recentAssignment;
 
         #region Properties
-        public Assignment CurrentAssignment { get; private set; }
-        public DirectoryInfo ProgramDirectory { get; private set; }
+        public Assignment CurrentAssignment
+        {
+            get; private set;
+        }
+        public DirectoryInfo ProgramDirectory
+        {
+            get; private set;
+        }
+        public Submission SelectedSubmission => SelectedSubmissionIndex >= 0 ? CurrentAssignment.Submissions[SelectedSubmissionIndex] : null;
+        public int SelectedSubmissionIndex => listboxSubmissions.SelectedIndex;
         #endregion
 
         public FormMain()
         {
             InitializeComponent();
             InitializeFormTheme();
+            SetupTooltip();
 
             CreateDirectory();
             recentAssignment = new FileInfo(Path.Combine(ProgramDirectory.FullName,"recent.json"));
 
-            if(recentAssignment.Exists)
+            if (recentAssignment.Exists)
                 LoadRecentAssignment();
         }
 
-        private bool CreateDirectory(){
-            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Automated Code Metrics");
+        private bool CreateDirectory()
+        {
+            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"Automated Code Metrics");
             ProgramDirectory = Directory.CreateDirectory(temp);
             return ProgramDirectory.Exists;
+        }
+
+        private void SetupTooltip()
+        {
+            toolTipFile.SetToolTip(richTextBox1,"Compilation results and build messages for the selected submission are displayed here");
+            toolTipFile.SetToolTip(listboxSubmissions,"Assignment submissions are displayed here. Select a Submission to use other form functions");
+            toolTipFile.SetToolTip(buttonPrint,"Print contents of the submission results shown above.");
+            toolTipFile.SetToolTip(buttonExecute,"Compile and Run submission with this button");
+            toolTipFile.SetToolTip(ButtonExit,"Exit here");
+            toolTipFile.SetToolTip(buttonHelp,"Instructions here");
+            toolTipFile.SetToolTip(buttonEdit,"Change Themes here");
+            toolTipFile.SetToolTip(buttonAssignments,"Open or Create Assignments here");
+            toolTipFile.SetToolTip(buttonSubmission,"Open or Create Submissions here");
         }
 
         #region Form Theme Functions
 
         // TODO: Handle with ThemeManager
 
-        private void InitializeFormTheme(){
+        private void InitializeFormTheme()
+        {
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
             panelSideMenuPanel.BackColor = Color.WhiteSmoke;
@@ -102,57 +126,10 @@ namespace Software_Engineering_Project
             {
                 HideSubMenu();
                 subMenu.Visible = true;
-            }
-            else if (subMenu.Visible == true)
+            } else if (subMenu.Visible == true)
             {
                 subMenu.Visible = false;
             }
-        }
-        #endregion
-
-        #region MouseHover Events
-        private void TextboxResults_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(richTextBox1, "Compilation results and build messages for the selected submission are displayed here");
-        }
-
-        private void ListboxSubmissions_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(listboxSubmissions, "Assignment submissions are displayed here. Select a Submission to use other form functions");
-        }
-
-        private void ButtonPrint_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonPrint, "Print contents of the submission results shown above.");
-        }
-        
-        private void ButtonExecute_MouseHover(object sender, EventArgs e){
-            toolTipFile.SetToolTip(buttonExecute, "Compile and Run submission with this button");
-        }
-
-        private void ButtonExit_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(ButtonExit, "Exit here");
-        }
-
-        private void ButtonHelp_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonHelp, "Instructions here");
-        }
-
-        private void ButtonThemeSettings_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonEdit, "Change Themes here");
-        }
-
-        private void ButtonAssignments_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonAssignments, "Open or Create Assignments here");
-        }
-
-        private void ButtonSubmissions_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFile.SetToolTip(buttonSubmission, "Open or Create Submissions here");
         }
         #endregion
 
@@ -163,22 +140,22 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonAssignments_Click(object sender, EventArgs e)
+        private void buttonAssignments_Click(object sender,EventArgs e)
         {
             ShowSubMenu(Pnl_AssignmentControls);
         }
 
-        private void buttonSubmission_Click(object sender, EventArgs e)
+        private void buttonSubmission_Click(object sender,EventArgs e)
         {
             ShowSubMenu(Pnl_SubmissionControls);
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender,EventArgs e)
         {
             ShowSubMenu(Pnl_ThemeControls);
         }
 
-        private void buttonHelp_Click(object sender, EventArgs e)
+        private void buttonHelp_Click(object sender,EventArgs e)
         {
             ShowSubMenu(Pnl_HelpControls);
         }
@@ -191,7 +168,7 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonOpenAssignment_Click(object sender, EventArgs e)
+        private void ButtonOpenAssignment_Click(object sender,EventArgs e)
         {
             Assignment assignment = LoadAssignment();
 
@@ -214,7 +191,7 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonLightTheme_Click(object sender, EventArgs e)
+        private void ButtonLightTheme_Click(object sender,EventArgs e)
         {
             panelMain.BackColor = Color.LightGray;
             labelTitlecard.BackColor = Color.Tan;
@@ -242,7 +219,7 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonDarkTheme_Click(object sender, EventArgs e)
+        private void ButtonDarkTheme_Click(object sender,EventArgs e)
         {
             panelMain.BackColor = Color.SlateGray;
             labelTitlecard.BackColor = Color.DarkSlateGray;
@@ -273,13 +250,13 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonAbout_Click(object sender, EventArgs e)
+        private void ButtonAbout_Click(object sender,EventArgs e)
         {
             MessageBox.Show("To Start, Click File " +
                 "then Open File. After that it'll take you" +
                 " to where you can get a cpp file. Click on OK and it will show up on the listbox." +
                 " We then can click run to get the stats and grade of the program." +
-                " Lastly we can view the Stats.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                " Lastly we can view the Stats.","About",MessageBoxButtons.OK,MessageBoxIcon.Information);
             HideSubMenu();
         }
 
@@ -288,11 +265,11 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonCreateAssignment_Click(object sender, EventArgs e)
+        private void ButtonCreateAssignment_Click(object sender,EventArgs e)
         {
             OpenFormCreateAssignment();
             HideSubMenu();
-            if(CurrentAssignment != null)
+            if (CurrentAssignment != null)
                 Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
         }
 
@@ -301,9 +278,10 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonCreateSubmission_Click(object sender, EventArgs e)
+        private void ButtonCreateSubmission_Click(object sender,EventArgs e)
         {
-            if(CurrentAssignment != null){
+            if (CurrentAssignment != null)
+            {
                 var form = new FormAddSubmission(CurrentAssignment);
 
                 if (form.ShowDialog() == DialogResult.OK)
@@ -315,10 +293,9 @@ namespace Software_Engineering_Project
                 }
 
                 form.Dispose();
-            }
-            else
-                MessageBox.Show("Must have an assignment open before adding submissions.","Unable to Add Submission - Missing Requirements", MessageBoxButtons.OK);
-                
+            } else
+                MessageBox.Show("Must have an assignment open before adding submissions.","Unable to Add Submission - Missing Requirements",MessageBoxButtons.OK);
+
         }
         #endregion
 
@@ -370,38 +347,44 @@ namespace Software_Engineering_Project
         /// </summary>
         private void SaveCurrentAssignment()
         {
-            if(!ProgramDirectory.Exists)
+            if (!ProgramDirectory.Exists)
                 CreateDirectory();
 
-            if(CurrentAssignment != null){
+            if (CurrentAssignment != null)
+            {
                 // Serialize CurrentAssignment as json
                 string json = JsonSerializer.Serialize(CurrentAssignment);
 
                 // folderpath created
-                if(!Directory.Exists(CurrentAssignment.AssignmentDirectory)){ 
+                if (!Directory.Exists(CurrentAssignment.AssignmentDirectory))
+                {
                     CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName).FullName;
-                    CurrentAssignment.AssignmentFile = Path.Combine(CurrentAssignment.AssignmentDirectory, $"{CurrentAssignment.AssignmentName}.json");
+                    CurrentAssignment.AssignmentFile = Path.Combine(CurrentAssignment.AssignmentDirectory,$"{CurrentAssignment.AssignmentName}.json");
                 }
                 // written user info to json
-                WriteFile(CurrentAssignment.AssignmentFile, json);
+                WriteFile(CurrentAssignment.AssignmentFile,json);
             }
         }
 
-        private void SaveRecentAssignment(){
-            if(CurrentAssignment != null){
-                WriteFile(recentAssignment.FullName, JsonSerializer.Serialize(CurrentAssignment));
+        private void SaveRecentAssignment()
+        {
+            if (CurrentAssignment != null)
+            {
+                WriteFile(recentAssignment.FullName,JsonSerializer.Serialize(CurrentAssignment));
             }
         }
 
-        private async void WriteFile(string filePath, string text){
-            var task = File.WriteAllTextAsync(filePath, text);
+        private async void WriteFile(string filePath,string text)
+        {
+            var task = File.WriteAllTextAsync(filePath,text);
 
-            while(!task.IsCompleted)
+            while (!task.IsCompleted)
                 await System.Threading.Tasks.Task.Delay(50);
         }
 
         //TODO: Implement Load Recent Assignment
-        private void LoadRecentAssignment(){
+        private void LoadRecentAssignment()
+        {
             var filestream = recentAssignment.OpenRead();
             var reader = new StreamReader(filestream);
 
@@ -418,28 +401,21 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender">The object running this event</param>
         /// <param name="e">The EventArguments</param>
-        private void ButtonExecute_Click(object sender, EventArgs e)
+        private void ButtonExecute_Click(object sender,EventArgs e)
         {
-            int selectedIndex = listboxSubmissions.SelectedIndex;
-            if(selectedIndex >= 0){
-                bool didCompile = false;
-            
-                // TODO: Ensure the listboxSubmissions is the same list as CurrentAssignment.Submissions
-                //If a file is selected  
-                if (CurrentAssignment != null)
+            //If a file is selected  
+            if (CurrentAssignment != null)
+            {
+                if (CurrentAssignment.Submissions.Count > 0)
                 {
-                    if (CurrentAssignment.Submissions.Count > 0)
-                    {
-                        Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
-                        didCompile = RunCompilerService(selectedSubmission);
-                        UpdateResultText(selectedSubmission);
-                    }
+                    RunCompilerService(SelectedSubmission);
+                    UpdateResultText();
                 }
             }
             SaveCurrentAssignment();
         }
 
-        private void ButtonPrint_Click(object sender, EventArgs e)
+        private void ButtonPrint_Click(object sender,EventArgs e)
         {
             //Placeholder for printing from the textBoxResult.text
             int selectedIndex = listboxSubmissions.SelectedIndex;
@@ -450,7 +426,7 @@ namespace Software_Engineering_Project
                     Submission selectedSubmission = CurrentAssignment.Submissions[selectedIndex];
                     if (selectedSubmission.Result == null)
                         selectedSubmission.Result = new Result();
-                    UpdateResultText(selectedSubmission);
+                    UpdateResultText();
 
                     printPreviewDialog1.Document = printDocument1;
                     printPreviewDialog1.ShowDialog();
@@ -464,7 +440,7 @@ namespace Software_Engineering_Project
         {
             if (selectedSubmission != null)
             {
-                CppService service = new CppService(CurrentAssignment, selectedSubmission);
+                CppService service = new CppService(CurrentAssignment,selectedSubmission);
                 return service.IsBuilt;
             }
 
@@ -472,14 +448,13 @@ namespace Software_Engineering_Project
         }
         #endregion
 
-        #pragma warning disable CA1416
-        private void UpdateResultText(Submission selectedSubmission)
+        private void UpdateResultText()
         {
-            printDocument1.DocumentName = $"{selectedSubmission.SubmissionName}_Results";
-            richTextBox1.Text = selectedSubmission.Result.ToString();
+            printDocument1.DocumentName = $"{SelectedSubmission.SubmissionName}_Results";
+            richTextBox1.Text = SelectedSubmission.Result.ToString();
         }
 
-        private void PrintResults(object sender, PrintPageEventArgs e)
+        private void PrintResults(object sender,PrintPageEventArgs e)
         {
             int charactersOnPage = 0;
             int linesPerPage = 0;
@@ -503,7 +478,6 @@ namespace Software_Engineering_Project
             if (!e.HasMorePages)
                 resultText = richTextBox1.Text;
         }
-        #pragma warning restore CA1416
 
         #region Exit Button
 
@@ -512,7 +486,7 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender,EventArgs e)
         {
             if (CurrentAssignment != null)
             {
@@ -525,8 +499,11 @@ namespace Software_Engineering_Project
 
         private void listboxSubmissions_SelectedIndexChanged(object sender,EventArgs e)
         {
-            if(CurrentAssignment.Submissions.Count > listboxSubmissions.SelectedIndex)
-                Lbl_ResultsLabel.Text = $"Results: {CurrentAssignment.Submissions[listboxSubmissions.SelectedIndex]}";
+            if (SelectedSubmissionIndex >= 0)
+            {
+                Lbl_ResultsLabel.Text = $"Results: {CurrentAssignment.Submissions[SelectedSubmissionIndex]}";
+                UpdateResultText();
+            }
         }
 
         private void FormMain_FormClosing(object sender,FormClosingEventArgs e)
@@ -536,6 +513,14 @@ namespace Software_Engineering_Project
                 SaveCurrentAssignment();
                 SaveRecentAssignment();
             }
+        }
+
+        private void labelTitlecard_Click(object sender,EventArgs e)
+        {
+            if(CurrentAssignment != null)
+                MessageBox.Show(CurrentAssignment.ToString(), $"State of {CurrentAssignment.AssignmentName}", MessageBoxButtons.OK);
+            else
+                MessageBox.Show("Current Assignment is null.",$"State of {CurrentAssignment.AssignmentName}", MessageBoxButtons.OK);
         }
     }
 }
