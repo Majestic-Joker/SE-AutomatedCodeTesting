@@ -55,7 +55,7 @@ namespace Software_Engineering_Project
 
         private void SetupTooltip()
         {
-            toolTipFile.SetToolTip(richTextBox1,"Compilation results and build messages for the selected submission are displayed here");
+            toolTipFile.SetToolTip(Rtb_Results,"Compilation results and build messages for the selected submission are displayed here");
             toolTipFile.SetToolTip(listboxSubmissions,"Assignment submissions are displayed here. Select a Submission to use other form functions");
             toolTipFile.SetToolTip(buttonPrint,"Print contents of the submission results shown above.");
             toolTipFile.SetToolTip(buttonExecute,"Compile and Run submission with this button");
@@ -319,6 +319,7 @@ namespace Software_Engineering_Project
 
                 string json = reader.ReadToEnd();
                 assignment = JsonSerializer.Deserialize<Assignment>(json);
+                UpdateResultText();
             }
 
             return assignment;
@@ -392,6 +393,7 @@ namespace Software_Engineering_Project
             CurrentAssignment = JsonSerializer.Deserialize<Assignment>(json);
 
             Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+            RefreshListBox();
         }
         #endregion
 
@@ -451,15 +453,26 @@ namespace Software_Engineering_Project
         private void UpdateResultText()
         {
             printDocument1.DocumentName = $"{SelectedSubmission.SubmissionName}_Results";
-            richTextBox1.Text = SelectedSubmission.Result.ToString();
+            Rtb_Results.Text = SelectedSubmission.Result.ToString();
+            Rtb_Results.Refresh();
         }
 
+        private void RefreshListBox(){
+            if(CurrentAssignment != null && CurrentAssignment.Submissions.Count > 0){
+                foreach(Submission submission in CurrentAssignment.Submissions)
+                    listboxSubmissions.Items.Add(submission);
+
+                listboxSubmissions.Refresh();
+            }
+        }
+
+        //TODO: figure out print preview not showing what's in Rtb_Results
         private void PrintResults(object sender,PrintPageEventArgs e)
         {
             int charactersOnPage = 0;
             int linesPerPage = 0;
-            string resultText = richTextBox1.Text;
-            Font resultFont = richTextBox1.Font;
+            string resultText = Rtb_Results.Text;
+            Font resultFont = Rtb_Results.Font;
 
             // Sets the value of charactersOnPage to the number of characters
             // of stringToPrint that will fit within the bounds of the page.
@@ -476,7 +489,7 @@ namespace Software_Engineering_Project
 
             // If there are no more pages, reset the string to be printed.
             if (!e.HasMorePages)
-                resultText = richTextBox1.Text;
+                resultText = Rtb_Results.Text;
         }
 
         #region Exit Button
@@ -517,10 +530,10 @@ namespace Software_Engineering_Project
 
         private void labelTitlecard_Click(object sender,EventArgs e)
         {
-            if(CurrentAssignment != null)
-                MessageBox.Show(CurrentAssignment.ToString(), $"State of {CurrentAssignment.AssignmentName}", MessageBoxButtons.OK);
+            if (CurrentAssignment != null)
+                MessageBox.Show(CurrentAssignment.ToString(),$"State of {CurrentAssignment.AssignmentName}",MessageBoxButtons.OK);
             else
-                MessageBox.Show("Current Assignment is null.",$"State of {CurrentAssignment.AssignmentName}", MessageBoxButtons.OK);
+                MessageBox.Show("Current Assignment is null.",$"State of the current assignment",MessageBoxButtons.OK);
         }
     }
 }

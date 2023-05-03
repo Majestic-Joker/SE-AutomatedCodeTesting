@@ -54,7 +54,7 @@
             toolTipFile = new System.Windows.Forms.ToolTip(components);
             listboxSubmissions = new System.Windows.Forms.ListBox();
             panelMain = new System.Windows.Forms.Panel();
-            richTextBox1 = new System.Windows.Forms.RichTextBox();
+            Rtb_Results = new System.Windows.Forms.RichTextBox();
             Lbl_ResultsLabel = new System.Windows.Forms.Label();
             Lbl_SubmissionsTitle = new System.Windows.Forms.Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -457,7 +457,7 @@
             // 
             panelMain.BackColor = System.Drawing.SystemColors.AppWorkspace;
             panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panelMain.Controls.Add(richTextBox1);
+            panelMain.Controls.Add(Rtb_Results);
             panelMain.Controls.Add(Lbl_ResultsLabel);
             panelMain.Controls.Add(Lbl_SubmissionsTitle);
             panelMain.Controls.Add(listboxSubmissions);
@@ -468,15 +468,15 @@
             panelMain.Size = new System.Drawing.Size(941,488);
             panelMain.TabIndex = 10;
             // 
-            // richTextBox1
+            // Rtb_Results
             // 
-            richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
-            richTextBox1.Location = new System.Drawing.Point(590,34);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new System.Drawing.Size(337,384);
-            richTextBox1.TabIndex = 15;
-            richTextBox1.Text = "";
+            Rtb_Results.Font = new System.Drawing.Font("Microsoft Sans Serif",12F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point);
+            Rtb_Results.Location = new System.Drawing.Point(590,34);
+            Rtb_Results.Name = "Rtb_Results";
+            Rtb_Results.ReadOnly = true;
+            Rtb_Results.Size = new System.Drawing.Size(337,384);
+            Rtb_Results.TabIndex = 15;
+            Rtb_Results.Text = "";
             // 
             // Lbl_ResultsLabel
             // 
@@ -568,7 +568,7 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.Label Lbl_SubmissionsTitle;
         private System.Windows.Forms.Label Lbl_ResultsLabel;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox Rtb_Results;
     }
 }
 
