@@ -28,247 +28,241 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBoxAssignmentName = new System.Windows.Forms.TextBox();
-            textBoxRequiredInput = new System.Windows.Forms.TextBox();
-            textBoxExpectedOutput = new System.Windows.Forms.TextBox();
-            listBoxAssignments = new System.Windows.Forms.ListBox();
-            ButtonSaveAssignment = new System.Windows.Forms.Button();
-            labelAssignmentName = new System.Windows.Forms.Label();
-            panelAssignmentForm = new System.Windows.Forms.Panel();
-            panelLabels = new System.Windows.Forms.Panel();
-            label3 = new System.Windows.Forms.Label();
-            labelInput = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
-            textBoxDescription = new System.Windows.Forms.TextBox();
-            PanelMainControls = new System.Windows.Forms.Panel();
-            PanelExit = new System.Windows.Forms.Panel();
-            button1 = new System.Windows.Forms.Button();
-            buttonClose = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
-            panelAssignmentForm.SuspendLayout();
-            panelLabels.SuspendLayout();
-            PanelMainControls.SuspendLayout();
-            PanelExit.SuspendLayout();
-            SuspendLayout();
+            this.textBoxAssignmentName = new System.Windows.Forms.TextBox();
+            this.ButtonSaveAssignment = new System.Windows.Forms.Button();
+            this.labelAssignmentName = new System.Windows.Forms.Label();
+            this.panelAssignmentForm = new System.Windows.Forms.Panel();
+            this.Nud_MatchReqSelector = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelOutputFilePath = new System.Windows.Forms.Label();
+            this.labelInputFilePath = new System.Windows.Forms.Label();
+            this.buttonOutput = new System.Windows.Forms.Button();
+            this.buttonInput = new System.Windows.Forms.Button();
+            this.labelInput = new System.Windows.Forms.Label();
+            this.labelOutput = new System.Windows.Forms.Label();
+            this.PanelMainControls = new System.Windows.Forms.Panel();
+            this.PanelExit = new System.Windows.Forms.Panel();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.panelAssignmentForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Nud_MatchReqSelector)).BeginInit();
+            this.PanelMainControls.SuspendLayout();
+            this.PanelExit.SuspendLayout();
+            this.SuspendLayout();
             // 
             // textBoxAssignmentName
             // 
-            textBoxAssignmentName.Location = new System.Drawing.Point(339, 26);
-            textBoxAssignmentName.Name = "textBoxAssignmentName";
-            textBoxAssignmentName.Size = new System.Drawing.Size(226, 23);
-            textBoxAssignmentName.TabIndex = 0;
-            // 
-            // textBoxRequiredInput
-            // 
-            textBoxRequiredInput.Location = new System.Drawing.Point(339, 60);
-            textBoxRequiredInput.Multiline = true;
-            textBoxRequiredInput.Name = "textBoxRequiredInput";
-            textBoxRequiredInput.Size = new System.Drawing.Size(226, 37);
-            textBoxRequiredInput.TabIndex = 1;
-            // 
-            // textBoxExpectedOutput
-            // 
-            textBoxExpectedOutput.Location = new System.Drawing.Point(339, 102);
-            textBoxExpectedOutput.Multiline = true;
-            textBoxExpectedOutput.Name = "textBoxExpectedOutput";
-            textBoxExpectedOutput.Size = new System.Drawing.Size(226, 38);
-            textBoxExpectedOutput.TabIndex = 2;
-            // 
-            // listBoxAssignments
-            // 
-            listBoxAssignments.FormattingEnabled = true;
-            listBoxAssignments.ItemHeight = 15;
-            listBoxAssignments.Location = new System.Drawing.Point(9, 196);
-            listBoxAssignments.Name = "listBoxAssignments";
-            listBoxAssignments.Size = new System.Drawing.Size(321, 229);
-            listBoxAssignments.TabIndex = 3;
+            this.textBoxAssignmentName.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxAssignmentName.Location = new System.Drawing.Point(197, 19);
+            this.textBoxAssignmentName.Name = "textBoxAssignmentName";
+            this.textBoxAssignmentName.PlaceholderText = "Enter a name for this assignment";
+            this.textBoxAssignmentName.Size = new System.Drawing.Size(259, 26);
+            this.textBoxAssignmentName.TabIndex = 0;
+            this.textBoxAssignmentName.TextChanged += new System.EventHandler(this.textBoxAssignmentName_TextChanged);
             // 
             // ButtonSaveAssignment
             // 
-            ButtonSaveAssignment.Location = new System.Drawing.Point(378, 11);
-            ButtonSaveAssignment.Name = "ButtonSaveAssignment";
-            ButtonSaveAssignment.Size = new System.Drawing.Size(156, 83);
-            ButtonSaveAssignment.TabIndex = 4;
-            ButtonSaveAssignment.Text = "Save Assignment";
-            ButtonSaveAssignment.UseVisualStyleBackColor = true;
-            ButtonSaveAssignment.Click += ButtonSaveAssignment_Click;
+            this.ButtonSaveAssignment.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonSaveAssignment.Location = new System.Drawing.Point(271, 11);
+            this.ButtonSaveAssignment.Name = "ButtonSaveAssignment";
+            this.ButtonSaveAssignment.Size = new System.Drawing.Size(156, 83);
+            this.ButtonSaveAssignment.TabIndex = 4;
+            this.ButtonSaveAssignment.Text = "Save Assignment";
+            this.ButtonSaveAssignment.UseVisualStyleBackColor = true;
+            this.ButtonSaveAssignment.Click += new System.EventHandler(this.ButtonSaveAssignment_Click);
             // 
             // labelAssignmentName
             // 
-            labelAssignmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelAssignmentName.Image = Properties.Resources.icons8_grades_32;
-            labelAssignmentName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            labelAssignmentName.Location = new System.Drawing.Point(3, 14);
-            labelAssignmentName.Name = "labelAssignmentName";
-            labelAssignmentName.Size = new System.Drawing.Size(326, 41);
-            labelAssignmentName.TabIndex = 5;
-            labelAssignmentName.Text = "Assignment Name:";
-            labelAssignmentName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelAssignmentName.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelAssignmentName.Image = global::Software_Engineering_Project.Properties.Resources.icons8_grades_32;
+            this.labelAssignmentName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAssignmentName.Location = new System.Drawing.Point(9, 8);
+            this.labelAssignmentName.Name = "labelAssignmentName";
+            this.labelAssignmentName.Size = new System.Drawing.Size(182, 47);
+            this.labelAssignmentName.TabIndex = 5;
+            this.labelAssignmentName.Text = "Assignment Name:";
+            this.labelAssignmentName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panelAssignmentForm
             // 
-            panelAssignmentForm.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            panelAssignmentForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panelAssignmentForm.Controls.Add(panelLabels);
-            panelAssignmentForm.Controls.Add(textBoxDescription);
-            panelAssignmentForm.Controls.Add(PanelMainControls);
-            panelAssignmentForm.Controls.Add(textBoxAssignmentName);
-            panelAssignmentForm.Controls.Add(textBoxRequiredInput);
-            panelAssignmentForm.Controls.Add(textBoxExpectedOutput);
-            panelAssignmentForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelAssignmentForm.Location = new System.Drawing.Point(0, 0);
-            panelAssignmentForm.Margin = new System.Windows.Forms.Padding(4);
-            panelAssignmentForm.Name = "panelAssignmentForm";
-            panelAssignmentForm.Size = new System.Drawing.Size(576, 540);
-            panelAssignmentForm.TabIndex = 11;
+            this.panelAssignmentForm.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelAssignmentForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAssignmentForm.Controls.Add(this.Nud_MatchReqSelector);
+            this.panelAssignmentForm.Controls.Add(this.label1);
+            this.panelAssignmentForm.Controls.Add(this.labelOutputFilePath);
+            this.panelAssignmentForm.Controls.Add(this.labelInputFilePath);
+            this.panelAssignmentForm.Controls.Add(this.buttonOutput);
+            this.panelAssignmentForm.Controls.Add(this.labelAssignmentName);
+            this.panelAssignmentForm.Controls.Add(this.buttonInput);
+            this.panelAssignmentForm.Controls.Add(this.labelInput);
+            this.panelAssignmentForm.Controls.Add(this.labelOutput);
+            this.panelAssignmentForm.Controls.Add(this.PanelMainControls);
+            this.panelAssignmentForm.Controls.Add(this.textBoxAssignmentName);
+            this.panelAssignmentForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAssignmentForm.Location = new System.Drawing.Point(0, 0);
+            this.panelAssignmentForm.Margin = new System.Windows.Forms.Padding(4);
+            this.panelAssignmentForm.Name = "panelAssignmentForm";
+            this.panelAssignmentForm.Size = new System.Drawing.Size(469, 355);
+            this.panelAssignmentForm.TabIndex = 11;
             // 
-            // panelLabels
+            // Nud_MatchReqSelector
             // 
-            panelLabels.BackColor = System.Drawing.SystemColors.MenuBar;
-            panelLabels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panelLabels.Controls.Add(label3);
-            panelLabels.Controls.Add(labelInput);
-            panelLabels.Controls.Add(label1);
-            panelLabels.Controls.Add(listBoxAssignments);
-            panelLabels.Controls.Add(labelAssignmentName);
-            panelLabels.Dock = System.Windows.Forms.DockStyle.Left;
-            panelLabels.Location = new System.Drawing.Point(0, 0);
-            panelLabels.Name = "panelLabels";
-            panelLabels.Size = new System.Drawing.Size(334, 432);
-            panelLabels.TabIndex = 15;
-            // 
-            // label3
-            // 
-            label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label3.Location = new System.Drawing.Point(2, 139);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(327, 41);
-            label3.TabIndex = 8;
-            label3.Text = "Description:";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelInput
-            // 
-            labelInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            labelInput.Location = new System.Drawing.Point(3, 54);
-            labelInput.Name = "labelInput";
-            labelInput.Size = new System.Drawing.Size(326, 41);
-            labelInput.TabIndex = 7;
-            labelInput.Text = "Input:";
-            labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Nud_MatchReqSelector.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Nud_MatchReqSelector.Location = new System.Drawing.Point(308, 193);
+            this.Nud_MatchReqSelector.Name = "Nud_MatchReqSelector";
+            this.Nud_MatchReqSelector.Size = new System.Drawing.Size(120, 26);
+            this.Nud_MatchReqSelector.TabIndex = 20;
+            this.Nud_MatchReqSelector.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.Nud_MatchReqSelector.ValueChanged += new System.EventHandler(this.Nud_MatchReqSelector_ValueChanged);
             // 
             // label1
             // 
-            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label1.Location = new System.Drawing.Point(3, 96);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(326, 41);
-            label1.TabIndex = 6;
-            label1.Text = "Output:";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(9, 195);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(210, 18);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Output Match Requirement:";
             // 
-            // textBoxDescription
+            // labelOutputFilePath
             // 
-            textBoxDescription.Location = new System.Drawing.Point(339, 154);
-            textBoxDescription.Multiline = true;
-            textBoxDescription.Name = "textBoxDescription";
-            textBoxDescription.Size = new System.Drawing.Size(226, 273);
-            textBoxDescription.TabIndex = 13;
+            this.labelOutputFilePath.AutoEllipsis = true;
+            this.labelOutputFilePath.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOutputFilePath.Location = new System.Drawing.Point(79, 94);
+            this.labelOutputFilePath.Name = "labelOutputFilePath";
+            this.labelOutputFilePath.Size = new System.Drawing.Size(375, 18);
+            this.labelOutputFilePath.TabIndex = 17;
+            this.labelOutputFilePath.Text = "No file selected";
+            // 
+            // labelInputFilePath
+            // 
+            this.labelInputFilePath.AutoEllipsis = true;
+            this.labelInputFilePath.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelInputFilePath.Location = new System.Drawing.Point(79, 64);
+            this.labelInputFilePath.Name = "labelInputFilePath";
+            this.labelInputFilePath.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelInputFilePath.Size = new System.Drawing.Size(375, 18);
+            this.labelInputFilePath.TabIndex = 16;
+            this.labelInputFilePath.Text = "No file selected";
+            this.labelInputFilePath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // buttonOutput
+            // 
+            this.buttonOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonOutput.Location = new System.Drawing.Point(272, 139);
+            this.buttonOutput.Name = "buttonOutput";
+            this.buttonOutput.Size = new System.Drawing.Size(156, 31);
+            this.buttonOutput.TabIndex = 10;
+            this.buttonOutput.Text = "Select Output File";
+            this.buttonOutput.UseVisualStyleBackColor = true;
+            this.buttonOutput.Click += new System.EventHandler(this.buttonOutput_Click);
+            // 
+            // buttonInput
+            // 
+            this.buttonInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonInput.Location = new System.Drawing.Point(35, 139);
+            this.buttonInput.Name = "buttonInput";
+            this.buttonInput.Size = new System.Drawing.Size(156, 31);
+            this.buttonInput.TabIndex = 9;
+            this.buttonInput.Text = "Select Input File";
+            this.buttonInput.UseVisualStyleBackColor = true;
+            this.buttonInput.Click += new System.EventHandler(this.buttonInput_Click);
+            // 
+            // labelInput
+            // 
+            this.labelInput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelInput.Location = new System.Drawing.Point(11, 64);
+            this.labelInput.Name = "labelInput";
+            this.labelInput.Size = new System.Drawing.Size(54, 18);
+            this.labelInput.TabIndex = 7;
+            this.labelInput.Text = "Input:";
+            this.labelInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelOutput
+            // 
+            this.labelOutput.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOutput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelOutput.Location = new System.Drawing.Point(9, 94);
+            this.labelOutput.Name = "labelOutput";
+            this.labelOutput.Size = new System.Drawing.Size(64, 18);
+            this.labelOutput.TabIndex = 6;
+            this.labelOutput.Text = "Output:";
+            this.labelOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PanelMainControls
             // 
-            PanelMainControls.BackColor = System.Drawing.SystemColors.WindowFrame;
-            PanelMainControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            PanelMainControls.Controls.Add(PanelExit);
-            PanelMainControls.Controls.Add(ButtonSaveAssignment);
-            PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            PanelMainControls.Location = new System.Drawing.Point(0, 432);
-            PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
-            PanelMainControls.Name = "PanelMainControls";
-            PanelMainControls.Size = new System.Drawing.Size(574, 106);
-            PanelMainControls.TabIndex = 12;
+            this.PanelMainControls.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.PanelMainControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelMainControls.Controls.Add(this.PanelExit);
+            this.PanelMainControls.Controls.Add(this.ButtonSaveAssignment);
+            this.PanelMainControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PanelMainControls.Location = new System.Drawing.Point(0, 247);
+            this.PanelMainControls.Margin = new System.Windows.Forms.Padding(4);
+            this.PanelMainControls.Name = "PanelMainControls";
+            this.PanelMainControls.Size = new System.Drawing.Size(467, 106);
+            this.PanelMainControls.TabIndex = 12;
             // 
             // PanelExit
             // 
-            PanelExit.BackColor = System.Drawing.SystemColors.Info;
-            PanelExit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            PanelExit.Controls.Add(button2);
-            PanelExit.Controls.Add(button1);
-            PanelExit.Controls.Add(buttonClose);
-            PanelExit.Dock = System.Windows.Forms.DockStyle.Left;
-            PanelExit.Location = new System.Drawing.Point(0, 0);
-            PanelExit.Margin = new System.Windows.Forms.Padding(4);
-            PanelExit.Name = "PanelExit";
-            PanelExit.Size = new System.Drawing.Size(333, 104);
-            PanelExit.TabIndex = 11;
-            // 
-            // button1
-            // 
-            button1.Location = new System.Drawing.Point(209, 28);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
-            button1.TabIndex = 9;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.PanelExit.BackColor = System.Drawing.SystemColors.Info;
+            this.PanelExit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelExit.Controls.Add(this.buttonClose);
+            this.PanelExit.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PanelExit.Location = new System.Drawing.Point(0, 0);
+            this.PanelExit.Margin = new System.Windows.Forms.Padding(4);
+            this.PanelExit.Name = "PanelExit";
+            this.PanelExit.Size = new System.Drawing.Size(232, 104);
+            this.PanelExit.TabIndex = 11;
             // 
             // buttonClose
             // 
-            buttonClose.Location = new System.Drawing.Point(33, 10);
-            buttonClose.Name = "buttonClose";
-            buttonClose.Size = new System.Drawing.Size(156, 83);
-            buttonClose.TabIndex = 8;
-            buttonClose.Text = "Close";
-            buttonClose.UseVisualStyleBackColor = true;
-            buttonClose.Click += ButtonClose_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new System.Drawing.Point(213, 60);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(75, 23);
-            button2.TabIndex = 10;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            this.buttonClose.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonClose.Location = new System.Drawing.Point(33, 10);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(156, 83);
+            this.buttonClose.TabIndex = 8;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // FormCreateAssignment
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(576, 540);
-            Controls.Add(panelAssignmentForm);
-            Name = "FormCreateAssignment";
-            Text = "Create Assignment";
-            panelAssignmentForm.ResumeLayout(false);
-            panelAssignmentForm.PerformLayout();
-            panelLabels.ResumeLayout(false);
-            PanelMainControls.ResumeLayout(false);
-            PanelExit.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(469, 355);
+            this.Controls.Add(this.panelAssignmentForm);
+            this.Name = "FormCreateAssignment";
+            this.Text = "Create Assignment";
+            this.panelAssignmentForm.ResumeLayout(false);
+            this.panelAssignmentForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Nud_MatchReqSelector)).EndInit();
+            this.PanelMainControls.ResumeLayout(false);
+            this.PanelExit.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
 
         private System.Windows.Forms.TextBox textBoxAssignmentName;
-        private System.Windows.Forms.TextBox textBoxRequiredInput;
-        private System.Windows.Forms.TextBox textBoxExpectedOutput;
-        private System.Windows.Forms.ListBox listBoxAssignments;
         private System.Windows.Forms.Button ButtonSaveAssignment;
         private System.Windows.Forms.Label labelAssignmentName;
         private System.Windows.Forms.Panel panelAssignmentForm;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Panel PanelMainControls;
         private System.Windows.Forms.Panel PanelExit;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Panel panelLabels;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonInput;
+        private System.Windows.Forms.Button buttonOutput;
+        private System.Windows.Forms.Label labelOutputFilePath;
+        private System.Windows.Forms.Label labelInputFilePath;
         private System.Windows.Forms.Label labelInput;
+        private System.Windows.Forms.Label labelOutput;
+        private System.Windows.Forms.NumericUpDown Nud_MatchReqSelector;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }

@@ -3,7 +3,8 @@
 public class ExeRunner
 {
     //Properties
-    public bool RunCompleted { get; set; }
+    public int ExitCode { get; private set; }
+    public bool RunCompleted => ExitCode == 0;
     public string ExeOutput { get; set; }
     public string ExeFilePath { get; set; }
     public string InputFilePath { get; set; }   
@@ -33,11 +34,16 @@ public class ExeRunner
         //update ExeOutput
         ExeOutput = output;
         //check to make sure exe has run correctly
-        if(process.ExitCode != 0) { return false; }
+        if(process.ExitCode != 0) { 
+            ExitCode = process.ExitCode;
+            return false; 
+        }
+        
         //STRETCH 
         //could determine what exit code is and display pertenent informant
         //Show that the program has run correctly
+
+        ExitCode = process.ExitCode;
         return true;
     }
-}
 }

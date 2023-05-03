@@ -1,143 +1,216 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Software_Engineering_Project
 {
     public partial class FormCreateAssignment : Form
     {
-        string assignmentFilepath = "";
+        private FileInfo inputTemp;
+        private FileInfo outputTemp;
 
-        public Assignment? assignment { get; set; }
+        private bool hasName => assignment.AssignmentName.Length > 0;
+        private bool hasOutputFile => outputTemp != null && outputTemp.Exists;
+        private bool canSave => hasName && hasOutputFile;
 
-        public FormCreateAssignment()
+        public Assignment assignment { get; set; }
+
+        private readonly DirectoryInfo programDirectory;
+
+        public FormCreateAssignment(DirectoryInfo programDirectory)
         {
             InitializeComponent();
 
-            assignment = new Assignment();
+            this.programDirectory = programDirectory;
 
-
-            //FormClosing += FormCreateAssignment_FormClosing;
+            assignment = new Assignment{
+                Submissions = new List<Submission>(),
+                MatchRequirement = (float)Nud_MatchReqSelector.Value
+            };
         }
 
-        #region assignment functions
-
+        #region File Manipulation Functions
         /// <summary>
         /// Creates Assignments folder and json file
         /// </summary>
         public void CreateAssignment()
         {
-            string assignmentName = textBoxAssignmentName.Text;
+            CreateAssignmentDirectory();
+            CreateAssignmentFileInfo();
+            WriteFile(new FileInfo(assignment.AssignmentFile), JsonSerializer.Serialize(assignment));
+            assignment.SubmissionsDirectory = Directory.CreateDirectory(Path.Combine(assignment.AssignmentDirectory, "Submissions")).FullName;
 
-            // creates a folder called CppGrader
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CppGrader");
+            if(inputTemp != null && inputTemp.Exists){
+                assignment.InputFilepath = CopyFileInfo(inputTemp).FullName;
+                var inInfo = new FileInfo(assignment.InputFilepath);
+                WriteFile(inInfo, GetFileText(inputTemp));
+            }
 
-            string inputFilepath = "Input.txt";
-            string outputFilepath = "Output.txt";
-
-            // assignment
-            Assignment newAssignment = new Assignment
-            {
-                AssignmentName = assignmentName,
-                InputFilepath = inputFilepath,
-                OutputFilepath = outputFilepath,
-                Submissions = new List<Submission>()
-            };
-            // serialize
-            string json = JsonSerializer.Serialize(newAssignment);
-
-            // folderpath created
-            folderPath = Path.Combine(folderPath, assignmentName);
-            Directory.CreateDirectory(folderPath);
-
-
-            string temp = Path.Combine(folderPath, $"{assignmentName}.json");
-
-            // save filepath
-            newAssignment.AssignmentDirectory = folderPath;
-            //assignmentFilepath = folderPath;
-            assignment = newAssignment;
-
+            if(outputTemp != null && outputTemp.Exists){
+                assignment.OutputFilepath = CopyFileInfo(outputTemp).FullName;
+                var outInfo = new FileInfo(assignment.OutputFilepath);
+                WriteFile(outInfo, GetFileText(outputTemp));
+            }
         }
 
+        /// <summary>
+        /// Method creates a subdirectory in programDirectory of assignmentName
+        /// </summary>
+        /// <returns></returns>
+        private bool CreateAssignmentDirectory(){
+            assignment.AssignmentDirectory = programDirectory.CreateSubdirectory(assignment.AssignmentName).FullName;
+            return assignment.AssignmentDirectory.Length > 0;
+        }
+
+        /// <summary>
+        /// Method creates a fileInfo for the assignmentFile.json and sets it on the assignment
+        /// </summary>
+        /// <returns></returns>
+        private bool CreateAssignmentFileInfo(){
+            string temp = Path.Combine(assignment.AssignmentDirectory, $"{assignment.AssignmentName}.json");
+            assignment.AssignmentFile = new FileInfo(temp).FullName;
+            return assignment.AssignmentFile.Length > 0;
+        }
+
+        /// <summary>
+        /// Method writes fileText to the location of fileInfo
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <param name="fileText"></param>
+        private async void WriteFile(FileInfo fileInfo, string fileText){
+            var task = File.WriteAllTextAsync(fileInfo.FullName, fileText);
+            
+            while(!task.IsCompleted)
+                await System.Threading.Tasks.Task.Delay(50);
+        }
+
+        /// <summary>
+        /// Method launches the OpenFileDialog and returns a FileInfo created by the opened file.
+        /// </summary>
+        /// <returns></returns>
+        private FileInfo GetFileInfo()
+        {
+            FileInfo info = null;
+            
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+                info = new FileInfo(dialog.FileName);
+
+            return info;
+        }
+
+        /// <summary>
+        /// Method intended to copy the temporary input/output fileInfos to the assignment directory on saving.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        private FileInfo CopyFileInfo(FileInfo info){
+            FileInfo returnable = null;
+
+            string path = Path.Combine(assignment.AssignmentDirectory, info.Name);
+            returnable = new FileInfo(path);
+
+            return returnable;
+        }
+
+        /// <summary>
+        /// Method opens a FileInfo and returns the text of the file.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        private string GetFileText(FileInfo info){
+            var filestream = info.OpenRead();
+            var reader = new StreamReader(filestream);
+            string fileText = reader.ReadToEnd();
+
+            return fileText;
+        }
         #endregion
 
-        #region button events
+        #region Form Object Events
         /// <summary>
-        /// creates assignment
+        /// creates assignment and returns the dialog with result OK if canSave, otherwise it warns the user
+        /// and returns dialog with result Cancel if they proceed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ButtonSaveAssignment_Click(object sender, EventArgs e)
         {
-            CreateAssignment();
-
-
-            listBoxAssignments.Items.Add(assignmentFilepath);
-
-            DialogResult = DialogResult.OK;
-
-            Close();
+            if (canSave){
+                CreateAssignment();
+                DialogResult = DialogResult.OK;
+                Close();
+            } else
+            {
+                var result = MessageBox.Show("AssignmentName and OutputFile are required fields.\nPressing OK will discard any progress you have made on this form.\nPressing Cancel returns you to the form.","Unable to Save - Missing Requirements", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK){
+                    DialogResult = DialogResult.Cancel;
+                    Close();
+                }
+            }
         }
 
         /// <summary>
-        /// gives the user a chance to create,edit, or save assignment before exiting
+        /// Returns to calling form with result of Cancel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            Visible = false;
-            PropertyInfo pi = typeof(Form).GetProperty("CloseReason", BindingFlags.NonPublic | BindingFlags.Instance);
-            pi.SetValue(this, CloseReason.None, null);
+            DialogResult = DialogResult.Cancel; 
+            Close();
         }
 
-        // TODO: set up input and output files
-        
-        private string GetInfo(string assignmentDirectory)
+        /// <summary>
+        /// Event gets a FileInfo from OpenFileDialog and stores it in inputTemp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonInput_Click(object sender, EventArgs e)
         {
-            string filePath = "";
-            OpenFileDialog dialog = new OpenFileDialog();
+            inputTemp = GetFileInfo();
+            if(inputTemp != null && inputTemp.Exists)
+                labelInputFilePath.Text = inputTemp.Name;
+        }
 
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
+        /// <summary>
+        /// Event gets a FileInfo from OpenFileDialog and stores it in outputTemp. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonOutput_Click(object sender, EventArgs e)
+        {
+            outputTemp = GetFileInfo();
+            if(outputTemp != null && outputTemp.Exists)
+                labelOutputFilePath.Text = outputTemp.Name;
+        }
 
-                FileInfo info = new FileInfo(dialog.FileName);
+        /// <summary>
+        /// Event updates assignmentName with textbox.Text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAssignmentName_TextChanged(object sender,EventArgs e)
+        {
+            if(textBoxAssignmentName.Text.Length > 0)
+                assignment.AssignmentName = textBoxAssignmentName.Text;            
+        }
 
-                var fileStream = dialog.OpenFile();
-                var reader = new StreamReader(fileStream);
-                string code = reader.ReadToEnd();
-                string temp = assignmentDirectory;
-                Directory.CreateDirectory(temp);
-                temp = Path.Combine(temp, info.Name);
-                File.WriteAllText(temp, code);
-                filePath = temp;
-            }
-            return filePath;
+        /// <summary>
+        /// Event updates assignment.MatchRequirement with numericUpDown.Value
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Nud_MatchReqSelector_ValueChanged(object sender,EventArgs e)
+        {
+            var nud = sender as NumericUpDown;
+
+            if(nud != null)
+                assignment.MatchRequirement = (float)nud.Value;
         }
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string input = GetInfo(assignment.AssignmentDirectory);
-            assignment.InputFilepath = input;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string output = GetInfo(assignment.AssignmentDirectory);
-            assignment.OutputFilepath = output;
-        }
     }
 }

@@ -5,24 +5,61 @@ using Microsoft.Build.Execution;
 using Microsoft.Build.Logging;
 using System;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Software_Engineering_Project
 {
     public class CppService
     {
-        private readonly BuildResult buildResult;
+        private BuildResult buildResult;
+        private float matchPercent = 0.0f;
+        private string exeOut;
+
         private readonly CppCompilation compilation;
         private readonly string exePath = null;
+        private readonly float matchTarget = 90.0f;
 
         public BuildResult BuildResult => buildResult;
         public CppCompilation Compilation => compilation;
         public string ExePath => exePath;
-        public bool IsBuilt => buildResult.OverallResult == BuildResultCode.Success;
+        public string ExeOut => exeOut;
+        public float MatchPercent => matchPercent;
+        public bool IsBuilt => false;
+        public bool DoesMatch => matchPercent > matchTarget;
 
-        public CppService(string filepath, string codePath) {
-            compilation = CppParser.ParseFile(codePath);
-            string projectPath = CreateProject(filepath, codePath);
-            exePath = BuildExe(projectPath);
+        public CppService(Assignment assignment, Submission submission) {
+            ExeRunner runner = null;
+            submission.Result = new Result();
+
+            if(IsBuilt){
+                UpdateCompilationResults(submission.Result);
+                runner = TryRunExe(assignment);
+            }
+
+            if(runner != null && runner.RunCompleted)
+            {
+                matchPercent = GetMatchPercentage(runner, assignment);
+                UpdateRunResults(submission.Result);
+            }
+        }
+
+        private void UpdateCompilationResults(Result subResult) {
+            subResult.Compiled = true;
+            subResult.CppCompilation = Compilation;
+            subResult.BuildResult = BuildResult;
+            subResult.ExeFilepath = ExePath;
+        }
+
+        private void UpdateRunResults(Result subResult){
+            subResult.RunComplete = true;
+            subResult.OutputMatchesExpected = DoesMatch;
+            subResult.MatchPercentage = MatchPercent.ToString("n2");
+            subResult.ExeOutput = ExeOut;
+        }
+
+        private string CreateDirectory(Assignment assignment){
+            return Path.Combine(assignment.AssignmentDirectory, "Projects");
         }
 
         private string CreateProject(string filepath, string codePath, string projectName = "Test")
@@ -30,7 +67,7 @@ namespace Software_Engineering_Project
             var projectRootElement = ProjectRootElement.Create();
             projectRootElement.AddProperty("ProjectName", projectName);
             projectRootElement.AddProperty("Configuration", "Release");
-            projectRootElement.AddProperty("Platform", "x64");
+            projectRootElement.AddProperty("Platform", "x86");
             projectRootElement.AddProperty("ProjectGuid", Guid.NewGuid().ToString());
             projectRootElement.AddProperty("Keyword", "Win32Proj");
 
@@ -41,7 +78,7 @@ namespace Software_Engineering_Project
             string returnable = Path.Combine(filepath, "/project.vcxproj");
 
             // Save the project file
-            projectRootElement.Save(returnable);
+            //projectRootElement.Save(returnable);
 
             return returnable;
         }
@@ -51,30 +88,69 @@ namespace Software_Engineering_Project
             // Load the project file
             var projectCollection = new ProjectCollection();
             var project = projectCollection.LoadProject(projectPath);
+            string ePath = null;
 
             // Build the project
             var buildParameters = new BuildParameters
             {
                 Loggers = new[] { new ConsoleLogger() }
             };
+
             var buildRequestData = new BuildRequestData(project.CreateProjectInstance(), new[] { "Build" });
-            var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
+            buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
 
             // Check if the build succeeded
             if (buildResult.OverallResult == BuildResultCode.Success)
             {
-                Console.WriteLine("Build succeeded!");
-
                 var outputPath = project.GetPropertyValue("OutputPath");
                 var outputDir = Path.Combine(project.DirectoryPath, outputPath);
-                var exePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
-            }
-            else
-            {
-                Console.WriteLine("Build failed!");
+                ePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
             }
 
-            return exePath;
+            return ePath;
+        }
+
+        private ExeRunner TryRunExe(Assignment assignment){
+            ExeRunner runner = null;
+            
+            if(ExePath.Length > 0){
+                runner = new ExeRunner{ ExeFilePath = ExePath, InputFilePath = assignment.InputFilepath};
+                runner.RunExe();
+                exeOut = runner.ExeOutput;
+            }
+            
+            return runner;
+        }
+
+        private float GetMatchPercentage(ExeRunner runner, Assignment assignment){
+            string expectedOutput = new StreamReader(assignment.OutputFilepath).ReadToEnd();
+
+            string[] exeLines = GetLines(runner.ExeOutput);
+            string[] assignmentLines = GetLines(expectedOutput);
+
+            float count = 0f;
+            for(int i = 0; i < assignmentLines.Length; i++){
+                for(int j = 0; j < exeLines.Length; i++){
+                    bool full = exeLines[j].Equals(assignmentLines[i]);
+                    bool half = exeLines[j].Equals(assignmentLines[i],  StringComparison.OrdinalIgnoreCase);
+                        
+                    if (full)
+                        count += 0.5f;
+
+                    if (half)
+                        count += 0.5f;
+
+                    if (full || half)
+                        break;
+                }
+            }
+
+            return (count / (float)assignmentLines.Length) * 100;
+        }
+
+        private string[] GetLines(string text){
+            string[] locResult = Regex.Split(text, "[\r?\n]+");
+            return locResult;
         }
     }
 }
