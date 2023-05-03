@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Software_Engineering_Project
 {
@@ -18,5 +14,16 @@ namespace Software_Engineering_Project
         public string InputFilepath { get; set; }
         public string OutputFilepath { get; set; }
         public float MatchRequirement { get; set; }
+
+        public override string ToString()    
+        {
+            string assignmentString = string.Empty;
+
+            assignmentString += $"Assignment Name: {AssignmentName}\n";
+            assignmentString += $"JSON:\n";
+            assignmentString += JsonSerializer.Serialize(this, new JsonSerializerOptions{ WriteIndented = true });
+
+            return assignmentString;
+        }
     }
 }
