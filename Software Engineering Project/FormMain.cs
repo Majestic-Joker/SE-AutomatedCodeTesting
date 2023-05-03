@@ -287,15 +287,14 @@ namespace Software_Engineering_Project
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     CurrentAssignment.Submissions.Add(form.submission);
-                    listboxSubmissions.Items.Add(form.submission);
-                    listboxSubmissions.Refresh();
+                    RefreshListBox();
                     SaveCurrentAssignment();
                 }
 
                 form.Dispose();
-            } else
+            } 
+            else
                 MessageBox.Show("Must have an assignment open before adding submissions.","Unable to Add Submission - Missing Requirements",MessageBoxButtons.OK);
-
         }
         #endregion
 
@@ -320,6 +319,7 @@ namespace Software_Engineering_Project
                 string json = reader.ReadToEnd();
                 assignment = JsonSerializer.Deserialize<Assignment>(json);
                 UpdateResultText();
+                RefreshListBox();
             }
 
             return assignment;
@@ -340,7 +340,6 @@ namespace Software_Engineering_Project
                 SaveCurrentAssignment();
             }
             form.Dispose();
-
         }
 
         /// <summary>
@@ -354,7 +353,7 @@ namespace Software_Engineering_Project
             if (CurrentAssignment != null)
             {
                 // Serialize CurrentAssignment as json
-                string json = JsonSerializer.Serialize(CurrentAssignment);
+                string json = JsonSerializer.Serialize(CurrentAssignment, new JsonSerializerOptions{ WriteIndented = true });
 
                 // folderpath created
                 if (!Directory.Exists(CurrentAssignment.AssignmentDirectory))
@@ -371,7 +370,7 @@ namespace Software_Engineering_Project
         {
             if (CurrentAssignment != null)
             {
-                WriteFile(recentAssignment.FullName,JsonSerializer.Serialize(CurrentAssignment));
+                WriteFile(recentAssignment.FullName,JsonSerializer.Serialize(CurrentAssignment, new JsonSerializerOptions{ WriteIndented = true }));
             }
         }
 
@@ -383,7 +382,6 @@ namespace Software_Engineering_Project
                 await System.Threading.Tasks.Task.Delay(50);
         }
 
-        //TODO: Implement Load Recent Assignment
         private void LoadRecentAssignment()
         {
             var filestream = recentAssignment.OpenRead();
