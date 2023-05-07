@@ -433,7 +433,7 @@ namespace Software_Engineering_Project
             if (selectedSubmission != null)
             {
                 CppService service = new CppService(CurrentAssignment,selectedSubmission);
-                return service.IsBuilt;
+                return service.ExePath.Length > 0;
             }
 
             return false;

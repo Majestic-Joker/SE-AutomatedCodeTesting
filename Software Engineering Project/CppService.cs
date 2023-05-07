@@ -1,9 +1,4 @@
-﻿using CppAst;
-using Microsoft.Build.Construction;
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Execution;
-using Microsoft.Build.Logging;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,25 +8,17 @@ using System.Windows.Forms;
 
 namespace Software_Engineering_Project
 {
-    //TODO: Extensive Unit Tests to ensure everything works
-    //TODO: Walk through CPPast package installation steps to ensure proper setup.
     public class CppService
     {
-        private BuildResult buildResult;
         private float matchPercent = 0.0f;
         private string exeOut;
-        private string projectPath;
 
-        private readonly CppCompilation compilation;
         private readonly string exePath = null;
         private readonly float matchTarget = 90.0f;
 
-        public BuildResult BuildResult => buildResult;
-        public CppCompilation Compilation => compilation;
         public string ExePath => exePath;
         public string ExeOut => exeOut;
         public float MatchPercent => matchPercent;
-        public bool IsBuilt => false;
         public bool DoesMatch => matchPercent > matchTarget;
 
         public CppService(Assignment assignment, Submission submission) {
@@ -40,8 +27,6 @@ namespace Software_Engineering_Project
             matchTarget = assignment.MatchRequirement;
 
             exePath = Compile(submission);
-            
-            //projectPath = CreateDirectory(assignment);
 
             if(exePath.Length > 0){
                 UpdateCompilationResults(submission.Result);
@@ -69,7 +54,6 @@ namespace Software_Engineering_Project
 
         private string Compile(Submission submission){
             var info = new FileInfo(submission.FilePath);
-            MessageBox.Show(info.FullName);
 
             string batchPath = info.DirectoryName + "\\GPPcompile.bat";
 
@@ -104,58 +88,6 @@ namespace Software_Engineering_Project
                 return executePath;
 
             return "";
-        }
-
-        private string CreateDirectory(Assignment assignment){
-            return Path.Combine(assignment.AssignmentDirectory, "Projects");
-        }
-
-        private string CreateProject(string filepath, string codePath, string projectName = "Test")
-        { 
-            var projectRootElement = ProjectRootElement.Create();
-            projectRootElement.AddProperty("ProjectName", projectName);
-            projectRootElement.AddProperty("Configuration", "Release");
-            projectRootElement.AddProperty("Platform", "x86");
-            projectRootElement.AddProperty("ProjectGuid", Guid.NewGuid().ToString());
-            projectRootElement.AddProperty("Keyword", "Win32Proj");
-
-            // Add a new item group for source files
-            var itemGroupElement = projectRootElement.AddItemGroup();
-            itemGroupElement.AddItem("ClCompile", codePath);
-
-            string returnable = Path.Combine(filepath, "project.vcxproj");
-
-            // Save the project file
-            projectRootElement.Save(returnable);
-
-            return returnable;
-        }
-
-        public string BuildExe(string projectPath, string projectName = "Test")
-        {
-            // Load the project file
-            var projectCollection = new ProjectCollection();
-            var project = projectCollection.LoadProject(projectPath);
-            string ePath = null;
-
-            // Build the project
-            var buildParameters = new BuildParameters
-            {
-                Loggers = new[] { new ConsoleLogger() }
-            };
-
-            var buildRequestData = new BuildRequestData(project.CreateProjectInstance(), new[] { "Build" });
-            buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
-
-            // Check if the build succeeded
-            if (buildResult.OverallResult == BuildResultCode.Success)
-            {
-                var outputPath = project.GetPropertyValue("OutputPath");
-                var outputDir = Path.Combine(project.DirectoryPath, outputPath);
-                ePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
-            }
-
-            return ePath;
         }
 
         private ExeRunner TryRunExe(Assignment assignment){

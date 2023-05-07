@@ -12,8 +12,6 @@ namespace Software_Engineering_Project
         public string MatchPercentage { get; set; } 
         public string ExeFilepath { get; set; }
         public string ExeOutput { get; set; }
-        public BuildResult BuildResult { get; set; }
-        public CppCompilation CppCompilation { get; set; }
 
         public override string ToString()
         {
@@ -22,19 +20,8 @@ namespace Software_Engineering_Project
             resultAsString += $"Compiled:\t\t\t{Compiled}\n";
             resultAsString += $"Did .exe run:\t\t\t{RunComplete}\n";
             resultAsString += $"Output matches:\t\t{OutputMatchesExpected}\n";
-            resultAsString += $"Output Match Percentage:\t{MatchPercentage}\n";
+            resultAsString += $"Output Match Percentage:\t{MatchPercentage}%\n";
             resultAsString += $"Output from .exe:\n\t{ExeOutput}\n";
-
-            if(CppCompilation != null && CppCompilation.HasErrors){
-                resultAsString += $"\nCompilation Errors:\n";
-                foreach(var message in CppCompilation.Diagnostics.Messages)
-                    resultAsString += $"\t{message.ToString()}\n";
-            }
-
-            if(BuildResult != null && BuildResult.OverallResult != BuildResultCode.Success){
-                resultAsString += "\nBuild Error:\n";
-                resultAsString += $"\t{BuildResult.Exception.ToString()}\n";
-            }
 
             return resultAsString;
         }
