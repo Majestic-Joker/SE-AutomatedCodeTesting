@@ -38,11 +38,11 @@ namespace Software_Engineering_Project
             ExeRunner runner = null;
             submission.Result = new Result();
 
-            Compile(submission);
+            exePath = Compile(submission);
             
             //projectPath = CreateDirectory(assignment);
 
-            if(IsBuilt){
+            if(exePath.Length > 0){
                 UpdateCompilationResults(submission.Result);
                 runner = TryRunExe(assignment);
             }
@@ -56,8 +56,6 @@ namespace Software_Engineering_Project
 
         private void UpdateCompilationResults(Result subResult) {
             subResult.Compiled = true;
-            subResult.CppCompilation = Compilation;
-            subResult.BuildResult = BuildResult;
             subResult.ExeFilepath = ExePath;
         }
 
@@ -68,7 +66,7 @@ namespace Software_Engineering_Project
             subResult.ExeOutput = ExeOut;
         }
 
-        private void Compile(Submission submission){
+        private string Compile(Submission submission){
             var info = new FileInfo(submission.FilePath);
             MessageBox.Show(info.FullName);
 
@@ -99,7 +97,12 @@ namespace Software_Engineering_Project
             process.Start();
             process.WaitForExit();
 
-            exePath = Path.Combine(info.DirectoryName, $"{noSpaceSubName}.exe");
+            string executePath = Path.Combine(info.DirectoryName, $"{noSpaceSubName}.exe");
+
+            if(File.Exists(executePath))
+                return executePath;
+
+            return "";
         }
 
         private string CreateDirectory(Assignment assignment){
