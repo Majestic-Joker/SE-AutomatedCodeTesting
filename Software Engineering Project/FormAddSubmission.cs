@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 
 namespace Software_Engineering_Project
 {
@@ -9,6 +10,7 @@ namespace Software_Engineering_Project
         public Submission submission { get; set; }
 
         private FileInfo codeInfo;
+        private string noSpaceName;
 
         private bool hasName => submission.SubmissionName.Length > 0;
         private bool hasFile => codeInfo != null && codeInfo.Exists;
@@ -84,7 +86,8 @@ namespace Software_Engineering_Project
         }
 
         private void CopyCodeInfo(){
-            string fileName = $"{assignment.Submissions.Count + 1}_{submission.SubmissionName}_{codeInfo.Name}";
+            string codeName = new string(codeInfo.Name.Where(c => !char.IsWhiteSpace(c)).ToArray());
+            string fileName = $"{assignment.Submissions.Count + 1}_{noSpaceName}_{codeName}";
             string path = Path.Combine(assignment.SubmissionsDirectory, fileName);
             submission.FilePath = path;
         }
@@ -95,8 +98,10 @@ namespace Software_Engineering_Project
 
         private void textBoxSubmissionName_TextChanged(object sender,EventArgs e)
         {
-            if(textBoxSubmissionName.Text.Length > 0)
+            if(textBoxSubmissionName.Text.Length > 0){
                 submission.SubmissionName = textBoxSubmissionName.Text;
+                noSpaceName = new string(submission.SubmissionName.Where(c => !char.IsWhiteSpace(c)).ToArray());
+            }
         }
     }
 }

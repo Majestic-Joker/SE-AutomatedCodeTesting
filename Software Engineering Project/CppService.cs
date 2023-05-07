@@ -1,38 +1,34 @@
-﻿using CppAst;
-using Microsoft.Build.Construction;
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Execution;
-using Microsoft.Build.Logging;
-using System;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Software_Engineering_Project
 {
     public class CppService
     {
-        private BuildResult buildResult;
         private float matchPercent = 0.0f;
         private string exeOut;
 
-        private readonly CppCompilation compilation;
         private readonly string exePath = null;
         private readonly float matchTarget = 90.0f;
 
-        public BuildResult BuildResult => buildResult;
-        public CppCompilation Compilation => compilation;
         public string ExePath => exePath;
         public string ExeOut => exeOut;
         public float MatchPercent => matchPercent;
-        public bool IsBuilt => false;
         public bool DoesMatch => matchPercent > matchTarget;
 
         public CppService(Assignment assignment, Submission submission) {
             ExeRunner runner = null;
             submission.Result = new Result();
+            matchTarget = assignment.MatchRequirement;
 
-            if(IsBuilt){
+            exePath = Compile(submission);
+
+            if(exePath.Length > 0){
                 UpdateCompilationResults(submission.Result);
                 runner = TryRunExe(assignment);
             }
@@ -46,8 +42,6 @@ namespace Software_Engineering_Project
 
         private void UpdateCompilationResults(Result subResult) {
             subResult.Compiled = true;
-            subResult.CppCompilation = Compilation;
-            subResult.BuildResult = BuildResult;
             subResult.ExeFilepath = ExePath;
         }
 
@@ -58,56 +52,42 @@ namespace Software_Engineering_Project
             subResult.ExeOutput = ExeOut;
         }
 
-        private string CreateDirectory(Assignment assignment){
-            return Path.Combine(assignment.AssignmentDirectory, "Projects");
-        }
+        private string Compile(Submission submission){
+            var info = new FileInfo(submission.FilePath);
 
-        private string CreateProject(string filepath, string codePath, string projectName = "Test")
-        { 
-            var projectRootElement = ProjectRootElement.Create();
-            projectRootElement.AddProperty("ProjectName", projectName);
-            projectRootElement.AddProperty("Configuration", "Release");
-            projectRootElement.AddProperty("Platform", "x86");
-            projectRootElement.AddProperty("ProjectGuid", Guid.NewGuid().ToString());
-            projectRootElement.AddProperty("Keyword", "Win32Proj");
+            string batchPath = info.DirectoryName + "\\GPPcompile.bat";
 
-            // Add a new item group for source files
-            var itemGroupElement = projectRootElement.AddItemGroup();
-            itemGroupElement.AddItem("ClCompile", codePath);
+            string noSpaceSubName = new string(submission.SubmissionName.Where(c => !char.IsWhiteSpace(c)).ToArray());
 
-            string returnable = Path.Combine(filepath, "/project.vcxproj");
-
-            // Save the project file
-            //projectRootElement.Save(returnable);
-
-            return returnable;
-        }
-
-        public string BuildExe(string projectPath, string projectName = "Test")
-        {
-            // Load the project file
-            var projectCollection = new ProjectCollection();
-            var project = projectCollection.LoadProject(projectPath);
-            string ePath = null;
-
-            // Build the project
-            var buildParameters = new BuildParameters
-            {
-                Loggers = new[] { new ConsoleLogger() }
+            string[] lines = {
+                $"g++.exe {info.FullName} -o {noSpaceSubName}.exe",
+                "exit"
             };
 
-            var buildRequestData = new BuildRequestData(project.CreateProjectInstance(), new[] { "Build" });
-            buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
+            using(StreamWriter writer = new StreamWriter(batchPath))
+                foreach(string line in lines)
+                    writer.WriteLine(line);
 
-            // Check if the build succeeded
-            if (buildResult.OverallResult == BuildResultCode.Success)
+            var process = new Process
             {
-                var outputPath = project.GetPropertyValue("OutputPath");
-                var outputDir = Path.Combine(project.DirectoryPath, outputPath);
-                ePath = Path.Combine(outputDir, $"{project.GetPropertyValue("ProjectName")}.exe");
-            }
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = batchPath,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WorkingDirectory = info.DirectoryName
+                }
+            };
 
-            return ePath;
+            process.Start();
+            process.WaitForExit();
+
+            string executePath = Path.Combine(info.DirectoryName, $"{noSpaceSubName}.exe");
+
+            if(File.Exists(executePath))
+                return executePath;
+
+            return "";
         }
 
         private ExeRunner TryRunExe(Assignment assignment){

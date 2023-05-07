@@ -1,17 +1,9 @@
-﻿using Microsoft.Build.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Drawing.Text;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Software_Engineering_Project
@@ -19,6 +11,8 @@ namespace Software_Engineering_Project
     public partial class FormMain:Form
     {
         private FileInfo recentAssignment;
+
+        private static readonly object fileLocker = new object();
 
         #region Properties
         public Assignment CurrentAssignment
@@ -48,7 +42,7 @@ namespace Software_Engineering_Project
 
         private bool CreateDirectory()
         {
-            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"Automated Code Metrics");
+            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"AutomatedCodeMetrics");
             ProgramDirectory = Directory.CreateDirectory(temp);
             return ProgramDirectory.Exists;
         }
@@ -68,7 +62,7 @@ namespace Software_Engineering_Project
 
         #region Form Theme Functions
 
-        // TODO: Handle with ThemeManager
+        // TODO: Stretch Goal - Handle theme initialization with ThemeManager
 
         private void InitializeFormTheme()
         {
@@ -91,7 +85,7 @@ namespace Software_Engineering_Project
             PanelMainControls.BackColor = Color.Gray;
         }
 
-        // TODO: Refactor submenu toggling
+        // TODO: Stretch Goal - Refactor submenu toggling
 
         /// <summary>
         /// Hides Sub Menus after clicked on
@@ -177,14 +171,16 @@ namespace Software_Engineering_Project
                 SaveCurrentAssignment();
                 CurrentAssignment = assignment;
                 SaveCurrentAssignment();
-                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+                SetAssignmentTitle();
+                RefreshListBox();
+                UpdateResultText();
             }
 
             // Hides the Assignment sub menu after use
             HideSubMenu();
         }
 
-        // TODO: Implement ThemeManager class to handle Light/Dark mode in FormMain.cs
+        // TODO: Stretch Goal - Implement ThemeManager class to handle Light/Dark mode in FormMain.cs
 
         /// <summary>
         /// This button gives you the ability to go back to the normal theme
@@ -269,8 +265,7 @@ namespace Software_Engineering_Project
         {
             OpenFormCreateAssignment();
             HideSubMenu();
-            if (CurrentAssignment != null)
-                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+            SetAssignmentTitle();
         }
 
         /// <summary>
@@ -287,15 +282,14 @@ namespace Software_Engineering_Project
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     CurrentAssignment.Submissions.Add(form.submission);
-                    listboxSubmissions.Items.Add(form.submission);
-                    listboxSubmissions.Refresh();
+                    RefreshListBox();
                     SaveCurrentAssignment();
                 }
 
                 form.Dispose();
-            } else
+            } 
+            else
                 MessageBox.Show("Must have an assignment open before adding submissions.","Unable to Add Submission - Missing Requirements",MessageBoxButtons.OK);
-
         }
         #endregion
 
@@ -315,12 +309,19 @@ namespace Software_Engineering_Project
                 string filepath = openFileDialog.FileName;
 
                 var filestream = openFileDialog.OpenFile();
+
                 var reader = new StreamReader(filestream);
 
                 string json = reader.ReadToEnd();
+
                 assignment = JsonSerializer.Deserialize<Assignment>(json);
+                RefreshListBox();
                 UpdateResultText();
+                
+                reader.Close();
             }
+
+            openFileDialog.Dispose();
 
             return assignment;
         }
@@ -338,9 +339,9 @@ namespace Software_Engineering_Project
             {
                 CurrentAssignment = form.assignment;
                 SaveCurrentAssignment();
+                SetAssignmentTitle();
             }
             form.Dispose();
-
         }
 
         /// <summary>
@@ -348,22 +349,13 @@ namespace Software_Engineering_Project
         /// </summary>
         private void SaveCurrentAssignment()
         {
-            if (!ProgramDirectory.Exists)
-                CreateDirectory();
-
             if (CurrentAssignment != null)
             {
                 // Serialize CurrentAssignment as json
-                string json = JsonSerializer.Serialize(CurrentAssignment);
+                string json = JsonSerializer.Serialize(CurrentAssignment, new JsonSerializerOptions{ WriteIndented = true });
 
-                // folderpath created
-                if (!Directory.Exists(CurrentAssignment.AssignmentDirectory))
-                {
-                    CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName).FullName;
-                    CurrentAssignment.AssignmentFile = Path.Combine(CurrentAssignment.AssignmentDirectory,$"{CurrentAssignment.AssignmentName}.json");
-                }
                 // written user info to json
-                WriteFile(CurrentAssignment.AssignmentFile,json);
+                WriteFile(CurrentAssignment.AssignmentFile, json);
             }
         }
 
@@ -371,19 +363,15 @@ namespace Software_Engineering_Project
         {
             if (CurrentAssignment != null)
             {
-                WriteFile(recentAssignment.FullName,JsonSerializer.Serialize(CurrentAssignment));
+                WriteFile(recentAssignment.FullName,JsonSerializer.Serialize(CurrentAssignment, new JsonSerializerOptions{ WriteIndented = true }));
             }
         }
 
-        private async void WriteFile(string filePath,string text)
+        private void WriteFile(string filePath,string text)
         {
-            var task = File.WriteAllTextAsync(filePath,text);
-
-            while (!task.IsCompleted)
-                await System.Threading.Tasks.Task.Delay(50);
+            File.WriteAllText(filePath, text);
         }
 
-        //TODO: Implement Load Recent Assignment
         private void LoadRecentAssignment()
         {
             var filestream = recentAssignment.OpenRead();
@@ -391,9 +379,11 @@ namespace Software_Engineering_Project
 
             string json = reader.ReadToEnd();
             CurrentAssignment = JsonSerializer.Deserialize<Assignment>(json);
-
-            Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";
+            reader.Close();
+            
+            SetAssignmentTitle();
             RefreshListBox();
+            UpdateResultText();
         }
         #endregion
 
@@ -419,7 +409,6 @@ namespace Software_Engineering_Project
 
         private void ButtonPrint_Click(object sender,EventArgs e)
         {
-            //Placeholder for printing from the textBoxResult.text
             int selectedIndex = listboxSubmissions.SelectedIndex;
             if (CurrentAssignment != null)
             {
@@ -443,7 +432,7 @@ namespace Software_Engineering_Project
             if (selectedSubmission != null)
             {
                 CppService service = new CppService(CurrentAssignment,selectedSubmission);
-                return service.IsBuilt;
+                return service.ExePath.Length > 0;
             }
 
             return false;
@@ -452,18 +441,27 @@ namespace Software_Engineering_Project
 
         private void UpdateResultText()
         {
-            printDocument1.DocumentName = $"{SelectedSubmission.SubmissionName}_Results";
-            Rtb_Results.Text = SelectedSubmission.Result.ToString();
-            Rtb_Results.Refresh();
+            if(SelectedSubmission != null){
+                printDocument1.DocumentName = $"{SelectedSubmission.SubmissionName}_Results";
+                Rtb_Results.Text = SelectedSubmission.Result.ToString();
+                Rtb_Results.Refresh();
+            }
         }
 
         private void RefreshListBox(){
             if(CurrentAssignment != null && CurrentAssignment.Submissions.Count > 0){
+                listboxSubmissions.Items.Clear();
+
                 foreach(Submission submission in CurrentAssignment.Submissions)
                     listboxSubmissions.Items.Add(submission);
 
                 listboxSubmissions.Refresh();
             }
+        }
+
+        private void SetAssignmentTitle(){
+            if (CurrentAssignment != null)
+                Lbl_SubmissionsTitle.Text = $"Submissions: {CurrentAssignment.AssignmentName}";                
         }
 
         //TODO: figure out print preview not showing what's in Rtb_Results
@@ -501,10 +499,11 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonExit_Click(object sender,EventArgs e)
         {
-            if (CurrentAssignment != null)
-            {
+            if (CurrentAssignment != null){
                 SaveCurrentAssignment();
+                SaveRecentAssignment();
             }
+
             Application.Exit();
         }
 
@@ -521,8 +520,7 @@ namespace Software_Engineering_Project
 
         private void FormMain_FormClosing(object sender,FormClosingEventArgs e)
         {
-            if (CurrentAssignment != null)
-            {
+            if (CurrentAssignment != null){
                 SaveCurrentAssignment();
                 SaveRecentAssignment();
             }
