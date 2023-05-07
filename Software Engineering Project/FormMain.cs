@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
 
@@ -10,6 +11,8 @@ namespace Software_Engineering_Project
     public partial class FormMain:Form
     {
         private FileInfo recentAssignment;
+
+        private static readonly object fileLocker = new object();
 
         #region Properties
         public Assignment CurrentAssignment
@@ -169,6 +172,8 @@ namespace Software_Engineering_Project
                 CurrentAssignment = assignment;
                 SaveCurrentAssignment();
                 SetAssignmentTitle();
+                RefreshListBox();
+                UpdateResultText();
             }
 
             // Hides the Assignment sub menu after use
@@ -304,13 +309,19 @@ namespace Software_Engineering_Project
                 string filepath = openFileDialog.FileName;
 
                 var filestream = openFileDialog.OpenFile();
+
                 var reader = new StreamReader(filestream);
 
                 string json = reader.ReadToEnd();
+
                 assignment = JsonSerializer.Deserialize<Assignment>(json);
-                UpdateResultText();
                 RefreshListBox();
+                UpdateResultText();
+                
+                reader.Close();
             }
+
+            openFileDialog.Dispose();
 
             return assignment;
         }
@@ -338,22 +349,13 @@ namespace Software_Engineering_Project
         /// </summary>
         private void SaveCurrentAssignment()
         {
-            if (!ProgramDirectory.Exists)
-                CreateDirectory();
-
             if (CurrentAssignment != null)
             {
                 // Serialize CurrentAssignment as json
                 string json = JsonSerializer.Serialize(CurrentAssignment, new JsonSerializerOptions{ WriteIndented = true });
 
-                // folderpath created
-                if (!Directory.Exists(CurrentAssignment.AssignmentDirectory))
-                {
-                    CurrentAssignment.AssignmentDirectory = ProgramDirectory.CreateSubdirectory(CurrentAssignment.AssignmentName).FullName;
-                    CurrentAssignment.AssignmentFile = Path.Combine(CurrentAssignment.AssignmentDirectory,$"{CurrentAssignment.AssignmentName}.json");
-                }
                 // written user info to json
-                WriteFile(CurrentAssignment.AssignmentFile,json);
+                WriteFile(CurrentAssignment.AssignmentFile, json);
             }
         }
 
@@ -365,12 +367,9 @@ namespace Software_Engineering_Project
             }
         }
 
-        private async void WriteFile(string filePath,string text)
+        private void WriteFile(string filePath,string text)
         {
-            var task = File.WriteAllTextAsync(filePath,text);
-
-            while (!task.IsCompleted)
-                await System.Threading.Tasks.Task.Delay(50);
+            File.WriteAllText(filePath, text);
         }
 
         private void LoadRecentAssignment()
@@ -380,9 +379,11 @@ namespace Software_Engineering_Project
 
             string json = reader.ReadToEnd();
             CurrentAssignment = JsonSerializer.Deserialize<Assignment>(json);
-
+            reader.Close();
+            
             SetAssignmentTitle();
             RefreshListBox();
+            UpdateResultText();
         }
         #endregion
 
@@ -499,11 +500,11 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void ButtonExit_Click(object sender,EventArgs e)
         {
-            if (CurrentAssignment != null)
-            {
+            if (CurrentAssignment != null){
                 SaveCurrentAssignment();
                 SaveRecentAssignment();
             }
+
             Application.Exit();
         }
 
@@ -520,8 +521,7 @@ namespace Software_Engineering_Project
 
         private void FormMain_FormClosing(object sender,FormClosingEventArgs e)
         {
-            if (CurrentAssignment != null)
-            {
+            if (CurrentAssignment != null){
                 SaveCurrentAssignment();
                 SaveRecentAssignment();
             }
