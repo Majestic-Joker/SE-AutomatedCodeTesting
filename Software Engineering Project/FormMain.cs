@@ -340,7 +340,10 @@ namespace Software_Engineering_Project
                 CurrentAssignment = form.assignment;
                 SaveCurrentAssignment();
                 SetAssignmentTitle();
+                RefreshListBox();
+                UpdateResultText();
             }
+
             form.Dispose();
         }
 
@@ -449,14 +452,14 @@ namespace Software_Engineering_Project
         }
 
         private void RefreshListBox(){
+            listboxSubmissions.Items.Clear();
+            
             if(CurrentAssignment != null && CurrentAssignment.Submissions.Count > 0){
-                listboxSubmissions.Items.Clear();
-
                 foreach(Submission submission in CurrentAssignment.Submissions)
                     listboxSubmissions.Items.Add(submission);
-
-                listboxSubmissions.Refresh();
             }
+
+            listboxSubmissions.Refresh();
         }
 
         private void SetAssignmentTitle(){
