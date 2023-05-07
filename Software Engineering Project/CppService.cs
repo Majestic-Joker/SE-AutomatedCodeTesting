@@ -37,6 +37,7 @@ namespace Software_Engineering_Project
         public CppService(Assignment assignment, Submission submission) {
             ExeRunner runner = null;
             submission.Result = new Result();
+            matchTarget = assignment.MatchRequirement;
 
             exePath = Compile(submission);
             
