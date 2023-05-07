@@ -502,6 +502,7 @@ namespace Software_Engineering_Project
             if (CurrentAssignment != null)
             {
                 SaveCurrentAssignment();
+                SaveRecentAssignment();
             }
             Application.Exit();
         }
