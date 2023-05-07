@@ -97,8 +97,9 @@ namespace Software_Engineering_Project
             };
 
             process.Start();
-            //string output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
+
+            exePath = Path.Combine(info.DirectoryName, $"{noSpaceSubName}.exe");
         }
 
         private string CreateDirectory(Assignment assignment){
