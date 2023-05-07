@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-//TODO: Unit tests on these functions to ensure it all works
 public class ExeRunner
 {
     //Properties

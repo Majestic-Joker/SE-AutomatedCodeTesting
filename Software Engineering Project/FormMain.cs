@@ -409,7 +409,6 @@ namespace Software_Engineering_Project
 
         private void ButtonPrint_Click(object sender,EventArgs e)
         {
-            //Placeholder for printing from the textBoxResult.text
             int selectedIndex = listboxSubmissions.SelectedIndex;
             if (CurrentAssignment != null)
             {
