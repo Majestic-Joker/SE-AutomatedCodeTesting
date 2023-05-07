@@ -4,9 +4,12 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Logging;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Software_Engineering_Project
 {
@@ -17,6 +20,7 @@ namespace Software_Engineering_Project
         private BuildResult buildResult;
         private float matchPercent = 0.0f;
         private string exeOut;
+        private string projectPath;
 
         private readonly CppCompilation compilation;
         private readonly string exePath = null;
@@ -33,6 +37,10 @@ namespace Software_Engineering_Project
         public CppService(Assignment assignment, Submission submission) {
             ExeRunner runner = null;
             submission.Result = new Result();
+
+            Compile(submission);
+            
+            //projectPath = CreateDirectory(assignment);
 
             if(IsBuilt){
                 UpdateCompilationResults(submission.Result);
@@ -60,6 +68,39 @@ namespace Software_Engineering_Project
             subResult.ExeOutput = ExeOut;
         }
 
+        private void Compile(Submission submission){
+            var info = new FileInfo(submission.FilePath);
+            MessageBox.Show(info.FullName);
+
+            string batchPath = info.DirectoryName + "\\GPPcompile.bat";
+
+            string noSpaceSubName = new string(submission.SubmissionName.Where(c => !char.IsWhiteSpace(c)).ToArray());
+
+            string[] lines = {
+                $"g++.exe {info.FullName} -o {noSpaceSubName}.exe",
+                "exit"
+            };
+
+            using(StreamWriter writer = new StreamWriter(batchPath))
+                foreach(string line in lines)
+                    writer.WriteLine(line);
+
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = batchPath,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WorkingDirectory = info.DirectoryName
+                }
+            };
+
+            process.Start();
+            //string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+        }
+
         private string CreateDirectory(Assignment assignment){
             return Path.Combine(assignment.AssignmentDirectory, "Projects");
         }
@@ -77,10 +118,10 @@ namespace Software_Engineering_Project
             var itemGroupElement = projectRootElement.AddItemGroup();
             itemGroupElement.AddItem("ClCompile", codePath);
 
-            string returnable = Path.Combine(filepath, "/project.vcxproj");
+            string returnable = Path.Combine(filepath, "project.vcxproj");
 
             // Save the project file
-            //projectRootElement.Save(returnable);
+            projectRootElement.Save(returnable);
 
             return returnable;
         }

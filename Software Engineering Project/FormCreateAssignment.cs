@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ namespace Software_Engineering_Project
     {
         private FileInfo inputTemp;
         private FileInfo outputTemp;
+        private string noSpaceName;
 
         private bool hasName => assignment.AssignmentName.Length > 0;
         private bool hasOutputFile => outputTemp != null && outputTemp.Exists;
@@ -40,7 +42,7 @@ namespace Software_Engineering_Project
         {
             CreateAssignmentDirectory();
             CreateAssignmentFileInfo();
-            WriteFile(new FileInfo(assignment.AssignmentFile), JsonSerializer.Serialize(assignment));
+            WriteFile(new FileInfo(assignment.AssignmentFile), JsonSerializer.Serialize(assignment, new JsonSerializerOptions { WriteIndented = true }));
             assignment.SubmissionsDirectory = Directory.CreateDirectory(Path.Combine(assignment.AssignmentDirectory, "Submissions")).FullName;
 
             if(inputTemp != null && inputTemp.Exists){
@@ -61,7 +63,7 @@ namespace Software_Engineering_Project
         /// </summary>
         /// <returns></returns>
         private bool CreateAssignmentDirectory(){
-            assignment.AssignmentDirectory = programDirectory.CreateSubdirectory(assignment.AssignmentName).FullName;
+            assignment.AssignmentDirectory = programDirectory.CreateSubdirectory(noSpaceName).FullName;
             return assignment.AssignmentDirectory.Length > 0;
         }
 
@@ -195,8 +197,10 @@ namespace Software_Engineering_Project
         /// <param name="e"></param>
         private void textBoxAssignmentName_TextChanged(object sender,EventArgs e)
         {
-            if(textBoxAssignmentName.Text.Length > 0)
-                assignment.AssignmentName = textBoxAssignmentName.Text;            
+            if(textBoxAssignmentName.Text.Length > 0){
+                assignment.AssignmentName = textBoxAssignmentName.Text;
+                noSpaceName = new string(assignment.AssignmentName.Where(c => !char.IsWhiteSpace(c)).ToArray());
+            }
         }
 
         /// <summary>

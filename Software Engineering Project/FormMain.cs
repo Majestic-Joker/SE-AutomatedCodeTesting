@@ -39,7 +39,7 @@ namespace Software_Engineering_Project
 
         private bool CreateDirectory()
         {
-            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"Automated Code Metrics");
+            string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"AutomatedCodeMetrics");
             ProgramDirectory = Directory.CreateDirectory(temp);
             return ProgramDirectory.Exists;
         }
@@ -441,9 +441,11 @@ namespace Software_Engineering_Project
 
         private void UpdateResultText()
         {
-            printDocument1.DocumentName = $"{SelectedSubmission.SubmissionName}_Results";
-            Rtb_Results.Text = SelectedSubmission.Result.ToString();
-            Rtb_Results.Refresh();
+            if(SelectedSubmission != null){
+                printDocument1.DocumentName = $"{SelectedSubmission.SubmissionName}_Results";
+                Rtb_Results.Text = SelectedSubmission.Result.ToString();
+                Rtb_Results.Refresh();
+            }
         }
 
         private void RefreshListBox(){
