@@ -5,6 +5,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ApplicationIcon>Resources\Tusk.ico</ApplicationIcon>
+    <AssemblyName>Automated Code Metrics</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="ClassCustomMenuStrip.cs">
