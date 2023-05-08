@@ -111,8 +111,11 @@ namespace Software_Engineering_Project
             float count = 0f;
             for(int i = 0; i < assignmentLines.Length; i++){
                 for(int j = 0; j < exeLines.Length; i++){
-                    bool full = exeLines[j].Equals(assignmentLines[i]);
-                    bool half = exeLines[j].Equals(assignmentLines[i],  StringComparison.OrdinalIgnoreCase);
+                    string left = new string(exeLines[j].Where(c => !char.IsWhiteSpace(c)).ToArray());
+                    string right = new string(assignmentLines[i].Where(c => !char.IsWhiteSpace(c)).ToArray());
+
+                    bool full = left.Equals(right);
+                    bool half = left.Equals(right,  StringComparison.OrdinalIgnoreCase);
                         
                     if (full)
                         count += 0.5f;
